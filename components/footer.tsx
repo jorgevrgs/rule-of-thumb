@@ -1,5 +1,4 @@
-import Facebook from './icons/facebook.icon';
-import Twitter from './icons/twitter.icon';
+import Icon from './icon';
 
 export default function Footer() {
   return (
@@ -24,12 +23,12 @@ export default function Footer() {
           <ul>
             <li>
               <a href="#">
-                <Facebook />
+                <Icon name="facebook" />
               </a>
             </li>
             <li>
               <a href="#">
-                <Twitter />
+                <Icon name="twitter" />
               </a>
             </li>
           </ul>

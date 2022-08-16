@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import WikipediSvg from './icons/wikipedia.icon';
+import Icon from './icon';
 
 export default function FeaturedCard() {
   return (
@@ -15,27 +14,17 @@ export default function FeaturedCard() {
         </p>
         <p className="featured-card__more-info">
           <a href="http://wikipedia.com">
-            <WikipediSvg />
+            <Icon name="wikipedia" width={27} height={18} />
             More information
           </a>
         </p>
         <p className="featured-card__cta">{"What's Your Veredict?"}</p>
         <div className="featured-card__buttons">
           <button className="icon-button" aria-label="thumbs up">
-            <Image
-              width={36}
-              height={36}
-              src="/assets/img/thumbs-up.svg"
-              alt="thumbs up"
-            />
+            <Icon name="thumbs-up" width={36} height={36} />
           </button>
           <button className="icon-button" aria-label="thumbs down">
-            <Image
-              width={36}
-              height={36}
-              src="/assets/img/thumbs-down.svg"
-              alt="thumbs down"
-            />
+            <Icon name="thumbs-down" width={36} height={36} />
           </button>
         </div>
       </div>

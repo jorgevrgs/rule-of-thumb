@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Icon from './icon';
 export default function Navbar() {
   return (
     <nav className="nav" role="navigation">
@@ -31,12 +31,7 @@ export default function Navbar() {
                 type="text"
               />
               <button className="nav__search icon-button" type="submit">
-                <Image
-                  src="/assets/img/search.svg"
-                  alt="search"
-                  width={200}
-                  height={200}
-                />
+                <Icon name="search" width={36} height={36} />
               </button>
             </form>
           </li>
