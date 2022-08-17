@@ -3,3 +3,10 @@ export interface IconProps {
   width?: number;
   height?: number;
 }
+
+export interface NavLinkProps {
+  navLinks: Array<{
+    name: string;
+    href: string;
+  }>;
+}
