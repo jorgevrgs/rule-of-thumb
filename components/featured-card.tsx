@@ -21,10 +21,10 @@ export default function FeaturedCard() {
         <p className="featured-card__cta">{"What's Your Veredict?"}</p>
         <div className="featured-card__buttons">
           <button className="icon-button" aria-label="thumbs up">
-            <Icon name="thumbs-up" width={36} height={36} />
+            <Icon name="thumbs-up" width={16} height={16} />
           </button>
           <button className="icon-button" aria-label="thumbs down">
-            <Icon name="thumbs-down" width={36} height={36} />
+            <Icon name="thumbs-down" width={16} height={16} />
           </button>
         </div>
       </div>

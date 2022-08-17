@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { NavLinksContext } from '../contexts/nav-links.context';
+import { NavLinksContext } from '../infrastructure';
 import Icon from './icon';
 
 function Navbar() {
