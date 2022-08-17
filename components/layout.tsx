@@ -1,16 +1,15 @@
-import type { NavLinkProps } from '../types';
 import Footer from './footer';
 import Header from './header';
 import Navbar from './navbar';
 
-interface Props extends NavLinkProps {
+interface Props {
   children: React.ReactNode;
 }
 
-function Layout({ children, navLinks }: Props): JSX.Element {
+function Layout({ children }: Props): JSX.Element {
   return (
     <>
-      <Navbar navLinks={navLinks} />
+      <Navbar />
       <Header />
       <div className="max-centered">
         {children}

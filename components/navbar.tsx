@@ -1,7 +1,10 @@
-import type { NavLinkProps } from '../types';
+import { useContext } from 'react';
+import { NavLinksContext } from '../contexts/nav-links.context';
 import Icon from './icon';
 
-function Navbar({ navLinks }: NavLinkProps) {
+function Navbar() {
+  const navLinks = useContext(NavLinksContext);
+
   return (
     <nav className="nav" role="navigation">
       <div className="max-centered">
