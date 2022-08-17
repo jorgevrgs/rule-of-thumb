@@ -11,6 +11,14 @@
   --color-white: rgba(255, 255, 255, 1);
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 html,
 body {
   width: 100%;
@@ -51,7 +59,7 @@ hr[role='separator'] {
   z-index: 2;
   top: 0;
   display: flex;
-  width: calc(100vw - 2rem);
+  width: 100vw;
   min-height: 10rem;
   justify-content: space-between;
   padding: 0 1rem;
@@ -112,7 +120,7 @@ hr[role='separator'] {
   left: 0;
   display: flex;
   width: 100vw;
-  height: calc(100vh - 4rem);
+  height: 100vh;
   flex-direction: column;
   padding: 4rem 0 2rem;
   background-color: var(--color-darker-background);
