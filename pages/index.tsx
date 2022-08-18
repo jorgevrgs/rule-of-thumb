@@ -7,7 +7,6 @@ import { NavLinksContext, servicesContainer } from '../infrastructure';
 import type { IndexPageProps } from '../types';
 
 const Home: NextPage<IndexPageProps> = ({ navLinks, celebrities }) => {
-  console.log({ celebrities });
   return (
     <NavLinksContext.Provider value={navLinks}>
       <Layout>

@@ -18,3 +18,8 @@ export interface CelebritiesProps {
 export interface CelebrityProps {
   celebrity: Celebrities[number];
 }
+
+export interface VeredictProps {
+  positive: number;
+  negative: number;
+}
