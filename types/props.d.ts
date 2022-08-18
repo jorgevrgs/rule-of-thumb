@@ -1,3 +1,4 @@
+import { Celebrities } from './api';
 import type { NavLinks } from './components';
 
 export interface IconProps {
@@ -8,4 +9,12 @@ export interface IconProps {
 
 export interface NavLinkProps {
   navLinks: NavLinks;
+}
+
+export interface CelebritiesProps {
+  celebrities: Celebrities;
+}
+
+export interface CelebrityProps {
+  celebrity: Celebrities[number];
 }

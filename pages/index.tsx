@@ -1,17 +1,21 @@
 import type { GetServerSideProps, NextPage } from 'next';
 import BannerBottom from '../components/banner-bottom';
 import BannerTop from '../components/banner-top';
+import Celebrities from '../components/celebrities';
 import Layout from '../components/layout';
 import { NavLinksContext, servicesContainer } from '../infrastructure';
-import type { NavLinkProps } from '../types';
+import type { IndexPageProps } from '../types';
 
-const Home: NextPage<NavLinkProps> = ({ navLinks }) => {
+const Home: NextPage<IndexPageProps> = ({ navLinks, celebrities }) => {
+  console.log({ celebrities });
   return (
     <NavLinksContext.Provider value={navLinks}>
       <Layout>
         <BannerTop />
 
-        <main role="main">👉 Your code goes here 👈</main>
+        <main role="main">
+          <Celebrities celebrities={celebrities} />
+        </main>
 
         <BannerBottom />
       </Layout>
@@ -20,15 +24,20 @@ const Home: NextPage<NavLinkProps> = ({ navLinks }) => {
 };
 
 export const getServerSideProps: GetServerSideProps<
-  NavLinkProps
+  IndexPageProps
 > = async () => {
   const getLinksService = servicesContainer.cradle.getLinksService;
+  const getCelebritiesService = servicesContainer.cradle.getCelebritiesService;
 
-  const navLinks = await getLinksService();
+  const [navLinks, celebrities] = await Promise.all([
+    getLinksService(),
+    getCelebritiesService(),
+  ]);
 
   return {
     props: {
       navLinks,
+      celebrities,
     },
   };
 };

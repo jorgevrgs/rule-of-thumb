@@ -10,6 +10,9 @@ const nextConfig = {
   sassOptions: {
     includePaths: [join(__dirname, 'styles')],
   },
+  images: {
+    domains: ['celebrities-v2.s3.amazonaws.com'],
+  },
 };
 
 export default nextConfig;

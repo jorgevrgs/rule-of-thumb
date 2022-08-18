@@ -1,5 +1,5 @@
 import { asFunction, asValue, createContainer, InjectionMode } from 'awilix';
-import { getLinksService } from '../../application';
+import { getCelebritiesService, getLinksService } from '../../application';
 import { Context } from '../../types';
 
 export const servicesContainer = createContainer<Context>({
@@ -7,4 +7,5 @@ export const servicesContainer = createContainer<Context>({
 }).register({
   fetch: asValue(fetch),
   getLinksService: asFunction(getLinksService).singleton(),
+  getCelebritiesService: asFunction(getCelebritiesService).singleton(),
 });
