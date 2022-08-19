@@ -5,14 +5,6 @@ export default function Veredict({ positive, negative }: VeredictProps) {
   const positivePercentage = (positive / (positive + negative)) * 100;
   const negativePercentage = (negative / (positive + negative)) * 100;
 
-  // const positiveStyle = {
-  //   width: `${positivePercentage}%`,
-  // };
-
-  // const negativeStyle = {
-  //   width: `${negativePercentage}%`,
-  // };
-
   return (
     <>
       <div className="flex justify-between align-middle w-full">
