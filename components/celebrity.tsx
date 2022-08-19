@@ -10,8 +10,6 @@ export function Celebrity({ celebrity }: CelebrityProps) {
           src={celebrity.picture}
           alt={celebrity.name}
           className="absolute inset-0 object-cover w-full h-full"
-          width={256}
-          height={114}
           layout="fill"
           objectFit="cover"
         />
