@@ -50,8 +50,6 @@ export const getServerSideProps: GetServerSideProps<
 
   celebrities.unshift(featured);
 
-  console.log({ celebrities });
-
   return {
     props: {
       navLinks,
