@@ -470,10 +470,6 @@ main h2 {
   display: none;
 }
 
-.max-centered {
-  display: contents;
-}
-
 @media all and (min-width: 500px) {
   .banner-top .banner__left {
     flex-basis: 30%;
@@ -589,25 +585,6 @@ main h2 {
   html,
   body {
     font-size: 18px;
-  }
-
-  .max-centered {
-    position: relative;
-    display: block;
-    width: 100vw;
-    max-width: 1100px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  .max-centered > *,
-  .max-centered > hr[role='separator'] {
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  .max-centered main {
-    padding: 0;
   }
 
   .nav {

@@ -10,7 +10,7 @@ export default function Header() {
         src="/assets/img/pope-francis.@2x.png"
         alt="Pope Francis"
       />
-      <div className="max-centered">
+      <div className="contents lg:relative lg:w-full lg:max-w-5xl lg:mx-auto">
         <FeaturedCard />
       </div>
       <div className="hero__closing-gauge">

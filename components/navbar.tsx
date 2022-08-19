@@ -7,7 +7,7 @@ function Navbar() {
 
   return (
     <nav className="nav" role="navigation">
-      <div className="max-centered">
+      <div className="contents lg:relative lg:w-full lg:max-w-5xl lg:mx-auto">
         <h1 className="nav__logo">Rule of thumb.</h1>
         <button className="nav__hamburger icon-button">
           <Icon name="hamburger" width={25} height={20} />

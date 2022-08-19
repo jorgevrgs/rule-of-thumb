@@ -11,7 +11,7 @@ function Layout({ children }: Props): JSX.Element {
     <>
       <Navbar />
       <Header />
-      <div className="max-centered">
+      <div className="contents lg:relative lg:w-full lg:max-w-5xl lg:mx-auto">
         {children}
 
         <Footer />
