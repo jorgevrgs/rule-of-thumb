@@ -2,6 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import type {
   Celebrities,
+  Celebrity,
   GetCelebritiesResponse,
   OriginCelebrity,
 } from '../../types';
@@ -24,6 +25,21 @@ export default async function handler(
     process.env.BACKEND_API_URL
   );
 
+  const featured: Celebrity = {
+    celebrityId: 'featured',
+    name: 'Pope Francis',
+    picture: '/assets/img/pope-francis.@2x.png',
+    description:
+      'Pope Francis is the head of the Catholic Church. He is the first Jesuit pope, the first from the Americas, the first from the Southern Hemisphere, and the first pope from outside Europe since the Syrian Gregory III, 1,700 years ago.',
+    votes: {
+      positive: 78,
+      negative: 22,
+    },
+    active: true,
+    lastUpdated: '',
+    category: 'Religion',
+  };
+
   const celebrities = await fetch(url)
     .then((data) => data.json())
     .then((data: GetCelebritiesResponse) => data.data)
@@ -35,6 +51,8 @@ export default async function handler(
       }))
     )
     .then((data) => data.filter((item) => item.active));
+
+  celebrities.unshift(featured);
 
   res.status(200).json(celebrities);
 }
