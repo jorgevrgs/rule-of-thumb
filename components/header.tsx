@@ -1,4 +1,4 @@
-import FeaturedCard from './featured-card';
+import FeaturedCard from 'components/featured-card';
 
 export default function Header() {
   return (

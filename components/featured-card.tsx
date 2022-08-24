@@ -1,7 +1,7 @@
+import Icon from 'components/icon';
+import { LayoutContext } from 'infrastructure/contexts';
 import Image from 'next/image';
 import { useContext } from 'react';
-import { LayoutContext } from '../infrastructure';
-import Icon from './icon';
 
 export default function FeaturedCard() {
   const { celebrity } = useContext(LayoutContext);

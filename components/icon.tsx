@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { IconProps } from '../types';
+import { IconProps } from 'types';
 
 export default function Icon({ name, width = 24, height = 24 }: IconProps) {
   return (

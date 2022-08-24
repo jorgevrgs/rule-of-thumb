@@ -1,12 +1,13 @@
+import BannerBottom from 'components/banner-bottom';
+import BannerTop from 'components/banner-top';
+import Celebrities from 'components/celebrities';
+import Layout from 'components/layout';
+import { servicesContainer } from 'infrastructure/containers';
+import { LayoutContext } from 'infrastructure/contexts';
 import type { GetServerSideProps, NextPage } from 'next';
-import BannerBottom from '../components/banner-bottom';
-import BannerTop from '../components/banner-top';
-import Celebrities from '../components/celebrities';
-import Layout from '../components/layout';
-import { LayoutContext, servicesContainer } from '../infrastructure';
-import type { IndexPageProps } from '../types';
+import type { IndexPageProps } from 'types';
 
-const Home: NextPage<IndexPageProps> = ({ navLinks, celebrities }) => {
+const Index: NextPage<IndexPageProps> = ({ navLinks, celebrities }) => {
   const [feturedCelebrity, ...otherCelebrities] = celebrities;
 
   return (
@@ -43,4 +44,4 @@ export const getServerSideProps: GetServerSideProps<
   };
 };
 
-export default Home;
+export default Index;

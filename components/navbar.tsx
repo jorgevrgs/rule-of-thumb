@@ -1,6 +1,7 @@
+import Icon from 'components/icon';
+import { LayoutContext } from 'infrastructure/contexts';
 import { useContext } from 'react';
-import { LayoutContext } from '../infrastructure';
-import Icon from './icon';
+import type { NavLink } from 'types';
 
 function Navbar() {
   const { navLinks } = useContext(LayoutContext);
@@ -14,7 +15,7 @@ function Navbar() {
         </button>
         <ul className="nav__links">
           {navLinks?.length &&
-            navLinks.map(({ name, href }) => (
+            navLinks.map(({ name, href }: NavLink) => (
               <li key={name}>
                 <a href={href}>{name}</a>
               </li>

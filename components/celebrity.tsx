@@ -1,6 +1,6 @@
+import Veredict from 'components/veredict';
 import Image from 'next/image';
-import { CelebrityProps } from '../types';
-import Veredict from './veredict';
+import { CelebrityProps } from 'types';
 
 export function Celebrity({ celebrity }: CelebrityProps) {
   return (

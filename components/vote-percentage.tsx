@@ -1,4 +1,4 @@
-import Icon from './icon';
+import Icon from 'components/icon';
 
 export default function VotePercentage({
   positive = 0,
@@ -15,7 +15,7 @@ export default function VotePercentage({
 
   return (
     <div
-      className={`flex align-middle text-lg font-bold h-12 py-2 px-4 text-white ${bgColor}/80 w-full`}
+      className={`flex items-center justify-center text-lg font-bold h-12 py-2 px-4 text-white ${bgColor}/80 w-full`}
       style={{ maxWidth: `${value.toFixed(0)}%` }}
       aria-label={ariaLabel}
     >
