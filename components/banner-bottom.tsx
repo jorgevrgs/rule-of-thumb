@@ -10,7 +10,7 @@ export default function BannerBottom() {
       <Image
         layout="fill"
         className="banner__background"
-        src="/assets/img/bg-people.png"
+        src="/img/bg-people.png"
         alt=""
         role="none"
       />
