@@ -6,11 +6,9 @@ export default function Veredict({ positive, negative }: VeredictProps) {
   const negativePercentage = (negative / (positive + negative)) * 100;
 
   return (
-    <>
-      <div className="flex justify-between align-middle w-full">
-        <VotePercentage positive={positivePercentage} />
-        <VotePercentage negative={negativePercentage} />
-      </div>
-    </>
+    <div className="flex justify-between align-middle w-full">
+      <VotePercentage positive={positivePercentage} />
+      <VotePercentage negative={negativePercentage} />
+    </div>
   );
 }
