@@ -21,9 +21,9 @@ export function Celebrity({ celebrity }: CelebrityProps) {
         />
 
         <div className="z-10 p-8">
-          <h2 className="text-xl font-bold text-white line-clamp-1">
+          <h3 className="text-2xl font-bold text-white line-clamp-1 mb-4">
             {celebrity.name}
-          </h2>
+          </h3>
           <p className="text-lg line-clamp-3">{celebrity.description}</p>
           <p className="text-right text-sm mt-4 w-full">
             {`${timeAgo} in ${celebrity.category}`}
