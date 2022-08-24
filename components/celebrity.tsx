@@ -1,14 +1,9 @@
 import Veredict from 'components/veredict';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import Image from 'next/image';
 import type { CelebrityProps } from 'types';
+import getTimeAgo from 'utils/get-time-ago';
 
 export function Celebrity({ celebrity }: CelebrityProps) {
-  dayjs.extend(relativeTime);
-
-  const timeAgo = dayjs().to(dayjs(celebrity.lastUpdated));
-
   return (
     <>
       <article className="flex flex-col items-center px-4 w-[300px] h-[300px] text-white relative">
@@ -26,7 +21,7 @@ export function Celebrity({ celebrity }: CelebrityProps) {
           </h3>
           <p className="text-lg line-clamp-3">{celebrity.description}</p>
           <p className="text-right text-sm mt-4 w-full">
-            {`${timeAgo} in ${celebrity.category}`}
+            {`${getTimeAgo(celebrity.lastUpdated)} in ${celebrity.category}`}
           </p>
         </div>
 
