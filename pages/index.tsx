@@ -7,13 +7,15 @@ import { LayoutContext, servicesContainer } from '../infrastructure';
 import type { IndexPageProps } from '../types';
 
 const Home: NextPage<IndexPageProps> = ({ navLinks, celebrities }) => {
+  const [feturedCelebrity, ...otherCelebrities] = celebrities;
+
   return (
-    <LayoutContext.Provider value={{ navLinks, celebrity: celebrities[0] }}>
+    <LayoutContext.Provider value={{ navLinks, celebrity: feturedCelebrity }}>
       <Layout>
         <BannerTop />
 
         <main role="main">
-          <Celebrities celebrities={celebrities.slice(1)} />
+          <Celebrities celebrities={otherCelebrities} />
         </main>
 
         <BannerBottom />
