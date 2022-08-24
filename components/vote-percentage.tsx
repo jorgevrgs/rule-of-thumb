@@ -16,7 +16,7 @@ export default function VotePercentage({
   return (
     <div
       className={`flex align-middle text-lg font-bold h-12 py-2 px-4 text-white ${bgColor}/80 w-full`}
-      style={{ maxWidth: `${value.toFixed(0)}%`, minWidth: '30%' }}
+      style={{ maxWidth: `${value.toFixed(0)}%` }}
       aria-label={ariaLabel}
     >
       <Icon name={iconName} width={16} height={16} />
