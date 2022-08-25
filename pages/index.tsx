@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import BannerBottom from 'components/banner-bottom';
 import BannerTop from 'components/banner-top';
 import Celebrities from 'components/celebrities';
@@ -8,7 +9,21 @@ import type { GetServerSideProps, NextPage } from 'next';
 import type { IndexPageProps } from 'types';
 
 const Index: NextPage<IndexPageProps> = ({ navLinks, celebrities }) => {
-  const [feturedCelebrity, ...otherCelebrities] = celebrities;
+  const getCelebritiesService = servicesContainer.cradle.getCelebritiesService;
+
+  const { data, isLoading } = useQuery(['celebrities'], getCelebritiesService, {
+    initialData: celebrities,
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!data) {
+    return <div>No celebrities</div>;
+  }
+
+  const [feturedCelebrity, ...otherCelebrities] = data;
 
   return (
     <LayoutContext.Provider value={{ navLinks, celebrity: feturedCelebrity }}>

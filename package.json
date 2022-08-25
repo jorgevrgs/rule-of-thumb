@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@tailwindcss/line-clamp": "0.4.0",
+    "@tanstack/react-query": "4.2.1",
+    "@tanstack/react-query-devtools": "4.2.1",
     "awilix": "7.0.3",
     "dayjs": "1.11.5",
     "next": "12.2.3",
