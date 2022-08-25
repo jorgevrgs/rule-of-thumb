@@ -1,4 +1,6 @@
 import Icon from 'components/icon';
+import getClassNames from 'utils/get-class-names';
+import roundValue from 'utils/round-value';
 
 export default function VotePercentage({
   positive = 0,
@@ -12,15 +14,28 @@ export default function VotePercentage({
   const ariaLabel = isPositive ? 'thumbs up' : 'thumbs down';
   const bgColor = isPositive ? 'bg-green-positive' : 'bg-yellow-negative';
   const iconName = isPositive ? 'thumbs-up' : 'thumbs-down';
+  const absValue = roundValue(Math.abs(value), 2);
+  const roundedValue = roundValue(absValue);
 
   return (
     <div
-      className={`flex items-center justify-center text-lg font-bold h-12 py-2 px-4 text-white ${bgColor}/80 w-full`}
-      style={{ maxWidth: `${value.toFixed(0)}%` }}
+      className={getClassNames([
+        'flex',
+        'items-center',
+        'justify-center',
+        'text-lg',
+        'font-bold',
+        'h-12',
+        'py-2',
+        'px-4',
+        'text-white',
+        `${bgColor}/80`,
+      ])}
       aria-label={ariaLabel}
+      style={{ width: `${roundedValue}%`, minWidth: '30%' }}
     >
       <Icon name={iconName} width={16} height={16} />
-      <span className="ml-2 text-base font-xs">{value.toFixed(2)} %</span>
+      <span className="ml-2 text-base font-xs">{absValue} %</span>
     </div>
   );
 }
