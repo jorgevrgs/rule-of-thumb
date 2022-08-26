@@ -2,7 +2,7 @@ import { VoteState } from 'domain/contants';
 import { useMemo, useState } from 'react';
 import getClassNames from 'utils/get-class-names';
 
-export default function useButtonClasses() {
+export function useVoteHook() {
   const [vote, setVote] = useState<VoteState>(VoteState.neutral);
   const setPositiveVote = () => {
     if (vote !== VoteState.positive) {

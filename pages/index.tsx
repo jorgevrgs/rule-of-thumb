@@ -1,19 +1,15 @@
-import { useQuery } from '@tanstack/react-query';
 import BannerBottom from 'components/banner-bottom';
 import BannerTop from 'components/banner-top';
 import Celebrities from 'components/celebrities';
 import Layout from 'components/layout';
+import type { IndexPageProps } from 'domain/types';
 import { servicesContainer } from 'infrastructure/containers';
 import { LayoutContext } from 'infrastructure/contexts';
+import { useFetchCelebrities } from 'infrastructure/hooks';
 import type { GetServerSideProps, NextPage } from 'next';
-import type { IndexPageProps } from 'types';
 
 const Index: NextPage<IndexPageProps> = ({ navLinks, celebrities }) => {
-  const getCelebritiesService = servicesContainer.cradle.getCelebritiesService;
-
-  const { data, isLoading } = useQuery(['celebrities'], getCelebritiesService, {
-    initialData: celebrities,
-  });
+  const { data, isLoading } = useFetchCelebrities(celebrities);
 
   if (isLoading) {
     return <div>Loading...</div>;

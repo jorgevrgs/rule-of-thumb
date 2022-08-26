@@ -3,3 +3,7 @@ export enum VoteState {
   'positive' = 'positive',
   'negative' = 'negative',
 }
+
+export enum Stores {
+  'celebrities' = 'celebrities',
+}

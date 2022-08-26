@@ -1,4 +1,4 @@
-import type { Celebrities, Context } from '../../types';
+import type { Celebrities, Context } from 'domain/types';
 
 export const getCelebritiesService = ({ fetch }: Context) => {
   return (): Promise<Celebrities> =>

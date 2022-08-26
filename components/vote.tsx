@@ -1,6 +1,6 @@
 import Icon from 'components/icon';
-import useVoteHook from 'infrastructure/hooks/use-vote.hook';
-import { Celebrity } from 'types';
+import { Celebrity } from 'domain/types';
+import { useVoteHook } from 'infrastructure/hooks';
 
 export default function Vote({ celebrityId }: Pick<Celebrity, 'celebrityId'>) {
   const {

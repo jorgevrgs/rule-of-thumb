@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import type { NavLinks } from 'domain/types';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { NavLinks } from '../../types';
 
 export default function handler(
   _req: NextApiRequest,

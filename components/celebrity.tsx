@@ -1,7 +1,7 @@
 import Veredict from 'components/veredict';
 import Vote from 'components/vote';
+import type { CelebrityProps } from 'domain/types';
 import Image from 'next/image';
-import type { CelebrityProps } from 'types';
 import getTimeAgo from 'utils/get-time-ago';
 
 export function Celebrity({ celebrity }: CelebrityProps) {

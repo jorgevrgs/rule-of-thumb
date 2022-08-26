@@ -1,5 +1,5 @@
 import { Celebrity } from 'components/celebrity';
-import type { CelebritiesProps } from 'types';
+import type { CelebritiesProps } from 'domain/types';
 
 export default function Celebrities({ celebrities }: CelebritiesProps) {
   return (

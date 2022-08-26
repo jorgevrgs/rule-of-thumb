@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import type { Celebrities } from 'domain/types';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import type { Celebrities } from '../../types';
 
 export default async function handler(
   _req: NextApiRequest,

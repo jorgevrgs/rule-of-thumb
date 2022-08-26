@@ -1,7 +1,7 @@
 import Icon from 'components/icon';
+import type { NavLink } from 'domain/types';
 import { LayoutContext } from 'infrastructure/contexts';
 import { useContext } from 'react';
-import type { NavLink } from 'types';
 
 function Navbar() {
   const { navLinks } = useContext(LayoutContext);

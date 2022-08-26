@@ -1,4 +1,4 @@
-import type { Context, NavLinks } from '../../types';
+import type { Context, NavLinks } from 'domain/types';
 
 export const getLinksService = ({ fetch }: Context) => {
   return (): Promise<NavLinks> =>
