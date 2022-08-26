@@ -1,5 +1,5 @@
 import Icon from 'components/icon';
-import useButtonClasses from 'infrastructure/hooks/use-vote.hook';
+import useVoteHook from 'infrastructure/hooks/use-vote.hook';
 
 export default function Vote({ celebrityId }: { celebrityId: string }) {
   const {
@@ -8,7 +8,7 @@ export default function Vote({ celebrityId }: { celebrityId: string }) {
     getNegativeVoteClasses,
     setNegativeVote,
     isButtonDisabled,
-  } = useButtonClasses();
+  } = useVoteHook();
 
   return (
     <div className="flex justify-center my-8">
