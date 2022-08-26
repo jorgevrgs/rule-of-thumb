@@ -54,7 +54,6 @@ export default function useButtonClasses() {
     return getClassNames(classess);
   }, [vote]);
   const isButtonDisabled = useMemo(() => {
-    console.log('isButtonDisabled');
     return vote === VoteState.neutral;
   }, [vote]);
 
