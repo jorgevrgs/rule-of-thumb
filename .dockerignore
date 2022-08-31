@@ -1,0 +1,4 @@
+.env*
+.docker
+.tmp
+node_modules

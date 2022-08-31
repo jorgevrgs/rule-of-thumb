@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: nextjs_app
+    image: nextjs/dev:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    depends_on:
+      - mongo
+    networks:
+      - nextjs-network
+    ports:
+      - 3000:3000
+    restart: always
+    volumes:
+      - ./packages/frontend:/usr/src/app
+      - /usr/src/app/node_modules
+
+  mongo:
+    container_name: nextjs_mongo
+    image: mongo:4.2.22
+    restart: always
+    env_file:
+      - ./.env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME:-mongoadmin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD:-secret}
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE:-nextjs}
+    networks:
+      - nextjs-network
+    ports:
+      - 27017:27017
+    volumes:
+      - .tmp/mongo:/data/db
+
+  redis:
+    image: redis:6.2.6-alpine
+    container_name: nextjs_cache
+    networks:
+      - nextjs-network
+    ports:
+      - 6379:6379
+    volumes:
+      - .tmp/redis:/data
+
+networks:
+  nextjs-network:
