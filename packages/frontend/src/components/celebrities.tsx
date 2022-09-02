@@ -1,11 +1,11 @@
 import ReactSelect from 'react-select';
 import type { CelebritiesProps } from '../domain/types';
-import { useListView } from '../infrastructure';
+import { useListViewHook } from '../infrastructure';
 import Celebrity from './celebrity';
 
 export default function Celebrities({ celebrities }: CelebritiesProps) {
   const { listView, handleListViewChange, options, defaultValue } =
-    useListView();
+    useListViewHook();
 
   return (
     <section className="flex flex-col">

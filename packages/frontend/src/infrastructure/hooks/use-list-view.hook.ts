@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { SingleValue } from 'react-select';
 
-export function useListView() {
+export function useListViewHook() {
   enum ListOptions {
     'list' = 'list',
     'grid' = 'grid',
