@@ -11,18 +11,19 @@ export async function getClient() {
   // Use connect method to connect to the server
   if (!client) {
     let url = process.env.NEXT_MONGO_URL;
-    url = url.replace('@mongo:', '@localhost:');
-
-    console.log('starting getClient...', {
-      database: process.env.MONGO_INITDB_DATABASE,
-      url: process.env.NEXT_MONGO_URL,
-    });
 
     if (!url) {
       throw new Error(
         'Mongo URL is not defined, use NEXT_MONGO_URL environment variable'
       );
     }
+
+    url = url.replace('@mongo:', '@localhost:');
+
+    console.log('starting getClient...', {
+      database: process.env.MONGO_INITDB_DATABASE,
+      url: process.env.NEXT_MONGO_URL,
+    });
 
     client = new MongoClient(url);
     await client.connect();
