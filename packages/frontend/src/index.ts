@@ -1,3 +1,4 @@
 export * from './application';
-export * from './domain/components';
+export * from './components';
+export * from './domain';
 export * from './infrastructure';

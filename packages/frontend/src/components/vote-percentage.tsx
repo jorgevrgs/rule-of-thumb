@@ -1,5 +1,5 @@
-import { getClassNames } from '../../application/utils/get-class-names';
-import { roundValue } from '../../application/utils/round-value';
+import { getClassNames } from '../application/utils/get-class-names';
+import { roundValue } from '../application/utils/round-value';
 import Icon from './icon';
 
 export default function VotePercentage({

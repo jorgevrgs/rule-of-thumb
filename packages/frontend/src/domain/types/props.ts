@@ -1,5 +1,4 @@
-import { Celebrities } from './api';
-import type { NavLinks } from './components';
+import { CelebritiesType, CelebrityType, NavLinksType } from '@app/shared';
 
 export interface IconProps {
   name: string;
@@ -8,15 +7,15 @@ export interface IconProps {
 }
 
 export interface NavLinkProps {
-  navLinks: NavLinks;
+  navLinks: NavLinksType;
 }
 
 export interface CelebritiesProps {
-  celebrities: Celebrities;
+  celebrities: CelebritiesType;
 }
 
 export interface CelebrityProps {
-  celebrity: Celebrities[number];
+  celebrity: CelebrityType;
 }
 
 export interface VeredictProps {
