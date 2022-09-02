@@ -3,5 +3,5 @@ import type { LayoutContextType } from '../../domain/types';
 
 export const LayoutContext = createContext<LayoutContextType>({
   navLinks: [],
-  celebrity: null,
+  celebrity: undefined,
 });

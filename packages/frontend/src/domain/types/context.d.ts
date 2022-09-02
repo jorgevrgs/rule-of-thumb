@@ -1,7 +1,6 @@
-import type { Celebrity } from './api';
-import type { NavLinks } from './components';
+import { CelebrityType, NavLinksType } from '@app/shared';
 
 export interface LayoutContextType {
-  navLinks: NavLinks;
-  celebrity: Celebrity;
+  navLinks: NavLinksType;
+  celebrity?: CelebrityType;
 }

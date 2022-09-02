@@ -1,6 +1,3 @@
-import type { CelebritiesType, NavLinks } from '@app/frontend';
+import { LayoutContextType } from '@app/frontend';
 
-export interface IndexPageProps {
-  celebrities: CelebritiesType;
-  navLinks: NavLinks;
-}
+export type IndexPageProps = LayoutContextType;

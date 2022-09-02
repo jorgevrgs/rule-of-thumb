@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { LayoutContext } from '../../infrastructure/contexts';
-import { NavLinkType } from '../types';
 import Icon from './icon';
 
 function Navbar() {
@@ -14,8 +13,8 @@ function Navbar() {
           <Icon name="hamburger" width={25} height={20} />
         </button>
         <ul className="nav__links">
-          {navLinks?.length &&
-            navLinks.map(({ name, href }: NavLinkType) => (
+          {Boolean(navLinks?.length) &&
+            navLinks.map(({ name, href }) => (
               <li key={name}>
                 <a href={href}>{name}</a>
               </li>

@@ -6,6 +6,10 @@ import Icon from './icon';
 export default function FeaturedCard() {
   const { celebrity } = useContext(LayoutContext);
 
+  if (!celebrity) {
+    return null;
+  }
+
   return (
     <>
       <Image

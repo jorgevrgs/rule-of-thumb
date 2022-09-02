@@ -23,3 +23,7 @@ export interface VeredictProps {
   positive: number;
   negative: number;
 }
+
+export interface VoteProps {
+  celebrityId: string;
+}
