@@ -4,6 +4,7 @@ import {
   CollectionOptions,
   GridFSBucket,
   GridFSBucketOptions,
+  GridFSBucketReadStreamOptionsWithRevision,
   MongoClient,
   MongoClientOptions,
 } from 'mongodb';
@@ -68,8 +69,11 @@ export async function getBucket(
   });
 }
 
-export async function getPictureStream(pictureName: string) {
+export async function getPictureStream(
+  pictureName: string,
+  options?: GridFSBucketReadStreamOptionsWithRevision
+) {
   const bucket = await getBucket(IMAGES_COLLECTION);
 
-  return bucket.openDownloadStreamByName(pictureName);
+  return bucket.openDownloadStreamByName(pictureName, options);
 }

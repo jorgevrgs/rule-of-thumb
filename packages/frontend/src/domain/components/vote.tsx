@@ -1,8 +1,10 @@
 import { useVoteHook } from '../../infrastructure/hooks';
-import { Celebrity } from '../types';
+import type { CelebrityType } from '../types';
 import Icon from './icon';
 
-export default function Vote({ celebrityId }: Pick<Celebrity, 'celebrityId'>) {
+export default function Vote({
+  celebrityId,
+}: Pick<CelebrityType, 'celebrityId'>) {
   const {
     getPositiveVoteClasses,
     setPositiveVote,

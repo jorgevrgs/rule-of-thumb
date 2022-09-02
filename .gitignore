@@ -38,3 +38,4 @@ yarn-error.log*
 .tmp
 .env
 node_modules
+.yarn

@@ -14,11 +14,17 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "baseUrl": ".",
     "paths": {
-      "@app/backend/*": ["./packages/backend/src"],
-      "@app/frontend/*": ["./packages/frontend/src"]
+      "@app/*": ["./packages/*"]
     }
   },
   "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.mjs"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.d.ts",
+    "**/*.tsx",
+    "next.config.mjs"
+  ]
 }

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { LayoutContext } from '../../infrastructure/contexts';
-import type { NavLink } from '../types';
+import { NavLinkType } from '../types';
 import Icon from './icon';
 
 function Navbar() {
@@ -15,7 +15,7 @@ function Navbar() {
         </button>
         <ul className="nav__links">
           {navLinks?.length &&
-            navLinks.map(({ name, href }: NavLink) => (
+            navLinks.map(({ name, href }: NavLinkType) => (
               <li key={name}>
                 <a href={href}>{name}</a>
               </li>

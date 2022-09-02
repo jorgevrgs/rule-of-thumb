@@ -1,10 +1,11 @@
 {
-  "name": "@app/frontend",
+  "name": "rule-of-tumb",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -19,8 +20,6 @@
     "@tailwindcss/line-clamp": "0.4.0",
     "@tanstack/react-query": "4.2.1",
     "@tanstack/react-query-devtools": "4.2.1",
-    "dayjs": "1.11.5",
-    "lodash.omit": "4.5.0",
     "next": "12.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -38,7 +37,7 @@
     "postcss": "8.4.16",
     "sass": "1.54.0",
     "tailwindcss": "3.1.8",
-    "typescript": "4.7.4"
+    "typescript": "4.8.2"
   },
   "workspaces": [
     "packages/*"

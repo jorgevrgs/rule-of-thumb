@@ -1,15 +1,14 @@
-import type { IndexPageProps } from '@app/frontend';
 import {
   BannerBottom,
   BannerTop,
   Celebrities,
   getCelebritiesService,
-  getLinksService,
   Layout,
   LayoutContext,
   useFetchCelebrities,
 } from '@app/frontend';
 import type { GetServerSideProps, NextPage } from 'next';
+import type { IndexPageProps } from '../types';
 
 const Index: NextPage<IndexPageProps> = ({ navLinks, celebrities }) => {
   const { data, isLoading } = useFetchCelebrities(celebrities);
@@ -39,18 +38,19 @@ const Index: NextPage<IndexPageProps> = ({ navLinks, celebrities }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<
-  IndexPageProps
-> = async () => {
-  const [navLinks, celebrities] = await Promise.all([
-    getLinksService(),
-    getCelebritiesService(),
-  ]);
+export const getServerSideProps: GetServerSideProps = async () => {
+  const celebrities = await getCelebritiesService();
+
+  const navLinks = [
+    { name: 'Past Trials', href: '#' },
+    { name: 'How It Works', href: '#' },
+    { name: 'Login / Sign Up', href: '#' },
+  ];
 
   return {
     props: {
-      navLinks,
       celebrities,
+      navLinks,
     },
   };
 };

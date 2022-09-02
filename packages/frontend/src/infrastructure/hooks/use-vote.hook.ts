@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { getClassNames } from '../../application/utils/get-class-names';
+import { getClassNames } from '../../application/utils';
 import { VoteState } from '../../domain/constants';
 
 export function useVoteHook() {
