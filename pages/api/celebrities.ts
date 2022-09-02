@@ -1,10 +1,12 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import type { Celebrities } from '@app/backend';
+import {
+  CELEBRITIES_COLLECTION,
+  CelebrityDto,
+  getCollection,
+} from '@app/backend';
 import omit from 'lodash.omit';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { CelebrityDto } from '../../backend/celebrity.dto';
-import { CELEBRITIES_COLLECTION } from '../../backend/contants';
-import { getCollection } from '../../backend/mongo.client';
-import type { Celebrities } from '../../domain/types';
 
 export default async function handler(
   _req: NextApiRequest,

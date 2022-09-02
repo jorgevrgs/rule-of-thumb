@@ -1,5 +1,5 @@
+import { getPictureStream } from '@app/backend';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { getPictureStream } from '../../../backend/get-picture-stream';
 
 export default async function handler(
   req: NextApiRequest,

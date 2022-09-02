@@ -13,6 +13,11 @@ const nextConfig = {
   images: {
     domains: ['celebrities-v2.s3.amazonaws.com'],
   },
+  env: {
+    NEXT_BACKEND_URL: process.env.NEXT_BACKEND_URL,
+    NEXT_FRONTEND_URL: process.env.NEXT_FRONTEND_URL,
+    NEXT_MONGO_URL: process.env.NEXT_MONGO_URL,
+  },
 };
 
 export default nextConfig;
