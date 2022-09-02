@@ -1,15 +1,6 @@
 // @ts-check
 import { GridFSBucket, MongoClient } from 'mongodb';
 
-// load environment variables from .env file
-import { config } from 'dotenv';
-import { resolve } from 'path';
-import { __dirname } from './constants.mjs';
-
-config({
-  path: resolve(__dirname, '..', '.env'),
-});
-
 // Database Name
 const dbName = process.env.MONGO_INITDB_DATABASE;
 
@@ -17,15 +8,19 @@ const dbName = process.env.MONGO_INITDB_DATABASE;
 let client;
 
 export async function getClient() {
-  // Connection URL
-
   // Use connect method to connect to the server
   if (!client) {
-    const url = process.env.MONGO_URL;
+    let url = process.env.NEXT_MONGO_URL;
+    url = url.replace('@mongo:', '@localhost:');
+
+    console.log('starting getClient...', {
+      database: process.env.MONGO_INITDB_DATABASE,
+      url: process.env.NEXT_MONGO_URL,
+    });
 
     if (!url) {
       throw new Error(
-        'Mongo URL is not defined, use MONGO_URL environment variable'
+        'Mongo URL is not defined, use NEXT_MONGO_URL environment variable'
       );
     }
 
