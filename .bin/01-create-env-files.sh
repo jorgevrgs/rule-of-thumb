@@ -8,4 +8,4 @@ set -x
 cp .env.example .env
 
 ## Use this to start a local server with npm run dev
-## cp .env.local.example .env.local
+cp .env.local.example .env.local

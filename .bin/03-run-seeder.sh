@@ -4,7 +4,7 @@ set -ex
 
 ## Load the environment variables
 set -a
-. .env
+. .env.local
 set +a
 
 echo "MONGO_INITDB_ROOT_USERNAME = ${MONGO_INITDB_ROOT_USERNAME}"
