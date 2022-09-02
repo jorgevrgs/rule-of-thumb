@@ -5,3 +5,10 @@
 ```bash
 docker compose up
 ```
+
+## Utils
+
+```bash
+docker-compose up --build
+docker-compose build --progress=plain --no-cache
+```

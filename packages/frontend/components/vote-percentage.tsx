@@ -1,6 +1,6 @@
+import { getClassNames } from '../application/utils/get-class-names';
+import { roundValue } from '../application/utils/round-value';
 import Icon from '../components/icon';
-import getClassNames from '../utils/get-class-names';
-import roundValue from '../utils/round-value';
 
 export default function VotePercentage({
   positive = 0,

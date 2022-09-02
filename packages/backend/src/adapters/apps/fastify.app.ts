@@ -1,6 +1,10 @@
 import type { FastifyPluginAsync } from 'fastify';
 import fastifyPlugin from 'fastify-plugin';
-import { envPlugin, mongoPlugin } from '../../infrastructure/plugins';
+import {
+  envPlugin,
+  httpErrorsPlugin,
+  mongoPlugin,
+} from '../../infrastructure/plugins';
 import { celebritiesRoute, imagesRoute } from '../../infrastructure/routes';
 
 export const fastifyApp: FastifyPluginAsync = async (fastify) => {
@@ -9,16 +13,17 @@ export const fastifyApp: FastifyPluginAsync = async (fastify) => {
     .register(
       fastifyPlugin(mongoPlugin, { name: 'mongo', dependencies: ['env'] })
     )
+    .register(fastifyPlugin(httpErrorsPlugin, { name: 'httpErrors' }))
     .register(
       fastifyPlugin(imagesRoute, {
         name: 'images',
-        dependencies: ['env', 'mongo'],
+        dependencies: ['env', 'mongo', 'httpErrors'],
       })
     )
     .register(
       fastifyPlugin(celebritiesRoute, {
         name: 'celebrities',
-        dependencies: ['env', 'mongo'],
+        dependencies: ['env', 'mongo', 'httpErrors'],
       })
     );
 };

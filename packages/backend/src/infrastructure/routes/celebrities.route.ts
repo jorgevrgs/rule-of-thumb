@@ -1,12 +1,15 @@
 import type { FastifyPluginAsync } from 'fastify';
+import { CELEBRITY_COLLECTION } from '../../domain/contants';
 
 export const celebritiesRoute: FastifyPluginAsync = async (fastify) => {
-  fastify.get('/celebrities', async (request, reply) => {
-    const celebrities = await fastify?.mongo?.db
-      ?.collection('celebrities')
-      .find()
-      .toArray();
+  fastify.get('/celebrities', async (_request, reply) => {
+    const celebrityCollection =
+      fastify?.mongo?.db?.collection(CELEBRITY_COLLECTION);
 
-    return celebrities;
+    if (!celebrityCollection) {
+      throw reply.badRequest('Collection not found!');
+    }
+
+    return celebrityCollection.find().toArray();
   });
 };

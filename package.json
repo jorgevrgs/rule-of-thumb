@@ -2,7 +2,14 @@
   "name": "fed-rule-of-thumb",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "dev:be": "dotenv -e .env.local npm run dev -- -w @app/backend",
+    "dev:fe": "dotenv -e .env.local npm run dev -- -w @app/frontend"
+  },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "devDependencies": {
+    "dotenv-cli": "6.0.0"
+  }
 }
