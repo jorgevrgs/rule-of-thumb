@@ -18,15 +18,14 @@ export function useVoteHook() {
       setVote(VoteState.neutral);
     }
   };
+
+  const baseClasses = useMemo(
+    () => ['flex', 'items-center', 'justify-center', 'w-full', 'h-full'],
+    []
+  );
+
   const getPositiveVoteClasses = useMemo(() => {
-    const classess = [
-      'flex',
-      'items-center',
-      'justify-center',
-      'w-8',
-      'mr-4',
-      'bg-green-positive',
-    ];
+    const classess = [...baseClasses, 'bg-green-positive'];
     if (vote === VoteState.positive) {
       classess.push('border-white', 'border-2');
     } else {
@@ -34,16 +33,9 @@ export function useVoteHook() {
     }
 
     return getClassNames(classess);
-  }, [vote]);
+  }, [vote, baseClasses]);
   const getNegativeVoteClasses = useMemo(() => {
-    const classess = [
-      'flex',
-      'items-center',
-      'justify-center',
-      'w-8',
-      'mr-4',
-      'bg-yellow-negative',
-    ];
+    const classess = [...baseClasses, 'bg-yellow-negative'];
 
     if (vote === VoteState.negative) {
       classess.push('border-white', 'border-2');
@@ -52,7 +44,7 @@ export function useVoteHook() {
     }
 
     return getClassNames(classess);
-  }, [vote]);
+  }, [vote, baseClasses]);
   const isButtonDisabled = useMemo(() => {
     return vote === VoteState.neutral;
   }, [vote]);

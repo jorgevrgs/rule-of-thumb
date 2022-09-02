@@ -15,7 +15,7 @@ export function Celebrity({ celebrity }: CelebrityProps) {
         objectFit="cover"
       />
 
-      <div className="z-10 p-12">
+      <div className="z-10 px-4 py-12">
         <h3 className="text-2xl font-bold text-white line-clamp-1 mb-4">
           {celebrity.name}
         </h3>
