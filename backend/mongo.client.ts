@@ -14,12 +14,13 @@ export async function getMongoClient(
   options?: MongoClientOptions
 ) {
   // Connection URL
+  console.log('Creating MongoClient', url);
 
   // Use connect method to connect to the server
   if (!client) {
     if (!url) {
       throw new Error(
-        'Mongo URL is not defined, use MONGO_URL environment variable'
+        'Mongo URL is not defined, use NEXT_MONGO_URL environment variable'
       );
     }
 
@@ -39,7 +40,7 @@ export async function getCollection(
     client = await getMongoClient();
   }
 
-  const dbName = client.db.name;
+  const dbName = client.options.dbName;
 
   return client.db(dbName).collection(tableName, options);
 }
@@ -48,11 +49,15 @@ export async function getBucket(
   bucketName: string,
   options?: GridFSBucketOptions
 ) {
+  console.log('Creating GridFSBucket', bucketName);
+
   if (!client) {
     client = await getMongoClient();
   }
 
-  const dbName = client.db.name;
+  const dbName = client.options.dbName;
+
+  console.log('Selecting db', dbName);
 
   // create a gridfs bucket
   return new GridFSBucket(client.db(dbName), {
