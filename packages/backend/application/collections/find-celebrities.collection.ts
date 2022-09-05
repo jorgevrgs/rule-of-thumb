@@ -1,7 +1,7 @@
 import omit from 'lodash.omit';
 import { Document, Filter } from 'mongodb';
 import { CELEBRITIES_COLLECTION, CelebrityCollectionType } from '../../domain';
-import { getCollection } from '../../infrastructure';
+import { getCollection } from '../clients';
 
 export async function findCelebritiesCollection<T>(
   filter: Filter<Document> = {}

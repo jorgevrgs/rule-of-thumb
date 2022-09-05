@@ -8,7 +8,7 @@ import {
   MongoClient,
   MongoClientOptions,
 } from 'mongodb';
-import { IMAGES_COLLECTION } from '../domain';
+import { IMAGES_COLLECTION } from '../../domain';
 
 let client: MongoClient;
 
