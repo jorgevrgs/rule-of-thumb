@@ -2,8 +2,8 @@
 module.exports = {
   mode: 'jit',
   content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './packages/frontend/src/domain/components/**/*.{js,ts,jsx,tsx}',
+    './src/pages/**/*.{js,ts,jsx,tsx}',
+    './packages/frontend/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {

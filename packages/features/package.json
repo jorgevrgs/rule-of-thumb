@@ -1,5 +1,5 @@
 {
-  "name": "@app/frontend",
+  "name": "@app/features",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -8,8 +8,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "dayjs": "1.11.5",
-    "react-select": "5.4.0"
+  "devDependencies": {
+    "@types/pino": "7.0.5"
   }
 }

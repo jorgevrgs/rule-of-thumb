@@ -8,7 +8,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   sassOptions: {
-    includePaths: [join(__dirname, 'styles')],
+    includePaths: [join(__dirname, 'src/assets/styles')],
   },
   images: {
     domains: ['celebrities-v2.s3.amazonaws.com'],

@@ -18,8 +18,6 @@ export async function getClient() {
       );
     }
 
-    url = url.replace('@mongo:', '@localhost:');
-
     console.log('starting getClient...', {
       database: process.env.MONGO_INITDB_DATABASE,
       url: process.env.NEXT_MONGO_URL,

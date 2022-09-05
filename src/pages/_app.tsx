@@ -5,6 +5,7 @@ import { useState } from 'react';
 import '../assets/styles/globals.scss';
 
 function App({ Component, pageProps }: AppProps) {
+  console.log('Loading App...');
   const [queryClient] = useState(() => new QueryClient());
 
   return (
