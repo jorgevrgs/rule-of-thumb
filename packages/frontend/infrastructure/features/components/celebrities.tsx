@@ -35,6 +35,10 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
     ]);
   }, [listView?.value]);
 
+  if (!celebrities?.length) {
+    return <div>No celebrities</div>;
+  }
+
   return (
     <section className="flex flex-col">
       <div className="flex justify-evenly items-center">
