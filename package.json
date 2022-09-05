@@ -11,10 +11,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "init:01": "sh ./.bin/01-create-env-files.sh",
-    "init:02": "sh ./.bin/02-start-docker.sh",
-    "init:03": "sh ./.bin/03-run-seeder.sh",
-    "stop": "sh ./.bin/04-stop-docker.sh"
+    "serve": "sh ./.bin/01-serve.sh",
+    "seed": "sh ./.bin/02-seed.sh",
+    "stop": "sh ./.bin/03-stop.sh"
   },
   "dependencies": {
     "@tailwindcss/line-clamp": "0.4.0",
