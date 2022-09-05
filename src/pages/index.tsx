@@ -2,15 +2,21 @@ import {
   BannerBottom,
   BannerTop,
   Celebrities,
+  DeviceType,
   getCelebritiesService,
   Layout,
   LayoutContext,
   useFetchCelebrities,
 } from '@app/frontend';
 import type { GetServerSideProps, NextPage } from 'next';
+import { getSelectorsByUserAgent } from 'react-device-detect';
 import type { IndexPageProps } from '../types';
 
-const Index: NextPage<IndexPageProps> = ({ navLinks, celebrities }) => {
+const Index: NextPage<IndexPageProps> = ({
+  navLinks,
+  celebrities,
+  deviceType,
+}) => {
   const { data, isLoading } = useFetchCelebrities(celebrities);
 
   if (isLoading) {
@@ -24,7 +30,9 @@ const Index: NextPage<IndexPageProps> = ({ navLinks, celebrities }) => {
   const [feturedCelebrity, ...otherCelebrities] = data;
 
   return (
-    <LayoutContext.Provider value={{ navLinks, celebrity: feturedCelebrity }}>
+    <LayoutContext.Provider
+      value={{ navLinks, celebrity: feturedCelebrity, deviceType }}
+    >
       <Layout>
         <BannerTop />
 
@@ -38,7 +46,7 @@ const Index: NextPage<IndexPageProps> = ({ navLinks, celebrities }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const celebrities = await getCelebritiesService();
 
   const navLinks = [
@@ -47,10 +55,25 @@ export const getServerSideProps: GetServerSideProps = async () => {
     { name: 'Login / Sign Up', href: '#' },
   ];
 
+  let deviceType = DeviceType.mobile;
+
+  const userAgent = context.req.headers['user-agent'];
+
+  if (userAgent) {
+    const selector = getSelectorsByUserAgent(userAgent);
+
+    if (selector.isDesktop) {
+      deviceType = DeviceType.desktop;
+    } else if (selector.isTablet) {
+      deviceType = DeviceType.tablet;
+    }
+  }
+
   return {
     props: {
       celebrities,
       navLinks,
+      deviceType,
     },
   };
 };
