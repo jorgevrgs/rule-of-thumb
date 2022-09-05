@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import { getTimeAgo } from '../application/utils/get-time-ago';
-import type { CelebrityProps } from '../domain/types';
+import { getTimeAgo } from '../../../application/utils';
+import type { CelebrityProps } from '../../../domain/types';
 import Veredict from './veredict';
 import Vote from './vote';
 

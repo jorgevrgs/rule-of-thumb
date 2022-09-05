@@ -1,4 +1,4 @@
-import type { VeredictProps } from '../domain/types';
+import type { VeredictProps } from '../../../domain/types';
 import VotePercentage from './vote-percentage';
 
 export default function Veredict({ positive, negative }: VeredictProps) {

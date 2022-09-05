@@ -1,13 +1,8 @@
 export { default as BannerBottom } from './banner-bottom';
 export { default as BannerTop } from './banner-top';
-export { default as Celebrities } from './celebrities';
-export { default as Celebrity } from './celebrity';
 export { default as FeaturedCard } from './featured-card';
 export { default as Footer } from './footer';
 export { default as Header } from './header';
 export { default as Icon } from './icon';
 export { default as Layout } from './layout';
 export { default as Navbar } from './navbar';
-export { default as Veredict } from './veredict';
-export { default as Vote } from './vote';
-export { default as VotePercentage } from './vote-percentage';

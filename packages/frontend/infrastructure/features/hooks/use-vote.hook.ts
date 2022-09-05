@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
-import { getClassNames } from '../../application/utils';
-import { VoteState } from '../../domain/constants';
+import { getClassNames } from '../../../application/utils';
+import { VoteState } from '../../../domain/constants';
 
 export function useVoteHook() {
   const [vote, setVote] = useState<VoteState>(VoteState.neutral);

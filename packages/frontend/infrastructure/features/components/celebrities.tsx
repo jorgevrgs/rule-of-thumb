@@ -1,6 +1,6 @@
 import ReactSelect from 'react-select';
-import type { CelebritiesProps } from '../domain/types';
-import { useListViewHook } from '../infrastructure';
+import type { CelebritiesProps } from '../../../domain/types';
+import { useListViewHook } from '../hooks';
 import Celebrity from './celebrity';
 
 export default function Celebrities({ celebrities }: CelebritiesProps) {

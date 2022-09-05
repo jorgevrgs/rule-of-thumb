@@ -1,6 +1,6 @@
-import type { VoteProps } from '../domain/types';
-import { useVoteHook } from '../infrastructure/hooks';
-import Icon from './icon';
+import type { VoteProps } from '../../../domain/types';
+import { Icon } from '../../components';
+import { useVoteHook } from '../hooks';
 
 export default function Vote({ celebrityId }: VoteProps) {
   const {
