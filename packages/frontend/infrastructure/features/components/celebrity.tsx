@@ -1,12 +1,34 @@
 import Image from 'next/image';
-import { getTimeAgo } from '../../../application/utils';
+import { useMemo } from 'react';
+import { getClassNames, getTimeAgo } from '../../../application/utils';
+import { ListOptions } from '../../../domain/constants';
 import type { CelebrityProps } from '../../../domain/types';
 import Veredict from './veredict';
 import Vote from './vote';
 
-export default function Celebrity({ celebrity, className }: CelebrityProps) {
+export default function Celebrity({ celebrity, listOption }: CelebrityProps) {
+  const celebrityStyles = useMemo((): string => {
+    let styles = [
+      'flex flex-col',
+      'items-center',
+      'px-4',
+      'w-[22rem]',
+      'h-[22rem]',
+      'text-white',
+      'relative',
+      'md:w-full',
+      'md:h-96',
+    ];
+
+    if (listOption === ListOptions.list) {
+      styles.push('md:flex-col');
+    }
+
+    return getClassNames(styles);
+  }, [listOption]);
+
   return (
-    <article className={className}>
+    <article className={celebrityStyles}>
       <Image
         src={celebrity.picture}
         alt={celebrity.name}

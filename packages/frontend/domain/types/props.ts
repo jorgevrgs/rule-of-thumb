@@ -1,4 +1,5 @@
 import { CelebritiesType, CelebrityType, NavLinksType } from '@app/shared';
+import { ListOptions } from '../constants';
 
 export interface IconProps {
   name: string;
@@ -16,7 +17,7 @@ export interface CelebritiesProps {
 
 export interface CelebrityProps {
   celebrity: CelebrityType;
-  className: string;
+  listOption?: ListOptions;
 }
 
 export interface VeredictProps {
