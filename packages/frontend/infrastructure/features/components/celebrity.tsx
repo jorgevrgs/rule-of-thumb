@@ -6,7 +6,7 @@ import Vote from './vote';
 
 export default function Celebrity({ celebrity }: CelebrityProps) {
   return (
-    <article className="flex flex-col items-center px-4 w-[300px] h-[300px] text-white relative">
+    <article className="flex flex-col items-center px-4 w-[300px] h-[300px] text-white relative md:w-full md:min-h-[400px]">
       <Image
         src={celebrity.picture}
         alt={celebrity.name}

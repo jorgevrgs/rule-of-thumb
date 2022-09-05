@@ -19,9 +19,7 @@
   *,
   *::before,
   *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    @apply box-border m-0 p-0;
   }
 
   html,
