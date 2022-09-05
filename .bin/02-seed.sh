@@ -7,10 +7,8 @@ set -a
 . .env.local
 set +a
 
-echo "NEXT_FRONTEND_URL          = ${NEXT_FRONTEND_URL}"
-echo "NEXT_MONGO_URL             = ${NEXT_MONGO_URL}"
-# FUTURE: remove and use just the URL
-echo "MONGO_INITDB_DATABASE      = ${MONGO_INITDB_DATABASE}"
+echo "NEXT_FRONTEND_URL = ${NEXT_FRONTEND_URL}"
+echo "NEXT_MONGO_URL    = ${NEXT_MONGO_URL}"
 
 cd bootstrap/src
 

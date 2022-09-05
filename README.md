@@ -7,13 +7,14 @@ Start the server using Docker or lift the server locally:
 ### Docker
 
 ```bash
-npm run init:01 # Create the .env file fro the example
-npm run init:02 # Start the dockerized services
-npm run init:03 # Seed the database with the example data
-npm run stop    # Stop the Docker containers
+npm run serve # Start a Docker container
+npm run seed  # Populate the MongoDB database and load the images to GridFS
+npm run stop  # Stop the Docker containers
 ```
 
-### local
+### Local/Remote Database
+
+For a MongoDB running either in localhost or remotely (i.e. Mongo Atlas):
 
 ```bash
 cp .env.local.example env.local # Edit the variables

@@ -1,9 +1,6 @@
 // @ts-check
 import { GridFSBucket, MongoClient } from 'mongodb';
 
-// Database Name
-const dbName = process.env.MONGO_INITDB_DATABASE;
-
 /** @type {import('mongodb').MongoClient} */
 let client;
 
@@ -36,6 +33,7 @@ export async function getClient() {
  * @param {string} table name of the table to get data from
  */
 export async function getCollection(table) {
+  const dbName = client.options.dbName;
   const db = client.db(dbName);
 
   return db.collection(table);
@@ -46,6 +44,7 @@ export async function getCollection(table) {
  * @param {string} bucketName name of the bucket to get data from
  */
 export async function getBucket(bucketName) {
+  const dbName = client.options.dbName;
   const db = client.db(dbName);
 
   // create a gridfs bucket
