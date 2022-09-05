@@ -16,6 +16,7 @@ export interface CelebritiesProps {
 
 export interface CelebrityProps {
   celebrity: CelebrityType;
+  className: string;
 }
 
 export interface VeredictProps {

@@ -3,3 +3,8 @@ export enum DeviceType {
   'tablet' = 'tablet',
   'desktop' = 'desktop',
 }
+
+export enum ListOptions {
+  'list' = 'list',
+  'grid' = 'grid',
+}

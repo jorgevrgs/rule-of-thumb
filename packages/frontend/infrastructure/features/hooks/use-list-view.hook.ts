@@ -1,12 +1,8 @@
 import { useState } from 'react';
 import { SingleValue } from 'react-select';
+import { ListOptions } from '../../../domain';
 
 export function useListViewHook() {
-  enum ListOptions {
-    'list' = 'list',
-    'grid' = 'grid',
-  }
-
   interface Option {
     value: ListOptions;
     label: string;

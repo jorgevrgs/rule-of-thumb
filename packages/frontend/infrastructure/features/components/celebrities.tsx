@@ -1,6 +1,7 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import ReactSelect from 'react-select';
-import { DeviceType } from '../../../domain/constants';
+import { getClassNames } from '../../../application';
+import { DeviceType, ListOptions } from '../../../domain/constants';
 import type { CelebritiesProps } from '../../../domain/types';
 import { LayoutContext } from '../../contexts';
 import { useListViewHook } from '../hooks';
@@ -11,6 +12,28 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
     useListViewHook();
 
   const { deviceType } = useContext(LayoutContext);
+
+  const listStyles = useMemo((): string => {
+    const columnsStyles =
+      listView?.value === ListOptions.grid
+        ? getClassNames([
+            'sm:grid-cols-1',
+            'md:grid-cols-2',
+            'lg:grid-cols-3',
+            'xl:grid-cols-4',
+          ])
+        : 'sm:grid-cols-1';
+
+    return getClassNames([
+      'grid',
+      'grid-flow-col',
+      'gap-4',
+      'overflow-x-auto',
+      'md:overflow-x-hidden',
+      'sm:grid-flow-dense',
+      columnsStyles,
+    ]);
+  }, [listView?.value]);
 
   return (
     <section className="flex flex-col">
@@ -28,9 +51,13 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
         />
       </div>
 
-      <div className="grid grid-flow-col gap-4 overflow-x-auto md:overflow-x-hidden md:grid-flow-dense sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className={listStyles}>
         {celebrities.map((celebrity) => (
-          <Celebrity key={celebrity.celebrityId} celebrity={celebrity} />
+          <Celebrity
+            key={celebrity.celebrityId}
+            celebrity={celebrity}
+            className="flex flex-col items-center px-4 w-[22rem] h-[22rem] text-white relative md:w-full md:h-96"
+          />
         ))}
       </div>
     </section>

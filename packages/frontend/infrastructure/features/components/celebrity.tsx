@@ -4,9 +4,9 @@ import type { CelebrityProps } from '../../../domain/types';
 import Veredict from './veredict';
 import Vote from './vote';
 
-export default function Celebrity({ celebrity }: CelebrityProps) {
+export default function Celebrity({ celebrity, className }: CelebrityProps) {
   return (
-    <article className="flex flex-col items-center px-4 w-[300px] h-[300px] text-white relative md:w-full md:min-h-[400px]">
+    <article className={className}>
       <Image
         src={celebrity.picture}
         alt={celebrity.name}
