@@ -12,8 +12,6 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
 
   const { deviceType } = useContext(LayoutContext);
 
-  console.log('deviceDetect', deviceType);
-
   return (
     <section className="flex flex-col">
       <div className="flex justify-evenly items-center">
