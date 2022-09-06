@@ -1,11 +1,11 @@
-import { useContext, useMemo } from 'react';
+import dynamic from 'next/dynamic';
+import { Suspense, useContext } from 'react';
 import ReactSelect from 'react-select';
-import { getClassNames } from '../../../application';
-import { DeviceType, ListOptions } from '../../../domain/constants';
+import PulseLoader from 'react-spinners/PulseLoader';
+import { DeviceType } from '../../../domain/constants';
 import type { CelebritiesProps } from '../../../domain/types';
 import { LayoutContext } from '../../contexts';
-import { useListViewHook } from '../hooks';
-import Celebrity from './celebrity';
+import { useItemsStylesHook, useListViewHook } from '../hooks';
 
 export default function Celebrities({ celebrities }: CelebritiesProps) {
   const { listView, handleListViewChange, options, defaultValue } =
@@ -13,23 +13,13 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
 
   const { deviceType } = useContext(LayoutContext);
 
-  const listStyles = useMemo((): string => {
-    const styles = [
-      'grid',
-      'grid-flow-col',
-      'gap-4',
-      'overflow-x-auto',
-      'md:overflow-x-hidden',
-      'sm:grid-flow-dense',
-      'sm:grid-cols-1',
-    ];
+  const CelebrityComponent = dynamic(() =>
+    deviceType === DeviceType.mobile
+      ? import('./celebrity.mobile')
+      : import('./celebrity.desktop')
+  );
 
-    if (listView?.value === ListOptions.grid) {
-      styles.push('md:grid-cols-2', 'lg:grid-cols-3', 'xl:grid-cols-4');
-    }
-
-    return getClassNames(styles);
-  }, [listView?.value]);
+  const { celebritiesStyle } = useItemsStylesHook(listView?.value);
 
   if (!celebrities?.length) {
     return <div>No celebrities</div>;
@@ -51,13 +41,15 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
         />
       </div>
 
-      <div className={listStyles}>
+      <div className={celebritiesStyle}>
         {celebrities.map((celebrity) => (
-          <Celebrity
-            key={celebrity.celebrityId}
-            celebrity={celebrity}
-            listOption={listView?.value}
-          />
+          <Suspense fallback={<PulseLoader />} key={celebrity.celebrityId}>
+            <CelebrityComponent
+              key={celebrity.celebrityId}
+              celebrity={celebrity}
+              listOption={listView?.value}
+            />
+          </Suspense>
         ))}
       </div>
     </section>
