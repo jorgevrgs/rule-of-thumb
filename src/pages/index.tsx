@@ -10,6 +10,7 @@ import {
 } from '@app/frontend';
 import type { GetServerSideProps, NextPage } from 'next';
 import { getSelectorsByUserAgent } from 'react-device-detect';
+import PulseLoader from 'react-spinners/PulseLoader';
 import type { IndexPageProps } from '../types';
 
 const Index: NextPage<IndexPageProps> = ({
@@ -20,7 +21,7 @@ const Index: NextPage<IndexPageProps> = ({
   const { data, isLoading } = useFetchCelebrities(celebrities);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <PulseLoader />;
   }
 
   if (!data) {
