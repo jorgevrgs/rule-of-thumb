@@ -1,33 +1,36 @@
 // @ts-check
 import { logger } from '@app/shared';
-import {
+import type {
+  Collection,
   CollectionOptions,
-  GridFSBucket,
+  Document,
   GridFSBucketOptions,
   GridFSBucketReadStreamOptionsWithRevision,
-  MongoClient,
   MongoClientOptions,
 } from 'mongodb';
+import { GridFSBucket, MongoClient } from 'mongodb';
 import { IMAGES_COLLECTION } from '../../domain';
 
 let client: MongoClient;
+let collection: Record<string, Collection<Document>> = {};
+let bucket: Record<string, GridFSBucket> = {};
 
-export async function getMongoClient(
-  url = process.env.NEXT_MONGO_URL,
-  options?: MongoClientOptions
-) {
+const mongoDbUrl = process.env.NEXT_MONGO_URL;
+
+export async function getMongoClient(options?: MongoClientOptions) {
   // Connection URL
-  logger.info('Creating MongoClient', url);
 
   // Use connect method to connect to the server
   if (!client) {
-    if (!url) {
+    if (!mongoDbUrl) {
       throw new Error(
         'Mongo URL is not defined, use NEXT_MONGO_URL environment variable'
       );
     }
 
-    client = new MongoClient(url, options);
+    logger.info('Creating MongoClient');
+
+    client = new MongoClient(mongoDbUrl, options);
     await client.connect();
     logger.info('Connected successfully to server');
   }
@@ -43,37 +46,46 @@ export async function getCollection(
     client = await getMongoClient();
   }
 
-  const dbName = client.options.dbName;
+  if (!collection[tableName]) {
+    logger.info(`Getting collection for ${tableName}`);
 
-  return client.db(dbName).collection(tableName, options);
+    collection[tableName] = client.db().collection(tableName, options);
+  }
+
+  return collection[tableName];
 }
 
 export async function getBucket(
   bucketName: string,
   options?: GridFSBucketOptions
 ) {
-  logger.info('Creating GridFSBucket', bucketName);
-
   if (!client) {
     client = await getMongoClient();
   }
 
-  const dbName = client.options.dbName;
+  if (!bucket[bucketName]) {
+    logger.info(`Creating GridFSBucket for ${bucketName}`);
 
-  logger.info('Selecting db', dbName);
+    // create a gridfs bucket
+    bucket[bucketName] = new GridFSBucket(client.db(), {
+      ...options,
+      bucketName,
+    });
+  }
 
-  // create a gridfs bucket
-  return new GridFSBucket(client.db(dbName), {
-    ...options,
-    bucketName,
-  });
+  return bucket[bucketName];
 }
 
 export async function getPictureStream(
   pictureName: string,
   options?: GridFSBucketReadStreamOptionsWithRevision
 ) {
-  const bucket = await getBucket(IMAGES_COLLECTION);
+  if (!bucket[IMAGES_COLLECTION]) {
+    bucket[IMAGES_COLLECTION] = await getBucket(IMAGES_COLLECTION);
+  }
 
-  return bucket.openDownloadStreamByName(pictureName, options);
+  return bucket[IMAGES_COLLECTION].openDownloadStreamByName(
+    pictureName,
+    options
+  );
 }
