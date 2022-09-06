@@ -93,8 +93,8 @@ export default function CelebrityDesktop({
           <div
             className={
               listOption === ListOptions.list
-                ? 'flex justify-end content-start gap-8 w-full h-full'
-                : 'flex justify-center gap-8 my-8 w-full h-10'
+                ? 'flex justify-end content-start gap-4 w-full h-full'
+                : 'flex justify-center gap-4 my-8 w-full h-10'
             }
           >
             <Vote celebrityId={celebrity.celebrityId} />
