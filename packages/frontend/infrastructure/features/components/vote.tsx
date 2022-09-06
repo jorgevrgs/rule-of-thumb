@@ -27,7 +27,7 @@ export default function Vote({ celebrityId }: VoteProps) {
 
       <div className="flex items-center justify-center h-8">
         <button
-          className="border-white bg-black/70 border-2 h-full px-8"
+          className="border-white bg-slate-700/60 border-2 h-full px-8"
           disabled={isButtonDisabled}
         >
           Vote Now
