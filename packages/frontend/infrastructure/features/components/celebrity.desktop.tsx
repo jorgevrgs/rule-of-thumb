@@ -46,7 +46,7 @@ export default function CelebrityDesktop({
       <div
         className={
           listOption === ListOptions.list
-            ? 'custom-gradient absolute inset-0 text-white pl-72 pr-8'
+            ? 'custom-gradient absolute inset-0 text-white pl-72 pr-8 py-4'
             : 'z-10 px-4 py-12 text-white'
         }
       >
@@ -62,16 +62,44 @@ export default function CelebrityDesktop({
           }
         `}</style>
 
-        <h3 className="text-2xl font-bold text-white line-clamp-1 mb-4">
-          {celebrity.name}
-        </h3>
-        <p className="text-lg line-clamp-3">{celebrity.description}</p>
+        <div
+          className={
+            listOption === ListOptions.list
+              ? 'grid grid-flow-col grid-cols-2 justify-start grid-rows-2 gap-4'
+              : ''
+          }
+        >
+          <h3
+            className={
+              listOption === ListOptions.list
+                ? 'text-3xl font-bold text-white line-clamp-1 mb-4'
+                : 'text-2xl font-bold text-white line-clamp-1 mb-4'
+            }
+          >
+            {celebrity.name}
+          </h3>
+          <p className="text-lg line-clamp-3 h-20">{celebrity.description}</p>
 
-        <p className="text-right text-sm mt-4 w-full">
-          {`${getTimeAgo(celebrity.lastUpdated)} in ${celebrity.category}`}
-        </p>
+          <p
+            className={
+              listOption === ListOptions.list
+                ? 'text-right text-sm mt-4 w-full'
+                : 'text-right text-sm mt-4 w-full'
+            }
+          >
+            {`${getTimeAgo(celebrity.lastUpdated)} in ${celebrity.category}`}
+          </p>
 
-        <Vote celebrityId={celebrity.celebrityId} />
+          <div
+            className={
+              listOption === ListOptions.list
+                ? 'flex justify-end content-start gap-8 w-full h-full'
+                : 'flex justify-center gap-8 my-8 w-full h-10'
+            }
+          >
+            <Vote celebrityId={celebrity.celebrityId} />
+          </div>
+        </div>
       </div>
 
       <div className="absolute inset-x-0 bottom-0">

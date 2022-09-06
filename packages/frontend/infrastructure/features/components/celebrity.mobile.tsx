@@ -25,7 +25,9 @@ export default function CelebrityMobile({ celebrity }: CelebrityProps) {
           {`${getTimeAgo(celebrity.lastUpdated)} in ${celebrity.category}`}
         </p>
 
-        <Vote celebrityId={celebrity.celebrityId} />
+        <div className="flex justify-center gap-8 my-8 w-full h-10">
+          <Vote celebrityId={celebrity.celebrityId} />
+        </div>
       </div>
 
       <div className="absolute inset-x-0 bottom-0">
