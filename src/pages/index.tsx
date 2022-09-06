@@ -9,6 +9,7 @@ import {
   useFetchCelebrities,
 } from '@app/frontend';
 import type { GetServerSideProps, NextPage } from 'next';
+import Head from 'next/head';
 import { getSelectorsByUserAgent } from 'react-device-detect';
 import PulseLoader from 'react-spinners/PulseLoader';
 import type { IndexPageProps } from '../types';
@@ -31,19 +32,25 @@ const Index: NextPage<IndexPageProps> = ({
   const [feturedCelebrity, ...otherCelebrities] = data;
 
   return (
-    <LayoutContext.Provider
-      value={{ navLinks, celebrity: feturedCelebrity, deviceType }}
-    >
-      <Layout>
-        <BannerTop />
+    <>
+      <Head>
+        <title>Rule of Thumb</title>
+      </Head>
 
-        <main role="main">
-          <Celebrities celebrities={otherCelebrities} />
-        </main>
+      <LayoutContext.Provider
+        value={{ navLinks, celebrity: feturedCelebrity, deviceType }}
+      >
+        <Layout>
+          <BannerTop />
 
-        <BannerBottom />
-      </Layout>
-    </LayoutContext.Provider>
+          <main role="main">
+            <Celebrities celebrities={otherCelebrities} />
+          </main>
+
+          <BannerBottom />
+        </Layout>
+      </LayoutContext.Provider>
+    </>
   );
 };
 
