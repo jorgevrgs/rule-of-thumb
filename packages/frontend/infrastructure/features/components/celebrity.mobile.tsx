@@ -4,10 +4,7 @@ import type { CelebrityProps } from '../../../domain/types';
 import Veredict from './veredict';
 import Vote from './vote';
 
-export default function CelebrityMobile({
-  celebrity,
-  handleVote,
-}: CelebrityProps) {
+export default function CelebrityMobile({ celebrity }: CelebrityProps) {
   return (
     <article className="flex flex-col items-center px-4 w-[22rem] h-[22rem] text-white relative">
       <Image
@@ -29,7 +26,7 @@ export default function CelebrityMobile({
         </p>
 
         <div className="flex justify-center gap-8 my-8 w-full h-10">
-          <Vote celebrityId={celebrity.celebrityId} handleVote={handleVote} />
+          <Vote celebrityId={celebrity.celebrityId} />
         </div>
       </div>
 

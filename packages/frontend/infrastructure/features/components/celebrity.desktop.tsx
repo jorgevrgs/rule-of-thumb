@@ -8,7 +8,6 @@ import Vote from './vote';
 export default function CelebrityDesktop({
   celebrity,
   listOption,
-  handleVote,
 }: CelebrityProps) {
   // const { celebrityStyles, imageObjectFit } = useItemStylesHook(listOption);
   const imageProps: ImageProps = {
@@ -81,13 +80,7 @@ export default function CelebrityDesktop({
           </h3>
           <p className="text-lg line-clamp-3 h-20">{celebrity.description}</p>
 
-          <p
-            className={
-              listOption === ListOptions.list
-                ? 'text-right text-sm mt-4 w-full'
-                : 'text-right text-sm mt-4 w-full'
-            }
-          >
+          <p className="text-right text-sm mt-4 w-full">
             {`${getTimeAgo(celebrity.lastUpdated)} in ${celebrity.category}`}
           </p>
 
@@ -98,7 +91,7 @@ export default function CelebrityDesktop({
                 : 'flex justify-center gap-4 my-8 w-full h-10'
             }
           >
-            <Vote celebrityId={celebrity.celebrityId} handleVote={handleVote} />
+            <Vote celebrityId={celebrity.celebrityId} />
           </div>
         </div>
       </div>

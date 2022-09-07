@@ -17,10 +17,16 @@ export function useUpdateVoteCelebrities() {
 
   return useMutation(updateVoteService, {
     onSuccess: (data, variables) => {
-      queryClient.setQueryData(
-        [Stores.celebrities, { celebrityId: variables.celebrityId }],
-        data
+      queryClient.setQueryData([Stores.celebrities], (oldData: any) =>
+        oldData.map((oldCelebrity: any) => {
+          if (oldCelebrity.celebrityId === variables.celebrityId) {
+            return data;
+          }
+
+          return oldCelebrity;
+        })
       );
+      queryClient.invalidateQueries([Stores.celebrities]);
     },
   });
 }

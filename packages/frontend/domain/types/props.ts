@@ -25,7 +25,6 @@ export interface CelebritiesProps {
 export interface CelebrityProps {
   celebrity: CelebrityType;
   listOption?: ListOptions;
-  handleVote: HandleVoteFn;
 }
 
 export interface VeredictProps {
@@ -35,5 +34,4 @@ export interface VeredictProps {
 
 export interface VoteProps {
   celebrityId: string;
-  handleVote: HandleVoteFn;
 }
