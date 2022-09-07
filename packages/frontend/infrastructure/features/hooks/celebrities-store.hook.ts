@@ -16,9 +16,9 @@ export function useUpdateVoteCelebrities() {
   const queryClient = useQueryClient();
 
   return useMutation(updateVoteService, {
-    onSuccess: (data) => {
+    onSuccess: (data, variables) => {
       queryClient.setQueryData(
-        [Stores.celebrities, { id: data.celebrityId }],
+        [Stores.celebrities, { celebrityId: variables.celebrityId }],
         data
       );
     },
