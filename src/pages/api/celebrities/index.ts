@@ -8,7 +8,7 @@ export default async function handler(
   _req: NextApiRequest,
   res: NextApiResponse<CelebritiesType>
 ) {
-  const celebrities = await findCelebritiesCollection<CelebritiesType>();
+  const celebrities = await findCelebritiesCollection();
 
   res.status(200).json(celebrities);
 }

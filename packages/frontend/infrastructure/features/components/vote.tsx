@@ -1,15 +1,23 @@
+import type { MouseEventHandler } from 'react';
 import type { VoteProps } from '../../../domain/types';
 import { Icon } from '../../components';
 import { useVoteHook } from '../hooks';
 
-export default function Vote({ celebrityId }: VoteProps) {
+export default function Vote({ celebrityId, handleVote }: VoteProps) {
   const {
     getPositiveVoteClasses,
     setPositiveVote,
     getNegativeVoteClasses,
     setNegativeVote,
     isButtonDisabled,
+    currentVote,
   } = useVoteHook();
+
+  const handleVoteClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
+
+    handleVote({ celebrityId, vote: currentVote });
+  };
 
   return (
     <>
@@ -29,6 +37,7 @@ export default function Vote({ celebrityId }: VoteProps) {
         <button
           className="border-white bg-slate-700/60 border-2 h-full px-8"
           disabled={isButtonDisabled}
+          onClick={handleVoteClick}
         >
           Vote Now
         </button>

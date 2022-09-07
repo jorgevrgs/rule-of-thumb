@@ -12,7 +12,7 @@ import { GridFSBucket, MongoClient } from 'mongodb';
 import { IMAGES_COLLECTION } from '../../domain';
 
 let client: MongoClient;
-let collection: Record<string, Collection<Document>> = {};
+let collection: Record<string, any> = {};
 let bucket: Record<string, GridFSBucket> = {};
 
 const mongoDbUrl = process.env.NEXT_MONGO_URL;
@@ -38,7 +38,7 @@ export async function getMongoClient(options?: MongoClientOptions) {
   return client;
 }
 
-export async function getCollection(
+export async function getCollection<T extends Document>(
   tableName: string,
   options?: CollectionOptions
 ) {
@@ -49,10 +49,10 @@ export async function getCollection(
   if (!collection[tableName]) {
     logger.info(`Getting collection for ${tableName}`);
 
-    collection[tableName] = client.db().collection(tableName, options);
+    collection[tableName] = client.db().collection<T>(tableName, options);
   }
 
-  return collection[tableName];
+  return collection[tableName] as Collection<T>;
 }
 
 export async function getBucket(

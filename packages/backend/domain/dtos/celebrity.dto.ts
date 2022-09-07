@@ -1,5 +1,9 @@
+import omit from 'lodash.omit';
+import type { WithId } from 'mongodb';
+import type { CelebrityCollectionType } from '../interfaces';
+
 export class CelebrityDto {
-  '_id': string;
+  'celebrityId': string;
   'name': string;
   'picture': string;
   'description': string;
@@ -10,4 +14,11 @@ export class CelebrityDto {
     positive: number;
     negative: number;
   };
+
+  constructor(params: Partial<WithId<CelebrityCollectionType>>) {
+    Object.assign(this, {
+      celebrityId: params._id,
+      ...omit(params, ['_id']),
+    });
+  }
 }

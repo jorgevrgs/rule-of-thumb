@@ -8,6 +8,7 @@ import Vote from './vote';
 export default function CelebrityDesktop({
   celebrity,
   listOption,
+  handleVote,
 }: CelebrityProps) {
   // const { celebrityStyles, imageObjectFit } = useItemStylesHook(listOption);
   const imageProps: ImageProps = {
@@ -97,7 +98,7 @@ export default function CelebrityDesktop({
                 : 'flex justify-center gap-4 my-8 w-full h-10'
             }
           >
-            <Vote celebrityId={celebrity.celebrityId} />
+            <Vote celebrityId={celebrity.celebrityId} handleVote={handleVote} />
           </div>
         </div>
       </div>

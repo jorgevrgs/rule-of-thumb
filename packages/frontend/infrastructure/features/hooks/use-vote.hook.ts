@@ -55,5 +55,6 @@ export function useVoteHook() {
     getPositiveVoteClasses,
     getNegativeVoteClasses,
     isButtonDisabled,
+    currentVote: vote,
   };
 }

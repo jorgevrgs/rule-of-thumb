@@ -1,2 +1,2 @@
 export * from './get-celebrities.service';
-export * from './get-links.service';
+export * from './update-vote.service';

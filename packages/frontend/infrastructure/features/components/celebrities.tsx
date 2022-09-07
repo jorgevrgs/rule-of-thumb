@@ -3,15 +3,20 @@ import { Suspense, useContext } from 'react';
 import ReactSelect from 'react-select';
 import PulseLoader from 'react-spinners/PulseLoader';
 import { DeviceType } from '../../../domain/constants';
-import type { CelebritiesProps } from '../../../domain/types';
+import type { CelebritiesProps, HandleVoteFn } from '../../../domain/types';
 import { LayoutContext } from '../../contexts';
-import { useItemsStylesHook, useListViewHook } from '../hooks';
+import {
+  useItemsStylesHook,
+  useListViewHook,
+  useUpdateVoteCelebrities,
+} from '../hooks';
 
 export default function Celebrities({ celebrities }: CelebritiesProps) {
   const { listView, handleListViewChange, options, defaultValue } =
     useListViewHook();
 
   const { deviceType } = useContext(LayoutContext);
+  const updateVote = useUpdateVoteCelebrities();
 
   const CelebrityComponent = dynamic(() =>
     deviceType === DeviceType.mobile
@@ -20,6 +25,10 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
   );
 
   const { celebritiesStyle } = useItemsStylesHook(listView?.value);
+
+  const handleVote: HandleVoteFn = async ({ celebrityId, vote }) => {
+    updateVote.mutate({ celebrityId, vote });
+  };
 
   if (!celebrities?.length) {
     return <div>No celebrities</div>;
@@ -48,6 +57,7 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
               key={celebrity.celebrityId}
               celebrity={celebrity}
               listOption={listView?.value}
+              handleVote={handleVote}
             />
           </Suspense>
         ))}

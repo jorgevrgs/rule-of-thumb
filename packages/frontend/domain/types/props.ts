@@ -1,5 +1,12 @@
 import { CelebritiesType, CelebrityType, NavLinksType } from '@app/shared';
-import { ListOptions } from '../constants';
+import { ListOptions, VoteState } from '../constants';
+
+export interface UpdateVoteParams {
+  celebrityId: string;
+  vote: VoteState;
+}
+
+export type HandleVoteFn = (params: UpdateVoteParams) => void;
 
 export interface IconProps {
   name: string;
@@ -18,6 +25,7 @@ export interface CelebritiesProps {
 export interface CelebrityProps {
   celebrity: CelebrityType;
   listOption?: ListOptions;
+  handleVote: HandleVoteFn;
 }
 
 export interface VeredictProps {
@@ -27,4 +35,5 @@ export interface VeredictProps {
 
 export interface VoteProps {
   celebrityId: string;
+  handleVote: HandleVoteFn;
 }
