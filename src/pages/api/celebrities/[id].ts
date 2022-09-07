@@ -16,8 +16,6 @@ export default async function handler(
         negative: { 'votes.negative': 1 },
       };
 
-      console.log(vote, increment);
-
       const result = await updateCelebrityByIdCollection(
         req.query.id as string,
         { $inc: increment[vote] }
