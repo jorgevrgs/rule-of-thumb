@@ -1,4 +1,5 @@
-import { CelebrityType, logger } from '@app/shared';
+import type { CelebrityType } from '@app/shared';
+import { logger } from '@app/shared';
 import type { UpdateVoteParams } from '../../domain';
 
 export async function updateVoteService({

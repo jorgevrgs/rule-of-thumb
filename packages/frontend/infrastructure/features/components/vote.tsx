@@ -8,7 +8,22 @@ import { Icon } from '../../components';
 import { useUpdateVoteCelebrities, useVoteHook } from '../hooks';
 import Veredict from './veredict';
 
-function VoteAgain({ onClick }: { onClick: MouseEventHandler }) {
+interface VoteAgainProps {
+  onClick: MouseEventHandler;
+}
+
+interface VoteNowProps {
+  celebrityId: string;
+  mutate: UseMutationResult<
+    CelebrityType,
+    unknown,
+    UpdateVoteParams,
+    unknown
+  >['mutate'];
+  isLoading: boolean;
+}
+
+export function VoteAgain({ onClick }: VoteAgainProps) {
   return (
     <button
       className="border-white bg-slate-700/60 border-2 h-8 px-8"
@@ -19,20 +34,7 @@ function VoteAgain({ onClick }: { onClick: MouseEventHandler }) {
   );
 }
 
-function VoteNow({
-  celebrityId,
-  mutate,
-  isLoading,
-}: {
-  celebrityId: string;
-  mutate: UseMutationResult<
-    CelebrityType,
-    unknown,
-    UpdateVoteParams,
-    unknown
-  >['mutate'];
-  isLoading: boolean;
-}) {
+export function VoteNow({ celebrityId, mutate, isLoading }: VoteNowProps) {
   const {
     getPositiveVoteClasses,
     setPositiveVote,

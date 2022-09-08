@@ -1,6 +1,7 @@
-import { CelebrityType } from '@app/shared';
+import type { CelebrityType } from '@app/shared';
 import classNames from 'classnames/bind';
-import Image, { ImageProps } from 'next/image';
+import type { ImageProps } from 'next/image';
+import Image from 'next/image';
 import { getTimeAgo } from '../../../application/utils';
 import { ListOptions } from '../../../domain';
 import type { CelebrityProps } from '../../../domain/types';

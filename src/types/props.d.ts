@@ -1,5 +1,5 @@
-import { LayoutContextType } from '@app/frontend';
-import { CelebritiesType, NavLinksType } from '@app/shared';
+import type { LayoutContextType } from '@app/frontend';
+import type { CelebritiesType, NavLinksType } from '@app/shared';
 
 export interface IndexPageProps {
   navLinks: NavLinksType;

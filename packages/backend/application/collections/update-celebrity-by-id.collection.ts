@@ -1,9 +1,7 @@
-import { ObjectId, UpdateFilter } from 'mongodb';
-import {
-  CELEBRITIES_COLLECTION,
-  CelebrityCollectionType,
-  CelebrityDto,
-} from '../../domain';
+import type { UpdateFilter } from 'mongodb';
+import { ObjectId } from 'mongodb';
+import type { CelebrityCollectionType } from '../../domain';
+import { CELEBRITIES_COLLECTION, CelebrityDto } from '../../domain';
 import { getCollection } from '../clients';
 
 export async function updateCelebrityByIdCollection(

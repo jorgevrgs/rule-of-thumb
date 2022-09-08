@@ -1,5 +1,5 @@
-import { CelebritiesType, CelebrityType, NavLinksType } from '@app/shared';
-import { ListOptions, VoteState } from '../constants';
+import type { CelebritiesType, CelebrityType, NavLinksType } from '@app/shared';
+import type { ListOptions, VoteState } from '../constants';
 
 export interface UpdateVoteParams {
   celebrityId: string;
