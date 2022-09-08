@@ -68,8 +68,6 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
 
   const customStyles: StylesConfig<Option> = {
     option: (provided, state) => {
-      console.log('option', { provided, state });
-
       return {
         ...provided,
         borderTop: '1px solid #000',
@@ -78,9 +76,7 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
         backgroundColor: state.isSelected ? 'lightgrey' : 'white',
       };
     },
-    menu: (provided, state) => {
-      console.log('menu', { provided, state });
-
+    menu: (provided, _state) => {
       return {
         ...provided,
         border: 'none',
@@ -90,9 +86,7 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
         padding: 0,
       };
     },
-    menuList: (provided, state) => {
-      console.log('menuList', { provided, state });
-
+    menuList: (provided, _state) => {
       return {
         ...provided,
         border: 'none',
