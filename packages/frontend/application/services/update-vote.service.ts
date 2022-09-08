@@ -7,7 +7,7 @@ export async function updateVoteService({
 }: UpdateVoteParams): Promise<CelebrityType> {
   logger.info('Running updateVoteService', celebrityId, vote);
 
-  return fetch(
+  const response = await fetch(
     new URL(`/api/celebrities/${celebrityId}`, process.env.NEXT_FRONTEND_URL),
     {
       method: 'PATCH',
@@ -16,5 +16,11 @@ export async function updateVoteService({
       },
       body: JSON.stringify({ vote }),
     }
-  ).then((res) => res.json());
+  );
+
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+
+  return response.json();
 }
