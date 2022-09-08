@@ -1,9 +1,66 @@
+import { CelebrityType } from '@app/shared';
 import classNames from 'classnames/bind';
 import Image, { ImageProps } from 'next/image';
 import { getTimeAgo } from '../../../application/utils';
 import { ListOptions } from '../../../domain';
 import type { CelebrityProps } from '../../../domain/types';
 import Vote from './vote';
+
+interface CelebrityDesktopUIProps {
+  celebrityStyles: Record<string, string>;
+  imageProps: ImageProps;
+  celebrity: CelebrityType;
+}
+
+export function CelebrityDesktopUI({
+  celebrityStyles,
+  imageProps,
+  celebrity,
+}: CelebrityDesktopUIProps) {
+  const {
+    articleClass,
+    cardBodyClass,
+    contentClass,
+    imageClass,
+    titleClass,
+    voteClass,
+  } = celebrityStyles;
+
+  return (
+    <article className={articleClass}>
+      <div className={imageClass}>
+        <Image alt={celebrity.name} {...imageProps} />
+      </div>
+
+      <div className={contentClass}>
+        <style jsx>{`
+          .custom-gradient {
+            background: linear-gradient(
+              80deg,
+              rgba(0, 0, 0, 0.0001) 0%,
+              #888888 19.79%,
+              #666666 50%,
+              rgba(51, 51, 51, 0.6) 71.88%
+            );
+          }
+        `}</style>
+
+        <div className={cardBodyClass}>
+          <h3 className={titleClass}>{celebrity.name}</h3>
+          <p className="text-lg line-clamp-3 h-20">{celebrity.description}</p>
+
+          <p className="text-right text-sm mt-4 w-full">
+            {`${getTimeAgo(celebrity.lastUpdated)} in ${celebrity.category}`}
+          </p>
+
+          <div className={voteClass}>
+            <Vote celebrityId={celebrity.celebrityId} />
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
 
 export default function CelebrityDesktop({
   celebrity,
@@ -58,37 +115,17 @@ export default function CelebrityDesktop({
   });
 
   return (
-    <article className={articleClass}>
-      <div className={imageClass}>
-        <Image alt={celebrity.name} {...imageProps} />
-      </div>
-
-      <div className={contentClass}>
-        <style jsx>{`
-          .custom-gradient {
-            background: linear-gradient(
-              80deg,
-              rgba(0, 0, 0, 0.0001) 0%,
-              #888888 19.79%,
-              #666666 50%,
-              rgba(51, 51, 51, 0.6) 71.88%
-            );
-          }
-        `}</style>
-
-        <div className={cardBodyClass}>
-          <h3 className={titleClass}>{celebrity.name}</h3>
-          <p className="text-lg line-clamp-3 h-20">{celebrity.description}</p>
-
-          <p className="text-right text-sm mt-4 w-full">
-            {`${getTimeAgo(celebrity.lastUpdated)} in ${celebrity.category}`}
-          </p>
-
-          <div className={voteClass}>
-            <Vote celebrityId={celebrity.celebrityId} />
-          </div>
-        </div>
-      </div>
-    </article>
+    <CelebrityDesktopUI
+      celebrityStyles={{
+        articleClass,
+        cardBodyClass,
+        contentClass,
+        imageClass,
+        titleClass,
+        voteClass,
+      }}
+      imageProps={imageProps}
+      celebrity={celebrity}
+    />
   );
 }

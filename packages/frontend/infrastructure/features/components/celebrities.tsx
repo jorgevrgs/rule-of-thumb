@@ -1,38 +1,90 @@
+import { CelebritiesType } from '@app/shared';
 import classNames from 'classnames/bind';
 import dynamic from 'next/dynamic';
+import type { ComponentType } from 'react';
 import { Suspense, useContext, useMemo, useState } from 'react';
 import type { SingleValue, StylesConfig } from 'react-select';
 import ReactSelect from 'react-select';
 import PulseLoader from 'react-spinners/PulseLoader';
-import { DeviceType, ListOptions } from '../../../domain/constants';
-import type { CelebritiesProps } from '../../../domain/types';
+import {
+  DeviceType,
+  gridValue,
+  ListOptions,
+  listValue,
+} from '../../../domain/constants';
+import type {
+  CelebritiesProps,
+  CelebrityProps,
+  Option,
+} from '../../../domain/types';
 import { LayoutContext } from '../../contexts';
 
+interface CelebritiesUIProps {
+  CelebrityComponent: ComponentType<CelebrityProps>;
+  celebrities: CelebritiesType;
+  celebritiesStyle: string;
+  customStyles: StylesConfig<Option>;
+  deviceType: DeviceType;
+  handleListViewChange: (value: SingleValue<Option>) => void;
+  defaultValue: Option;
+  listView: SingleValue<Option>;
+  options: Option[];
+}
+
+export function CelebritiesUI({
+  CelebrityComponent,
+  celebrities,
+  celebritiesStyle,
+  customStyles,
+  deviceType,
+  handleListViewChange,
+  defaultValue,
+  listView,
+  options,
+}: CelebritiesUIProps) {
+  return (
+    <section className="flex flex-col">
+      <div className="flex justify-evenly items-center">
+        <h2 className="text-4xl my-8 w-full">Previous Rulings</h2>
+
+        <ReactSelect
+          instanceId="selectListView"
+          className={classNames({
+            'md:hidden': deviceType === DeviceType.mobile,
+          })}
+          styles={customStyles}
+          options={options}
+          value={listView}
+          defaultValue={listValue}
+          isMulti={false}
+          onChange={handleListViewChange}
+        />
+      </div>
+
+      <div className={celebritiesStyle}>
+        {celebrities.map((celebrity) => (
+          <Suspense fallback={<PulseLoader />} key={celebrity.celebrityId}>
+            <CelebrityComponent
+              key={celebrity.celebrityId}
+              celebrity={celebrity}
+              listOption={listView?.value}
+            />
+          </Suspense>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export default function Celebrities({ celebrities }: CelebritiesProps) {
-  interface Option {
-    value: ListOptions;
-    label: string;
-  }
-
-  const listValue = {
-    value: ListOptions.list,
-    label: 'List',
-  };
-
-  const gridValue = {
-    value: ListOptions.grid,
-    label: 'Grid',
-  };
-
   const [listView, setListView] = useState<SingleValue<Option>>(listValue);
+  const { deviceType } = useContext(LayoutContext);
 
   const options = [listValue, gridValue];
 
   const handleListViewChange = (newValue: SingleValue<Option>) => {
     setListView(newValue);
   };
-
-  const { deviceType } = useContext(LayoutContext);
 
   const CelebrityComponent = dynamic(() =>
     deviceType === DeviceType.mobile
@@ -68,8 +120,6 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
 
   const customStyles: StylesConfig<Option> = {
     option: (provided, state) => {
-      console.log('option', { provided, state });
-
       return {
         ...provided,
         borderTop: '1px solid #000',
@@ -78,9 +128,7 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
         backgroundColor: state.isSelected ? 'lightgrey' : 'white',
       };
     },
-    menu: (provided, state) => {
-      console.log('menu', { provided, state });
-
+    menu: (provided, _state) => {
       return {
         ...provided,
         border: 'none',
@@ -90,9 +138,7 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
         padding: 0,
       };
     },
-    menuList: (provided, state) => {
-      console.log('menuList', { provided, state });
-
+    menuList: (provided, _state) => {
       return {
         ...provided,
         border: 'none',
@@ -116,35 +162,16 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
   };
 
   return (
-    <section className="flex flex-col">
-      <div className="flex justify-evenly items-center">
-        <h2 className="text-4xl my-8 w-full">Previous Rulings</h2>
-
-        <ReactSelect
-          instanceId="selectListView"
-          className={classNames({
-            'md:hidden': deviceType === DeviceType.mobile,
-          })}
-          styles={customStyles}
-          options={options}
-          value={listView}
-          defaultValue={listValue}
-          isMulti={false}
-          onChange={handleListViewChange}
-        />
-      </div>
-
-      <div className={celebritiesStyle}>
-        {celebrities.map((celebrity) => (
-          <Suspense fallback={<PulseLoader />} key={celebrity.celebrityId}>
-            <CelebrityComponent
-              key={celebrity.celebrityId}
-              celebrity={celebrity}
-              listOption={listView?.value}
-            />
-          </Suspense>
-        ))}
-      </div>
-    </section>
+    <CelebritiesUI
+      CelebrityComponent={CelebrityComponent}
+      celebrities={celebrities}
+      celebritiesStyle={celebritiesStyle}
+      customStyles={customStyles}
+      defaultValue={listValue}
+      deviceType={deviceType}
+      handleListViewChange={handleListViewChange}
+      listView={listView}
+      options={options}
+    />
   );
 }

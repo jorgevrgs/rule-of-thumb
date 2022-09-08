@@ -35,3 +35,9 @@ export interface VeredictProps {
 export interface VoteProps {
   celebrityId: string;
 }
+
+// FUTURE: Add a more detailed name for this type
+export interface Option {
+  value: ListOptions;
+  label: string;
+}
