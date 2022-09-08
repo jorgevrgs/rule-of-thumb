@@ -1,5 +1,5 @@
+import classNames from 'classnames/bind';
 import { useMemo, useState } from 'react';
-import { getClassNames } from '../../../application/utils';
 import { VoteState } from '../../../domain/constants';
 
 export function useVoteHook() {
@@ -32,7 +32,7 @@ export function useVoteHook() {
       classess.push('border-transparent');
     }
 
-    return getClassNames(classess);
+    return classNames(classess);
   }, [vote, baseClasses]);
   const getNegativeVoteClasses = useMemo(() => {
     const classess = [...baseClasses, 'bg-yellow-negative'];
@@ -43,7 +43,7 @@ export function useVoteHook() {
       classess.push('border-transparent');
     }
 
-    return getClassNames(classess);
+    return classNames(classess);
   }, [vote, baseClasses]);
   const isButtonDisabled = useMemo(() => {
     return vote === VoteState.neutral;

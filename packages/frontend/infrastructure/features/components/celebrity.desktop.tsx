@@ -1,3 +1,4 @@
+import classNames from 'classnames/bind';
 import Image, { ImageProps } from 'next/image';
 import { getTimeAgo } from '../../../application/utils';
 import { ListOptions } from '../../../domain';
@@ -8,47 +9,61 @@ export default function CelebrityDesktop({
   celebrity,
   listOption,
 }: CelebrityProps) {
-  // const { celebrityStyles, imageObjectFit } = useItemStylesHook(listOption);
+  const isGrid = listOption === ListOptions.grid;
+  const isList = listOption === ListOptions.list;
+
   const imageProps: ImageProps = {
     src: celebrity.picture,
-    className:
-      listOption === 'grid'
-        ? 'absolute inset-0 object-cover w-full h-full'
-        : 'object-cover w-full h-full',
-    objectFit: listOption === 'grid' ? 'cover' : 'fill',
-    layout: listOption === 'grid' ? 'fill' : 'intrinsic',
+    className: classNames({
+      'absolute inset-0 object-cover w-full h-full': isGrid,
+      'object-cover w-full h-full': isList,
+    }),
+    objectFit: isGrid ? 'cover' : 'fill',
+    layout: isGrid ? 'fill' : 'intrinsic',
   };
 
-  if (listOption === 'list') {
+  if (isList) {
     imageProps.width = '322px';
     imageProps.height = '322px';
   }
 
+  const articleClass = classNames('flex', 'overflow-hidden', 'relative', {
+    'flex-col items-center px-4 w-[22rem] h-[22rem] text-white md:w-full md:h-96':
+      isGrid,
+    'h-72': isList,
+  });
+
+  const imageClass = classNames('w-full', {
+    'h-72 absolute': isList,
+    'h-full': isGrid,
+  });
+
+  const contentClass = classNames('text-white', {
+    'custom-gradient absolute inset-0 pl-72 pr-8 py-4': isList,
+    'z-10 px-4 py-12 text-white': isGrid,
+  });
+
+  const cardBodyClass = classNames({
+    'grid grid-flow-col grid-cols-2 justify-start grid-rows-2 gap-4': isList,
+  });
+
+  const titleClass = classNames('font-bold text-white line-clamp-1 mb-4', {
+    'text-2xl': isGrid,
+    'text-3xl': isList,
+  });
+
+  const voteClass = classNames('flex gap-4 w-full', {
+    'justify-end content-start h-full': isList,
+    'justify-center my-8 h-10': isGrid,
+  });
+
   return (
-    <article
-      className={
-        listOption === 'grid'
-          ? 'flex flex-col items-center px-4 w-[22rem] h-[22rem] text-white relative md:w-full md:h-96 overflow-hidden'
-          : 'flex relative h-72 overflow-hidden'
-      }
-    >
-      <div
-        className={
-          listOption === ListOptions.list
-            ? 'w-full h-72 absolute'
-            : 'w-full h-full'
-        }
-      >
+    <article className={articleClass}>
+      <div className={imageClass}>
         <Image alt={celebrity.name} {...imageProps} />
       </div>
 
-      <div
-        className={
-          listOption === ListOptions.list
-            ? 'custom-gradient absolute inset-0 text-white pl-72 pr-8 py-4'
-            : 'z-10 px-4 py-12 text-white'
-        }
-      >
+      <div className={contentClass}>
         <style jsx>{`
           .custom-gradient {
             background: linear-gradient(
@@ -61,35 +76,15 @@ export default function CelebrityDesktop({
           }
         `}</style>
 
-        <div
-          className={
-            listOption === ListOptions.list
-              ? 'grid grid-flow-col grid-cols-2 justify-start grid-rows-2 gap-4'
-              : ''
-          }
-        >
-          <h3
-            className={
-              listOption === ListOptions.list
-                ? 'text-3xl font-bold text-white line-clamp-1 mb-4'
-                : 'text-2xl font-bold text-white line-clamp-1 mb-4'
-            }
-          >
-            {celebrity.name}
-          </h3>
+        <div className={cardBodyClass}>
+          <h3 className={titleClass}>{celebrity.name}</h3>
           <p className="text-lg line-clamp-3 h-20">{celebrity.description}</p>
 
           <p className="text-right text-sm mt-4 w-full">
             {`${getTimeAgo(celebrity.lastUpdated)} in ${celebrity.category}`}
           </p>
 
-          <div
-            className={
-              listOption === ListOptions.list
-                ? 'flex justify-end content-start gap-4 w-full h-full'
-                : 'flex justify-center gap-4 my-8 w-full h-10'
-            }
-          >
+          <div className={voteClass}>
             <Vote celebrityId={celebrity.celebrityId} />
           </div>
         </div>

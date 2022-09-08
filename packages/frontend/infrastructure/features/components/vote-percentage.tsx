@@ -1,4 +1,5 @@
-import { getClassNames, roundValue } from '../../../application/utils';
+import classNames from 'classnames/bind';
+import { roundValue } from '../../../application/utils';
 import { Icon } from '../../components';
 
 export default function VotePercentage({
@@ -18,7 +19,7 @@ export default function VotePercentage({
 
   return (
     <div
-      className={getClassNames([
+      className={classNames([
         'flex',
         'items-center',
         'justify-center',
