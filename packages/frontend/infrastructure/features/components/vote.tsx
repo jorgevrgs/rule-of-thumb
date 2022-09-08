@@ -80,8 +80,6 @@ function VoteNow({
 }
 
 export default function Vote({ celebrityId }: VoteProps) {
-  console.log('Vote component', celebrityId);
-
   const { mutate, reset, isSuccess, isLoading, data } =
     useUpdateVoteCelebrities();
 
