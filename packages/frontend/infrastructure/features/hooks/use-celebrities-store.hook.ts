@@ -20,14 +20,24 @@ export function useUpdateVoteCelebrities() {
   return useMutation({
     mutationFn: updateVoteService,
     onSuccess: (data, variables) => {
-      queryClient.setQueryData([Stores.celebrities], (oldData: any) =>
-        oldData.map((oldCelebrity: any) => {
-          if (oldCelebrity.celebrityId === variables.celebrityId) {
-            return data;
+      queryClient.setQueryData<CelebritiesType>(
+        [Stores.celebrities],
+        (oldData) => {
+          if (!oldData) {
+            return oldData;
           }
 
-          return oldCelebrity;
-        })
+          const index = oldData?.findIndex(
+            (item) => item.celebrityId === variables.celebrityId
+          );
+
+          if (index !== -1) {
+            console.log('Updating data', oldData[index].votes, data.votes);
+            oldData[index] = data;
+          }
+
+          return oldData;
+        }
       );
     },
   });
