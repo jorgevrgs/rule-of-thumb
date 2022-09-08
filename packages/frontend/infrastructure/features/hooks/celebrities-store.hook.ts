@@ -6,8 +6,10 @@ import {
 } from '../../../application/services';
 import { Stores } from '../../../domain/constants';
 
-export function useFetchCelebrities(initialData: CelebritiesType) {
-  return useQuery([Stores.celebrities], getCelebritiesService, {
+export function useFetchCelebrities(initialData?: CelebritiesType) {
+  return useQuery({
+    queryKey: [Stores.celebrities],
+    queryFn: getCelebritiesService,
     initialData,
   });
 }
@@ -15,7 +17,8 @@ export function useFetchCelebrities(initialData: CelebritiesType) {
 export function useUpdateVoteCelebrities() {
   const queryClient = useQueryClient();
 
-  return useMutation(updateVoteService, {
+  return useMutation({
+    mutationFn: updateVoteService,
     onSuccess: (data, variables) => {
       queryClient.setQueryData([Stores.celebrities], (oldData: any) =>
         oldData.map((oldCelebrity: any) => {
@@ -26,7 +29,6 @@ export function useUpdateVoteCelebrities() {
           return oldCelebrity;
         })
       );
-      queryClient.invalidateQueries([Stores.celebrities]);
     },
   });
 }
