@@ -1,10 +1,7 @@
 import type { CelebritiesType } from '@app/shared';
 import { Document, Filter } from 'mongodb';
-import {
-  CELEBRITIES_COLLECTION,
-  CelebrityCollectionType,
-  CelebrityDto,
-} from '../../domain';
+import type { CelebrityCollectionType } from '../../domain';
+import { CELEBRITIES_COLLECTION, CelebrityDto } from '../../domain';
 import { getCollection } from '../clients';
 
 export async function findCelebritiesCollection(

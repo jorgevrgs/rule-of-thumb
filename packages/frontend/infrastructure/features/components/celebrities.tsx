@@ -1,4 +1,4 @@
-import { CelebritiesType } from '@app/shared';
+import type { CelebritiesType } from '@app/shared';
 import classNames from 'classnames/bind';
 import dynamic from 'next/dynamic';
 import type { ComponentType } from 'react';
