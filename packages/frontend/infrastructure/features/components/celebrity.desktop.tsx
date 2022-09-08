@@ -52,7 +52,7 @@ export default function CelebrityDesktop({
     'text-3xl': isList,
   });
 
-  const voteClass = classNames('flex gap-4 w-full', {
+  const voteClass = classNames('flex flex-wrap gap-4 w-full md:flex-no-wrap', {
     'justify-end content-start h-full': isList,
     'justify-center my-8 h-10': isGrid,
   });

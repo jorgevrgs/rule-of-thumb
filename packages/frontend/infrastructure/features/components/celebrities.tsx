@@ -43,7 +43,6 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
   const celebritiesStyle = useMemo((): string => {
     const styles = [
       'grid',
-      'grid-flow-col',
       'gap-4',
       'overflow-x-auto',
       'md:overflow-x-hidden',
@@ -52,7 +51,12 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
     ];
 
     if (listView?.value === ListOptions.grid) {
-      styles.push('md:grid-cols-2', 'lg:grid-cols-3', 'xl:grid-cols-4');
+      styles.push(
+        'sm:grid-cols-2',
+        'lg:grid-cols-3',
+        'xl:grid-cols-4',
+        'grid-flow-col'
+      );
     }
 
     return classNames(styles);
