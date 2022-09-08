@@ -2,7 +2,6 @@ import Image, { ImageProps } from 'next/image';
 import { getTimeAgo } from '../../../application/utils';
 import { ListOptions } from '../../../domain';
 import type { CelebrityProps } from '../../../domain/types';
-import Veredict from './veredict';
 import Vote from './vote';
 
 export default function CelebrityDesktop({
@@ -94,10 +93,6 @@ export default function CelebrityDesktop({
             <Vote celebrityId={celebrity.celebrityId} />
           </div>
         </div>
-      </div>
-
-      <div className="absolute inset-x-0 bottom-0">
-        <Veredict {...celebrity.votes} />
       </div>
     </article>
   );
