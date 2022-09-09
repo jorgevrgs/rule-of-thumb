@@ -11,7 +11,13 @@ export async function findCelebritiesCollection(
     CELEBRITIES_COLLECTION
   );
 
-  const data = await collection.find(filter).toArray();
+  const data = await collection
+    .find(filter)
+    .sort({
+      lastUpdated: -1,
+    })
+    .limit(12)
+    .toArray();
 
   const response = data.map((celebrity) => {
     return new CelebrityDto(celebrity);
