@@ -1,8 +1,14 @@
-import type { CelebritiesType } from '@app/shared';
+import { CelebritiesType } from '@app/shared';
 import classNames from 'classnames/bind';
 import dynamic from 'next/dynamic';
-import type { ComponentType } from 'react';
-import { Suspense, useContext, useMemo, useState } from 'react';
+import {
+  ComponentType,
+  Suspense,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import type { SingleValue, StylesConfig } from 'react-select';
 import ReactSelect from 'react-select';
 import PulseLoader from 'react-spinners/PulseLoader';
@@ -18,6 +24,7 @@ import type {
   Option,
 } from '../../../domain/types';
 import { LayoutContext } from '../../contexts';
+import { useDeviceTypeHook } from '../../hooks';
 
 interface CelebritiesUIProps {
   CelebrityComponent: ComponentType<CelebrityProps>;
@@ -36,9 +43,7 @@ export function CelebritiesUI({
   celebrities,
   celebritiesStyle,
   customStyles,
-  deviceType,
   handleListViewChange,
-  defaultValue,
   listView,
   options,
 }: CelebritiesUIProps) {
@@ -49,9 +54,6 @@ export function CelebritiesUI({
 
         <ReactSelect
           instanceId="selectListView"
-          className={classNames({
-            'md:hidden': deviceType === DeviceType.mobile,
-          })}
           styles={customStyles}
           options={options}
           value={listView}
@@ -78,19 +80,34 @@ export function CelebritiesUI({
 
 export default function Celebrities({ celebrities }: CelebritiesProps) {
   const [listView, setListView] = useState<SingleValue<Option>>(listValue);
-  const { deviceType } = useContext(LayoutContext);
+  const { deviceType: serverDeviceType } = useContext(LayoutContext);
+  const clientDeviceType = useDeviceTypeHook();
+
+  const deviceType = useMemo(() => {
+    if (clientDeviceType === DeviceType.mobile) {
+      return DeviceType.mobile;
+    }
+
+    return serverDeviceType;
+  }, [clientDeviceType, serverDeviceType]);
 
   const options = [listValue, gridValue];
+
+  const isMobile = useMemo(() => {
+    return deviceType === DeviceType.mobile;
+  }, [deviceType]);
+
+  useEffect(() => {
+    if (isMobile) {
+      setListView(gridValue);
+    }
+  }, [isMobile]);
 
   const handleListViewChange = (newValue: SingleValue<Option>) => {
     setListView(newValue);
   };
 
-  const CelebrityComponent = dynamic(() =>
-    deviceType === DeviceType.mobile
-      ? import('./celebrity.mobile')
-      : import('./celebrity.desktop')
-  );
+  const CelebrityComponent = dynamic(import('./celebrity'));
 
   const celebritiesStyle = useMemo((): string => {
     const styles = [
@@ -111,14 +128,22 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
       );
     }
 
+    if (isMobile) {
+      styles.push('overflow-x-auto');
+    }
+
     return classNames(styles);
-  }, [listView?.value]);
+  }, [listView?.value, isMobile]);
 
   if (!celebrities?.length) {
     return <div>No celebrities</div>;
   }
 
   const customStyles: StylesConfig<Option> = {
+    container: (provided) => ({
+      ...provided,
+      display: isMobile ? 'none' : 'block',
+    }),
     option: (provided, state) => {
       return {
         ...provided,
@@ -165,7 +190,7 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
       celebrities={celebrities}
       celebritiesStyle={celebritiesStyle}
       customStyles={customStyles}
-      defaultValue={listValue}
+      defaultValue={isMobile ? listValue : gridValue}
       deviceType={deviceType}
       handleListViewChange={handleListViewChange}
       listView={listView}
