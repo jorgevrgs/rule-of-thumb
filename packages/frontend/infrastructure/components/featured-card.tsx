@@ -12,13 +12,17 @@ export default function FeaturedCard() {
 
   return (
     <>
-      <Image
-        layout="fill"
-        className="absolute inset-0 w-full h-full object-cover"
-        src={celebrity.picture}
-        alt={celebrity.name}
-        priority={true}
-      />
+      <div className="absolute inset-0 ">
+        <Image
+          layout="fill"
+          className="w-full h-full"
+          src={celebrity.picture}
+          alt={celebrity.name}
+          priority={true}
+          objectFit="cover"
+          objectPosition="right"
+        />
+      </div>
 
       <div className="relative top-[5.5rem] left-4 overflow-hidden w-[55vw] max-h-[26rem] lg:left-0 lg:w-1/2 lg:min-w-[600px] lg:max-h-unset lg:mt-10">
         <div className="featured-card__glass-background absolute"></div>
