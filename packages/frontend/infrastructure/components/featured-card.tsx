@@ -14,13 +14,39 @@ export default function FeaturedCard() {
     <>
       <Image
         layout="fill"
-        className="hero__background"
+        className="absolute inset-0 w-full h-full object-cover"
         src={celebrity.picture}
         alt={celebrity.name}
         priority={true}
       />
+
       <div className="relative top-[5.5rem] left-4 overflow-hidden w-[55vw] max-h-[26rem] lg:left-0 lg:w-1/2 lg:min-w-[600px] lg:max-h-unset lg:mt-10">
-        <div className="featured-card__glass-background"></div>
+        <div className="featured-card__glass-background absolute"></div>
+        <style jsx>{`
+          .featured-card__glass-background {
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: center no-repeat
+                linear-gradient(
+                  var(--color-dark-background),
+                  var(--color-dark-background)
+                ),
+              calc(-50vw + 650px) -6rem/105vw auto no-repeat url(${celebrity.picture});
+            filter: blur(1rem);
+          }
+
+          @media all and (min-width: 768px) {
+            background: center no-repeat
+                linear-gradient(
+                  var(--color-dark-background),
+                  var(--color-dark-background)
+                ),
+              7vw -6.5rem/115vw auto no-repeat url(${celebrity.picture});
+          }
+        `}</style>
+
         <div className="relative p-4 text-white">
           <p className="whitespace-nowrap font-light">
             {"What's your opinion on"}
