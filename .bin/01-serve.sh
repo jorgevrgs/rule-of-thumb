@@ -2,11 +2,6 @@
 
 set -x
 
-# npm ci
-
-## Use this to lift the server with docker-compose up
-
-cp .env.example .env.docker
 ## Load the environment variables
 set -a
 . .env.docker

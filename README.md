@@ -2,11 +2,17 @@
 
 ## Getting Started
 
-Start the server using Docker or lift the server locally:
+Start the server using Docker or lift the server locally. First step install dependencies:
+
+```bash
+npm ci
+```
 
 ### Docker
 
 ```bash
+cp .env.example env.docker # Edit the variables
+
 npm run serve # Start a Docker container
 npm run seed  # Populate the MongoDB database and load the images to GridFS
 npm run stop  # Stop the Docker containers

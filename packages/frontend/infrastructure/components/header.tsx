@@ -2,7 +2,7 @@ import FeaturedCard from './featured-card';
 
 export default function Header() {
   return (
-    <header className="hero">
+    <header className="relative overflow-hidden h-[80vh] h-min-[35rem] h-max-[38rem] mb-8 lg:min-h-[700px]">
       <div className="contents lg:relative lg:w-full lg:max-w-5xl lg:mx-auto relative">
         <FeaturedCard />
       </div>

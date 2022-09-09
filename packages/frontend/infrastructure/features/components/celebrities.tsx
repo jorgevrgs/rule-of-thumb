@@ -148,9 +148,7 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
         padding: 0,
       };
     },
-    control: (provided, state) => {
-      console.log('control', { provided, state });
-
+    control: (provided, _state) => {
       return {
         ...provided,
         width: 300,

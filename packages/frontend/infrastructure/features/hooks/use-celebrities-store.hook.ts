@@ -1,4 +1,4 @@
-import type { CelebritiesType } from '@app/shared';
+import { CelebritiesType, logger } from '@app/shared';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   getCelebritiesService,
@@ -32,7 +32,14 @@ export function useUpdateVoteCelebrities() {
           );
 
           if (index !== -1) {
-            console.log('Updating data', oldData[index].votes, data.votes);
+            logger.info(
+              `Updating vote for ${data.name} from ${JSON.stringify(
+                oldData[index].votes,
+                null,
+                2
+              )} to ${JSON.stringify(data.votes, null, 2)}`
+            );
+
             oldData[index] = data;
           }
 
