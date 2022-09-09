@@ -72,12 +72,14 @@ export default function FeaturedCard() {
             <button
               className="w-1/2 h-11 bg-green-positive/80"
               aria-label="thumbs up"
+              disabled
             >
               <Icon name="thumbs-up" width={16} height={16} />
             </button>
             <button
               className="w-1/2 h-11 bg-yellow-negative/80"
               aria-label="thumbs down"
+              disabled
             >
               <Icon name="thumbs-down" width={16} height={16} />
             </button>
