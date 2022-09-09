@@ -8,6 +8,7 @@ import {
   LayoutContext,
   useFetchCelebrities,
 } from '@app/frontend';
+import { logger } from '@app/shared';
 import type { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
 import { getSelectorsByUserAgent } from 'react-device-detect';
@@ -30,6 +31,8 @@ const Index: NextPage<IndexPageProps> = ({
   }
 
   const [feturedCelebrity, ...otherCelebrities] = data;
+
+  logger.info(`Didplaying content for ${deviceType}`);
 
   return (
     <>
