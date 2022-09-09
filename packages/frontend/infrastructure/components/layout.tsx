@@ -11,7 +11,7 @@ function Layout({ children }: Props) {
     <>
       <Navbar />
       <Header />
-      <div className="contents lg:relative lg:w-full lg:max-w-5xl lg:mx-auto">
+      <div className="flex flex-col relative w-full max-w-7xl mx-auto">
         {children}
         <Footer />
       </div>
