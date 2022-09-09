@@ -86,7 +86,7 @@ export default function CelebrityDesktop({
   }
 
   const articleClass = classNames('flex', 'overflow-hidden', 'relative', {
-    'flex-col items-center px-4 w-[22rem] h-[22rem] text-white md:w-full md:h-96':
+    'flex-col items-center px-4 w-[22rem] h-[22rem] text-white md:w-full md:h-96 aspect-square':
       isGrid,
     'h-72': isList,
   });
