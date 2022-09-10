@@ -11,9 +11,9 @@ export default function Celebrity({ celebrity, listOption }: CelebrityProps) {
   return (
     <article
       className={classNames(
-        'flex overflow-hidden relative flex-col items-center text-white aspect-square',
+        'flex overflow-hidden relative flex-col items-center text-white aspect-square w-96 sm:w-full',
         {
-          'sm:w-full sm:h-72 sm:p-0 sm:aspect-auto': isList,
+          'sm:h-72 sm:p-0 sm:aspect-auto': isList,
         }
       )}
     >
