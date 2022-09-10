@@ -7,8 +7,7 @@ set -a
 . .env.local
 set +a
 
-echo "NEXT_FRONTEND_URL = ${NEXT_FRONTEND_URL}"
-echo "NEXT_MONGO_URL    = ${NEXT_MONGO_URL}"
+echo "${NEXT_MONGO_URL}"
 
 cd bootstrap/src
 
