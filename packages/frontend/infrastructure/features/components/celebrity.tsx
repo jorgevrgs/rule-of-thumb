@@ -35,15 +35,17 @@ export default function Celebrity({ celebrity, listOption }: CelebrityProps) {
       </div>
 
       <div
-        className={classNames('text-white z-10 px-4 py-12', {
-          'custom-gradient sm:absolute sm:inset-0 sm:pl-72 sm:pr-8 sm:py-4':
+        className={classNames('text-white z-10 w-full h-full', {
+          'list-gradient sm:absolute sm:inset-0 sm:pl-72 sm:pr-8 sm:py-4':
             isList,
+          'grid-gradient': !isList,
         })}
       >
         <div
           className={classNames({
             'grid grid-flow-col grid-cols-2 justify-start grid-rows-2 gap-4':
               isList,
+            'px-4 py-12': !isList,
           })}
         >
           <h3
