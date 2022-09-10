@@ -40,18 +40,6 @@ export default function Celebrity({ celebrity, listOption }: CelebrityProps) {
             isList,
         })}
       >
-        <style jsx>{`
-          .custom-gradient {
-            background: linear-gradient(
-              80deg,
-              rgba(0, 0, 0, 0.0001) 0%,
-              #888888 19.79%,
-              #666666 50%,
-              rgba(51, 51, 51, 0.6) 71.88%
-            );
-          }
-        `}</style>
-
         <div
           className={classNames({
             'grid grid-flow-col grid-cols-2 justify-start grid-rows-2 gap-4':

@@ -17,7 +17,6 @@ export default function SelectView({
   const customStyles: StylesConfig<Option> = {
     container: (provided) => ({
       ...provided,
-      display: isMobile ? 'none' : 'block',
       zIndex: 20,
     }),
     option: (provided, state) => {
@@ -62,6 +61,7 @@ export default function SelectView({
 
   return (
     <ReactSelect
+      className="hidden sm:flex"
       instanceId="selectListView"
       styles={customStyles}
       options={options}

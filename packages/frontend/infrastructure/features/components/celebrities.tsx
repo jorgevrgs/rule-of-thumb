@@ -1,7 +1,6 @@
 import classNames from 'classnames/bind';
-import { Suspense, useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import type { SingleValue } from 'react-select';
-import PulseLoader from 'react-spinners/PulseLoader';
 import {
   DeviceType,
   gridValue,
@@ -15,21 +14,17 @@ import Celebrity from './celebrity';
 import SelectView from './select-view';
 
 export default function Celebrities({ celebrities }: CelebritiesProps) {
+  const { deviceType } = useContext(LayoutContext);
   const [listView, setListView] = useState<SingleValue<Option>>(listValue);
-  const { deviceType: serverDeviceType } = useContext(LayoutContext);
-  const clientDeviceType = useDeviceTypeHook();
-
-  const deviceType = useMemo(() => {
-    if (clientDeviceType === DeviceType.mobile) {
-      return DeviceType.mobile;
-    }
-
-    return serverDeviceType;
-  }, [clientDeviceType, serverDeviceType]);
+  const navigatorDeviceType = useDeviceTypeHook();
 
   const isMobile = useMemo(() => {
     return deviceType === DeviceType.mobile;
   }, [deviceType]);
+
+  const isList = useMemo(() => {
+    return listView?.value === ListOptions.list;
+  }, [listView]);
 
   useEffect(() => {
     if (isMobile) {
@@ -37,36 +32,15 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
     }
   }, [isMobile]);
 
+  useEffect(() => {
+    if (navigatorDeviceType === DeviceType.mobile) {
+      setListView(gridValue);
+    }
+  }, [navigatorDeviceType]);
+
   const handleListViewChange = (newValue: SingleValue<Option>) => {
     setListView(newValue);
   };
-
-  const celebritiesStyle = useMemo((): string => {
-    const styles = [
-      'grid',
-      'gap-4',
-      'overflow-x-auto',
-      'sm:overflow-x-hidden',
-      'sm:grid-flow-dense',
-    ];
-
-    if (listView?.value === ListOptions.grid) {
-      styles.push(
-        'sm:grid-cols-2',
-        'xl:grid-cols-3',
-        'grid-flow-col',
-        'min-h-[22rem]'
-      );
-    } else {
-      styles.push('sm:grid-cols-1');
-    }
-
-    if (isMobile) {
-      styles.push('overflow-x-auto');
-    }
-
-    return classNames(styles);
-  }, [listView?.value, isMobile]);
 
   if (!celebrities?.length) {
     return <div>No celebrities</div>;
@@ -84,15 +58,21 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
         />
       </div>
 
-      <div className={celebritiesStyle}>
+      <div
+        className={classNames(
+          'grid grid-flow-col gap-4 overflow-x-auto sm:overflow-x-hidden sm:grid-flow-dense',
+          {
+            'sm:grid-cols-1': isList,
+            'sm:grid-cols-2 xl:grid-cols-3': !isList,
+          }
+        )}
+      >
         {celebrities.map((celebrity) => (
-          <Suspense fallback={<PulseLoader />} key={celebrity.celebrityId}>
-            <Celebrity
-              key={celebrity.celebrityId}
-              celebrity={celebrity}
-              listOption={listView?.value}
-            />
-          </Suspense>
+          <Celebrity
+            key={celebrity.celebrityId}
+            celebrity={celebrity}
+            listOption={listView?.value}
+          />
         ))}
       </div>
     </section>
