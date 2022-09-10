@@ -6,7 +6,7 @@ function Navbar() {
   const { navLinks } = useContext(LayoutContext);
 
   return (
-    <nav className="nav w-full" role="navigation">
+    <nav className="nav w-full z-30" role="navigation">
       <div className="flex justify-between w-full md:relative md:w-full md:max-w-7xl md:mx-auto">
         <h1 className="nav__logo">Rule of thumb.</h1>
         <button className="nav__hamburger icon-button">

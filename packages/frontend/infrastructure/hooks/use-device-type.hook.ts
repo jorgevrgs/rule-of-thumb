@@ -1,19 +1,19 @@
+import { createBreakpoint } from 'react-use';
 import { DeviceType } from '../../domain';
-import { useWindowSizeHook } from './use-windows-size.hook';
 
 export function useDeviceTypeHook(): DeviceType {
-  const { width } = useWindowSizeHook();
+  const useBreakpoint = createBreakpoint({
+    sm: 640,
+    md: 768,
+    lg: 1024,
+    xl: 1280,
+    '2xl': 1536,
+  });
 
-  if (width === undefined) {
-    return DeviceType.desktop;
-  }
+  const breakpoint = useBreakpoint();
 
-  if (width < 768) {
+  if (breakpoint === 'sm') {
     return DeviceType.mobile;
-  }
-
-  if (width < 992) {
-    return DeviceType.tablet;
   }
 
   return DeviceType.desktop;
