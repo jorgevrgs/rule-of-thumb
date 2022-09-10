@@ -12,6 +12,7 @@ services:
     env_file:
       - .env.docker
     environment:
+      NEXT_FRONTEND_URL: ${NEXT_FRONTEND_URL:-http://localhost:3000}
       NEXT_MONGO_URL: ${NEXT_MONGO_URL:-mongodb://mongo:27017/ruleOfThumb}
     networks:
       - nextjs-network
