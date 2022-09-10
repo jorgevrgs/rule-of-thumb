@@ -14,7 +14,6 @@ const nextConfig = {
     domains: ['celebrities-v2.s3.amazonaws.com'],
   },
   env: {
-    NEXT_FRONTEND_URL: process.env.NEXT_FRONTEND_URL,
     NEXT_MONGO_URL: process.env.NEXT_MONGO_URL,
   },
   poweredByHeader: false,
