@@ -1,39 +1,45 @@
-import type { CelebrityType } from '@app/shared';
 import classNames from 'classnames/bind';
-import type { ImageProps } from 'next/image';
 import Image from 'next/image';
 import { getTimeAgo } from '../../../application/utils';
 import { ListOptions } from '../../../domain';
 import type { CelebrityProps } from '../../../domain/types';
 import Vote from './vote';
 
-interface CelebrityDesktopUIProps {
-  celebrityStyles: Record<string, string>;
-  imageProps: ImageProps;
-  celebrity: CelebrityType;
-}
-
-export function CelebrityDesktopUI({
-  celebrityStyles,
-  imageProps,
-  celebrity,
-}: CelebrityDesktopUIProps) {
-  const {
-    articleClass,
-    cardBodyClass,
-    contentClass,
-    imageClass,
-    titleClass,
-    voteClass,
-  } = celebrityStyles;
+export default function Celebrity({ celebrity, listOption }: CelebrityProps) {
+  const isList = listOption === ListOptions.list;
 
   return (
-    <article className={articleClass}>
-      <div className={imageClass}>
-        <Image alt={celebrity.name} {...imageProps} />
+    <article
+      className={classNames(
+        'flex overflow-hidden relative flex-col items-center text-white aspect-square',
+        {
+          'sm:w-full sm:h-72 sm:p-0 sm:aspect-auto': isList,
+        }
+      )}
+    >
+      <div
+        className={classNames('absolute inset-0 flex w-full h-full', {
+          'sm:h-72': isList,
+        })}
+      >
+        <Image
+          src={celebrity.picture}
+          alt={celebrity.name}
+          className={classNames('absolute inset-0 object-cover w-full h-full', {
+            'sm:object-cover sm:w-full sm:h-full': isList,
+          })}
+          objectFit={isList ? 'contain' : 'fill'}
+          layout="fill"
+          objectPosition={isList ? 'left' : 'center'}
+        />
       </div>
 
-      <div className={contentClass}>
+      <div
+        className={classNames('text-white z-10 px-4 py-12', {
+          'custom-gradient sm:absolute sm:inset-0 sm:pl-72 sm:pr-8 sm:py-4':
+            isList,
+        })}
+      >
         <style jsx>{`
           .custom-gradient {
             background: linear-gradient(
@@ -46,87 +52,38 @@ export function CelebrityDesktopUI({
           }
         `}</style>
 
-        <div className={cardBodyClass}>
-          <h3 className={titleClass}>{celebrity.name}</h3>
+        <div
+          className={classNames({
+            'grid grid-flow-col grid-cols-2 justify-start grid-rows-2 gap-4':
+              isList,
+          })}
+        >
+          <h3
+            className={classNames(
+              'font-bold text-white line-clamp-1 mb-4',
+              isList ? 'text-3xl' : 'text-2xl'
+            )}
+          >
+            {celebrity.name}
+          </h3>
           <p className="text-lg line-clamp-3 h-20">{celebrity.description}</p>
 
           <p className="text-right text-sm mt-4 w-full">
             {`${getTimeAgo(celebrity.lastUpdated)} in ${celebrity.category}`}
           </p>
 
-          <div className={voteClass}>
+          <div
+            className={classNames(
+              'flex flex-wrap gap-4 w-full md:flex-no-wrap',
+              isList
+                ? 'justify-end content-start h-full'
+                : 'justify-center my-8 h-10'
+            )}
+          >
             <Vote celebrityId={celebrity.celebrityId} />
           </div>
         </div>
       </div>
     </article>
-  );
-}
-
-export default function CelebrityDesktop({
-  celebrity,
-  listOption,
-}: CelebrityProps) {
-  const isGrid = listOption === ListOptions.grid;
-  const isList = listOption === ListOptions.list;
-
-  const imageProps: ImageProps = {
-    src: celebrity.picture,
-    className: classNames({
-      'absolute inset-0 object-cover w-full h-full': isGrid,
-      'object-cover w-full h-full': isList,
-    }),
-    objectFit: isGrid ? 'cover' : 'fill',
-    layout: isGrid ? 'fill' : 'intrinsic',
-  };
-
-  if (isList) {
-    imageProps.width = '322px';
-    imageProps.height = '322px';
-  }
-
-  const articleClass = classNames('flex', 'overflow-hidden', 'relative', {
-    'flex-col items-center px-4 w-[22rem] h-[22rem] text-white md:w-full md:h-96 aspect-square':
-      isGrid,
-    'h-72': isList,
-  });
-
-  const imageClass = classNames('w-full', {
-    'h-72 absolute': isList,
-    'h-full': isGrid,
-  });
-
-  const contentClass = classNames('text-white', {
-    'custom-gradient absolute inset-0 pl-72 pr-8 py-4': isList,
-    'z-10 px-4 py-12 text-white': isGrid,
-  });
-
-  const cardBodyClass = classNames({
-    'grid grid-flow-col grid-cols-2 justify-start grid-rows-2 gap-4': isList,
-  });
-
-  const titleClass = classNames('font-bold text-white line-clamp-1 mb-4', {
-    'text-2xl': isGrid,
-    'text-3xl': isList,
-  });
-
-  const voteClass = classNames('flex flex-wrap gap-4 w-full md:flex-no-wrap', {
-    'justify-end content-start h-full': isList,
-    'justify-center my-8 h-10': isGrid,
-  });
-
-  return (
-    <CelebrityDesktopUI
-      celebrityStyles={{
-        articleClass,
-        cardBodyClass,
-        contentClass,
-        imageClass,
-        titleClass,
-        voteClass,
-      }}
-      imageProps={imageProps}
-      celebrity={celebrity}
-    />
   );
 }
