@@ -35,7 +35,7 @@ export function VotePercentageUI({
       style={{ width: `${roundedValue}%`, minWidth: '30%' }}
     >
       <Icon name={iconName} width={16} height={16} />
-      <span className="ml-2 text-base font-xs">{absValue} %</span>
+      <span className="ml-2 text-base font-xs">{`${absValue} %`}</span>
     </div>
   );
 }
