@@ -2,7 +2,7 @@ import Icon from './icon';
 
 export default function BannerTop() {
   return (
-    <aside className="banner banner-top" role="doc-tip" aria-label="Speak Out">
+    <aside className="banner banner-top" role="banner" aria-label="Speak Out">
       <div className="banner__left">
         <span className="banner__hairline">Speak out. Be heard.</span>
         <span className="banner__title">Be counted</span>

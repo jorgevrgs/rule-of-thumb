@@ -2,11 +2,7 @@ import Image from 'next/image';
 
 export default function BannerBottom() {
   return (
-    <aside
-      className="banner banner-bottom"
-      role="doc-tip"
-      aria-label="Submit a name"
-    >
+    <aside className="banner banner-bottom" role="banner">
       <Image
         layout="fill"
         className="banner__background"
@@ -20,7 +16,9 @@ export default function BannerBottom() {
         </h2>
       </div>
       <div className="banner__right">
-        <button className="banner__cta">Submit a name</button>
+        <button className="banner__cta" role="button">
+          Submit a name
+        </button>
       </div>
     </aside>
   );
