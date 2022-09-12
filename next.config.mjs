@@ -18,6 +18,10 @@ const nextConfig = {
     NEXT_MONGO_URL: process.env.NEXT_MONGO_URL,
   },
   poweredByHeader: false,
+  i18n: {
+    locales: ['en'],
+    defaultLocale: 'en',
+  },
 };
 
 export default nextConfig;

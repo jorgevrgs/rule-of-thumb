@@ -27,6 +27,7 @@ export function VoteAgain({ onClick }: VoteAgainProps) {
   return (
     <button
       className="border-white bg-slate-700/60 border-2 h-8 px-8"
+      role="button"
       onClick={onClick}
     >
       Vote Again
@@ -52,14 +53,32 @@ export function VoteNow({ celebrityId, mutate, isLoading }: VoteNowProps) {
 
   return (
     <>
-      <div className="flex items-center justify-center h-8 w-8">
-        <button className={getPositiveVoteClasses} onClick={setPositiveVote}>
+      <div
+        className="flex items-center justify-center h-8 w-8"
+        role="img"
+        aria-label="Vote positive"
+      >
+        <button
+          className={getPositiveVoteClasses}
+          onClick={setPositiveVote}
+          role="button"
+          aria-label="Thumbs up"
+        >
           <Icon name="thumbs-up" width={16} height={16} />
         </button>
       </div>
 
-      <div className="flex items-center justify-center h-8 w-8">
-        <button className={getNegativeVoteClasses} onClick={setNegativeVote}>
+      <div
+        className="flex items-center justify-center h-8 w-8"
+        role="img"
+        aria-label="Vote negative"
+      >
+        <button
+          className={getNegativeVoteClasses}
+          onClick={setNegativeVote}
+          role="button"
+          aria-label="Thumbs down"
+        >
           <Icon name="thumbs-down" width={16} height={16} />
         </button>
       </div>
@@ -72,6 +91,7 @@ export function VoteNow({ celebrityId, mutate, isLoading }: VoteNowProps) {
             className="border-white bg-slate-700/60 border-2 h-full px-8"
             disabled={isButtonDisabled}
             onClick={handleVoteClick}
+            role="button"
           >
             Vote Now
           </button>

@@ -62,6 +62,7 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
             'sm:grid-cols-2 xl:grid-cols-3': !isList,
           }
         )}
+        role="list"
       >
         {celebrities.map((celebrity) => (
           <Celebrity
