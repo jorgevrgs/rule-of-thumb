@@ -1,23 +1,27 @@
 import { render, screen } from '@testing-library/react';
-import { describe, expect, test } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import VotePercentage from './vote-percentage';
 
 describe('VotePercentage', () => {
-  test('should render a positive percentage', () => {
+  it('should render a positive percentage', () => {
     render(<VotePercentage positive={67} />);
     const actual = screen.getByText('67 %');
 
     expect(actual).toBeDefined();
     expect(actual).toBeInstanceOf(HTMLSpanElement);
-    expect(actual.parentElement?.className).toContain('bg-green-positive/80');
+    expect(
+      actual.parentElement?.classList.contains('bg-green-positive/80')
+    ).toBeTruthy();
   });
 
-  test('should render a negative percentage', () => {
+  it('should render a negative percentage', () => {
     render(<VotePercentage negative={33} />);
     const actual = screen.getByText('33 %');
 
     expect(actual).toBeDefined();
     expect(actual).toBeInstanceOf(HTMLSpanElement);
-    expect(actual.parentElement?.className).toContain('bg-yellow-negative/80');
+    expect(
+      actual.parentElement?.classList.contains('bg-yellow-negative/80')
+    ).toBeTruthy();
   });
 });

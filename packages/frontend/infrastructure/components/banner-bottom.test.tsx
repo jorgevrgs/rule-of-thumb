@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { beforeAll, describe, expect, test } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import BannerBottom from './banner-bottom';
 
 describe('BannerBottom', () => {
@@ -7,7 +7,7 @@ describe('BannerBottom', () => {
     render(<BannerBottom />);
   });
 
-  test('should render a submit button', () => {
+  it('should render a submit button', () => {
     const actual = screen.getByRole('button', {
       name: /Submit a name/i,
     });
