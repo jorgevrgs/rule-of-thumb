@@ -39,7 +39,7 @@ jobs:
             node_version: 16
           - os: windows-latest
             node_version: 16
-        fail-fast: false
+      fail-fast: false
 
     steps:
       - uses: actions/checkout@v3
