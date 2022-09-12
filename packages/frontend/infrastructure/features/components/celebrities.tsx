@@ -51,11 +51,7 @@ export default function Celebrities({ celebrities }: CelebritiesProps) {
       <div className="flex justify-evenly items-center">
         <h2 className="text-4xl my-8 w-full">Previous Rulings</h2>
 
-        <SelectView
-          isMobile={isMobile}
-          listView={listView}
-          onChange={handleListViewChange}
-        />
+        <SelectView listView={listView} onChange={handleListViewChange} />
       </div>
 
       <div
