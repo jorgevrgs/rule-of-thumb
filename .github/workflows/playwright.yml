@@ -7,7 +7,8 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  e2e-test:
+    if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
@@ -26,7 +27,7 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test
         env:
-          NEXT_MONGO_URL: ${{secrets.NEXT_MONGO_URL}}
+          NEXT_FRONTEND_URL: ${{ github.event.deployment_status.target_url }}
 
       - uses: actions/upload-artifact@v2
         if: always()
