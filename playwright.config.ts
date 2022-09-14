@@ -7,14 +7,22 @@ import { devices } from '@playwright/test';
  */
 // require('dotenv').config();
 
+// Use process.env.PORT by default and fallback to port 3000
+const PORT = process.env.PORT || 3000;
+
+// Set webServer.url and use.baseURL with the location of the WebServer respecting the correct set port
+const baseURL = `http://localhost:${PORT}`;
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 const config: PlaywrightTestConfig = {
   testDir: './test',
   testMatch: '**/*.e2e-spec.ts',
+
   /* Maximum time one test can run for. */
   timeout: 30 * 1000,
+
   expect: {
     /**
      * Maximum time expect() should wait for the condition to be met.
@@ -22,25 +30,31 @@ const config: PlaywrightTestConfig = {
      */
     timeout: 5000,
   },
+
   /* Run tests in files in parallel */
   fullyParallel: true,
+
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
+
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
+
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
+
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
     actionTimeout: 0,
+
     /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://localhost:3000',
+    baseURL,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: 'retry-with-trace',
   },
 
   /* Configure projects for major browsers */
@@ -102,6 +116,8 @@ const config: PlaywrightTestConfig = {
   webServer: {
     command: 'npm run dev',
     port: 3000,
+    timeout: 120 * 1000,
+    reuseExistingServer: !process.env.CI,
   },
 };
 
