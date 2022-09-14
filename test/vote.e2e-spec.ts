@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test.describe('Homepage', () => {
   test.beforeEach(async ({ page }) => {
     // Go to http://localhost:3000/
-    await page.goto('https://rule-of-thumb-ten.vercel.app/');
+    await page.goto('/');
   });
 
   test('Page Title', async ({ page }) => {
