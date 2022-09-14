@@ -1,4 +1,8 @@
-# This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Rule of Thumb
+
+[![CI](https://github.com/jorgevrgs/rule-of-thumb/actions/workflows/ci.yml/badge.svg)](https://github.com/jorgevrgs/rule-of-thumb/actions/workflows/ci.yml)
+
+[![Playwright Tests](https://github.com/jorgevrgs/rule-of-thumb/actions/workflows/playwright.yml/badge.svg)](https://github.com/jorgevrgs/rule-of-thumb/actions/workflows/playwright.yml)
 
 ## Getting Started
 
