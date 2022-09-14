@@ -12,6 +12,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
+    "test:e2e": "playwright test",
     "serve": "sh ./.bin/01-serve.sh",
     "seed": "sh ./.bin/02-seed.sh",
     "stop": "sh ./.bin/03-stop.sh"
@@ -35,6 +36,7 @@
     "sharp": "0.31.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.25.2",
     "@testing-library/react": "13.4.0",
     "@types/lodash.omit": "4.5.7",
     "@types/node": "18.7.16",

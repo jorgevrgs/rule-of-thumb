@@ -55,15 +55,17 @@ export default function SelectView({ onChange, listView }: SelectViewProps) {
   };
 
   return (
-    <ReactSelect
-      className="hidden sm:flex"
-      instanceId="selectListView"
-      styles={customStyles}
-      options={options}
-      value={listView}
-      defaultValue={listValue}
-      isMulti={false}
-      onChange={onChange}
-    />
+    <div role="select">
+      <ReactSelect
+        className="hidden sm:flex"
+        instanceId="selectListView"
+        styles={customStyles}
+        options={options}
+        value={listView}
+        defaultValue={listValue}
+        isMulti={false}
+        onChange={onChange}
+      />
+    </div>
   );
 }
