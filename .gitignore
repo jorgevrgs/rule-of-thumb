@@ -40,3 +40,6 @@ yarn-error.log*
 node_modules
 .yarn
 .env.docker
+/test-results/
+/playwright-report/
+/playwright/.cache/

@@ -14,10 +14,14 @@ const nextConfig = {
     domains: ['celebrities-v2.s3.amazonaws.com'],
   },
   env: {
-    NEXT_FRONTEND_URL: process.env.NEXT_FRONTEND_URL,
+    NEXT_FRONTEND_URL: process.env.NEXT_FRONTEND_URL || 'http://localhost:3000',
     NEXT_MONGO_URL: process.env.NEXT_MONGO_URL,
   },
   poweredByHeader: false,
+  i18n: {
+    locales: ['en'],
+    defaultLocale: 'en',
+  },
 };
 
 export default nextConfig;

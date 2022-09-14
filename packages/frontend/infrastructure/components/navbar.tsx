@@ -26,7 +26,12 @@ function Navbar() {
                 aria-label="search"
                 type="text"
               />
-              <button className="nav__search icon-button" type="submit">
+              <button
+                className="nav__search icon-button"
+                disabled
+                type="submit"
+                role="presentation"
+              >
                 <Icon name="search" width={36} height={36} />
               </button>
             </form>

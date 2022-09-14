@@ -16,6 +16,7 @@ export default function Celebrity({ celebrity, listOption }: CelebrityProps) {
           'sm:h-72 sm:p-0 sm:aspect-auto': isList,
         }
       )}
+      role="listitem"
     >
       <div
         className={classNames('absolute inset-0 flex w-full h-full', {

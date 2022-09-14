@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import VotePercentage from './vote-percentage';
 
-describe('VotePercentage', () => {
+describe('<VotePercentage />', () => {
   it('should render a positive percentage', () => {
     render(<VotePercentage positive={67} />);
     const actual = screen.getByText('67 %');

@@ -2,16 +2,11 @@ import ReactSelect, { SingleValue, StylesConfig } from 'react-select';
 import { gridValue, listValue, Option } from '../../../domain';
 
 interface SelectViewProps {
-  isMobile: boolean;
   onChange: (newValue: SingleValue<Option>) => void;
   listView: SingleValue<Option>;
 }
 
-export default function SelectView({
-  isMobile,
-  onChange,
-  listView,
-}: SelectViewProps) {
+export default function SelectView({ onChange, listView }: SelectViewProps) {
   const options = [listValue, gridValue];
 
   const customStyles: StylesConfig<Option> = {
@@ -60,15 +55,17 @@ export default function SelectView({
   };
 
   return (
-    <ReactSelect
-      className="hidden sm:flex"
-      instanceId="selectListView"
-      styles={customStyles}
-      options={options}
-      value={listView}
-      defaultValue={listValue}
-      isMulti={false}
-      onChange={onChange}
-    />
+    <div role="select">
+      <ReactSelect
+        className="hidden sm:flex"
+        instanceId="selectListView"
+        styles={customStyles}
+        options={options}
+        value={listView}
+        defaultValue={listValue}
+        isMulti={false}
+        onChange={onChange}
+      />
+    </div>
   );
 }

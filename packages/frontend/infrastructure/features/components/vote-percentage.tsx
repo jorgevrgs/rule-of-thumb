@@ -21,6 +21,7 @@ export default function VotePercentage({
       className={`flex items-center justify-center text-lg font-bold h-12 py-2 px-4 text-white ${bgColor}/80`}
       aria-label={ariaLabel}
       style={{ width: `${roundedValue}%`, minWidth: '30%' }}
+      role="listitem"
     >
       <Icon name={iconName} width={16} height={16} />
       <span className="ml-2 text-base font-xs">{`${absValue} %`}</span>
