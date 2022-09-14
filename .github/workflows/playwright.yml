@@ -26,7 +26,7 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test
         env:
-          NEXT_MONGO_URL: ${secrets.NEXT_MONGO_URL}
+          NEXT_MONGO_URL: ${{secrets.NEXT_MONGO_URL}}
 
       - uses: actions/upload-artifact@v2
         if: always()
