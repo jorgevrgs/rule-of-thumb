@@ -2,8 +2,10 @@ name: Playwright Tests
 on:
   push:
     branches: [ main, development ]
+
   pull_request:
     branches: [ main ]
+
 jobs:
   test:
     timeout-minutes: 60
@@ -23,6 +25,8 @@ jobs:
 
       - name: Run Playwright tests
         run: npx playwright test
+        env:
+          NEXT_MONGO_URL: ${secrets.NEXT_MONGO_URL}
 
       - uses: actions/upload-artifact@v2
         if: always()
