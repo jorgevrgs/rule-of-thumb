@@ -11,7 +11,7 @@ import { devices } from '@playwright/test';
 const PORT = Number(process.env.PORT) || 3000;
 
 // Set webServer.url and use.baseURL with the location of the WebServer respecting the correct set port
-const BASE_URL = process.env.NEXT_FRONTEND_URL || `http://localhost:${PORT}`;
+const BASE_URL = `http://localhost:${PORT}`;
 
 /**
  * See https://playwright.dev/docs/test-configuration.
