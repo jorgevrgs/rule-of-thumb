@@ -3,26 +3,28 @@ import {
   BannerTop,
   Celebrities,
   DeviceType,
-  getCelebritiesService,
+  getCelebrities,
+  getRunningOperationPromises,
   Layout,
   LayoutContext,
-  useFetchCelebrities,
+  LayoutContextType,
+  useGetCelebritiesQuery,
+  wrapper,
 } from '@app/frontend';
 import { logger } from '@app/shared';
 import type { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
 import { getSelectorsByUserAgent } from 'react-device-detect';
 import PulseLoader from 'react-spinners/PulseLoader';
-import type { IndexPageProps } from '../types';
 
-const Index: NextPage<IndexPageProps> = ({
-  navLinks,
-  celebrities,
-  deviceType,
-}) => {
-  const { data, isLoading } = useFetchCelebrities(celebrities);
+interface IndexPageProps {
+  deviceType: LayoutContextType['deviceType'];
+}
 
-  if (isLoading) {
+const Index: NextPage<IndexPageProps> = ({ deviceType }) => {
+  const { data, isFetching } = useGetCelebritiesQuery();
+
+  if (isFetching) {
     return <PulseLoader />;
   }
 
@@ -30,7 +32,7 @@ const Index: NextPage<IndexPageProps> = ({
     return <div>No celebrities</div>;
   }
 
-  const [feturedCelebrity, ...otherCelebrities] = data;
+  const [featuredCelebrity, ...otherCelebrities] = data;
 
   logger.info(`Didplaying content for ${deviceType}`);
 
@@ -40,9 +42,7 @@ const Index: NextPage<IndexPageProps> = ({
         <title>Rule of Thumb</title>
       </Head>
 
-      <LayoutContext.Provider
-        value={{ navLinks, celebrity: feturedCelebrity, deviceType }}
-      >
+      <LayoutContext.Provider value={{ featuredCelebrity, deviceType }}>
         <Layout>
           <BannerTop />
 
@@ -57,36 +57,29 @@ const Index: NextPage<IndexPageProps> = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const celebrities = await getCelebritiesService();
+export const getServerSideProps: GetServerSideProps =
+  wrapper.getServerSideProps((store) => async (context) => {
+    let deviceType = DeviceType.mobile;
+    const userAgent = context.req.headers['user-agent'];
 
-  const navLinks = [
-    { name: 'Past Trials', href: '#' },
-    { name: 'How It Works', href: '#' },
-    { name: 'Login / Sign Up', href: '#' },
-  ];
+    if (userAgent) {
+      const selector = getSelectorsByUserAgent(userAgent);
 
-  let deviceType = DeviceType.mobile;
-
-  const userAgent = context.req.headers['user-agent'];
-
-  if (userAgent) {
-    const selector = getSelectorsByUserAgent(userAgent);
-
-    if (selector.isDesktop) {
-      deviceType = DeviceType.desktop;
-    } else if (selector.isTablet) {
-      deviceType = DeviceType.tablet;
+      if (selector.isDesktop) {
+        deviceType = DeviceType.desktop;
+      } else if (selector.isTablet) {
+        deviceType = DeviceType.tablet;
+      }
     }
-  }
 
-  return {
-    props: {
-      celebrities,
-      navLinks,
-      deviceType,
-    },
-  };
-};
+    store.dispatch(getCelebrities.initiate());
+    await Promise.all(getRunningOperationPromises());
+
+    return {
+      props: {
+        deviceType,
+      },
+    };
+  });
 
 export default Index;

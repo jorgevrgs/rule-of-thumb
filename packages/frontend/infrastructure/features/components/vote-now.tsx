@@ -1,23 +1,17 @@
-import { CelebrityType } from '@app/shared';
-import { UseMutationResult } from '@tanstack/react-query';
+import classNames from 'classnames';
 import { MouseEventHandler } from 'react';
 import PulseLoader from 'react-spinners/PulseLoader';
 import type { UpdateVoteParams } from '../../../domain/types';
 import { Icon } from '../../components';
-import { useVoteHook } from '../hooks';
+import { useGetVoteClassesHook } from '../hooks';
 
 interface VoteNowProps {
   celebrityId: string;
-  mutate: UseMutationResult<
-    CelebrityType,
-    unknown,
-    UpdateVoteParams,
-    unknown
-  >['mutate'];
+  onClick: ({ celebrityId, vote }: UpdateVoteParams) => void;
   isLoading: boolean;
 }
 
-export function VoteNow({ celebrityId, mutate, isLoading }: VoteNowProps) {
+export function VoteNow({ celebrityId, onClick, isLoading }: VoteNowProps) {
   const {
     getPositiveVoteClasses,
     setPositiveVote,
@@ -25,12 +19,12 @@ export function VoteNow({ celebrityId, mutate, isLoading }: VoteNowProps) {
     setNegativeVote,
     isButtonDisabled,
     currentVote,
-  } = useVoteHook();
+  } = useGetVoteClassesHook();
 
   const handleVoteClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
 
-    mutate({ celebrityId, vote: currentVote });
+    onClick({ celebrityId, vote: currentVote });
   };
 
   return (
@@ -70,7 +64,13 @@ export function VoteNow({ celebrityId, mutate, isLoading }: VoteNowProps) {
           <PulseLoader />
         ) : (
           <button
-            className="border-white bg-slate-700/60 border-2 h-full px-8"
+            className={classNames(
+              'border-white bg-slate-700/60 border-2 h-full px-8',
+              {
+                'text-slate-400 cursor-not-allowed': isButtonDisabled,
+                'text-white hover:bg-slate-700': !isButtonDisabled,
+              }
+            )}
             disabled={isButtonDisabled}
             onClick={handleVoteClick}
             role="button"

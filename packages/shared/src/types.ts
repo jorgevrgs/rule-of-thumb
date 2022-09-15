@@ -13,10 +13,3 @@ export interface CelebrityType {
 }
 
 export type CelebritiesType = Array<CelebrityType>;
-
-export interface NavLinkType {
-  name: string;
-  href: string;
-}
-
-export type NavLinksType = NavLinkType[];

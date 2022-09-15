@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import { useMemo, useState } from 'react';
 import { VoteState } from '../../../domain/constants';
 
-export function useVoteHook() {
+export function useGetVoteClassesHook() {
   const [vote, setVote] = useState<VoteState>(VoteState.neutral);
   const setPositiveVote = () => {
     if (vote !== VoteState.positive) {
@@ -25,7 +25,11 @@ export function useVoteHook() {
   );
 
   const getPositiveVoteClasses = useMemo(() => {
-    const classess = [...baseClasses, 'bg-green-positive'];
+    const classess = [
+      ...baseClasses,
+      'bg-green-positive/80',
+      'hover:bg-green-positive',
+    ];
     if (vote === VoteState.positive) {
       classess.push('border-white', 'border-2');
     } else {
@@ -35,7 +39,11 @@ export function useVoteHook() {
     return classNames(classess);
   }, [vote, baseClasses]);
   const getNegativeVoteClasses = useMemo(() => {
-    const classess = [...baseClasses, 'bg-yellow-negative'];
+    const classess = [
+      ...baseClasses,
+      'bg-yellow-negative/80',
+      'hover:bg-yellow-negative',
+    ];
 
     if (vote === VoteState.negative) {
       classess.push('border-white', 'border-2');

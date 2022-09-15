@@ -1,8 +1,7 @@
-import type { CelebrityType, NavLinksType } from '@app/shared';
+import type { CelebrityType } from '@app/shared';
 import type { DeviceType } from '../constants';
 
 export interface LayoutContextType {
-  navLinks: NavLinksType;
-  celebrity?: CelebrityType;
+  featuredCelebrity?: CelebrityType;
   deviceType: DeviceType;
 }
