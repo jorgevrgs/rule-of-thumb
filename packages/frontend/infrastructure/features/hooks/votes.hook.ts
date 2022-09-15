@@ -25,7 +25,11 @@ export function useGetVoteClassesHook() {
   );
 
   const getPositiveVoteClasses = useMemo(() => {
-    const classess = [...baseClasses, 'bg-green-positive'];
+    const classess = [
+      ...baseClasses,
+      'bg-green-positive/80',
+      'hover:bg-green-positive',
+    ];
     if (vote === VoteState.positive) {
       classess.push('border-white', 'border-2');
     } else {
@@ -35,7 +39,11 @@ export function useGetVoteClassesHook() {
     return classNames(classess);
   }, [vote, baseClasses]);
   const getNegativeVoteClasses = useMemo(() => {
-    const classess = [...baseClasses, 'bg-yellow-negative'];
+    const classess = [
+      ...baseClasses,
+      'bg-yellow-negative/80',
+      'hover:bg-yellow-negative',
+    ];
 
     if (vote === VoteState.negative) {
       classess.push('border-white', 'border-2');

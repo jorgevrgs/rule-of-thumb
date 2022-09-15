@@ -6,11 +6,11 @@ import { useGetVoteClassesHook } from '../hooks';
 
 interface VoteNowProps {
   celebrityId: string;
-  updateVote: ({ celebrityId, vote }: UpdateVoteParams) => void;
+  onClick: ({ celebrityId, vote }: UpdateVoteParams) => void;
   isLoading: boolean;
 }
 
-export function VoteNow({ celebrityId, updateVote, isLoading }: VoteNowProps) {
+export function VoteNow({ celebrityId, onClick, isLoading }: VoteNowProps) {
   const {
     getPositiveVoteClasses,
     setPositiveVote,
@@ -23,7 +23,7 @@ export function VoteNow({ celebrityId, updateVote, isLoading }: VoteNowProps) {
   const handleVoteClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
 
-    updateVote({ celebrityId, vote: currentVote });
+    onClick({ celebrityId, vote: currentVote });
   };
 
   return (

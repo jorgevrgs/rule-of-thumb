@@ -7,7 +7,7 @@ import VoteResult from './vote-result';
 
 export default function Vote({ celebrityId }: VoteProps) {
   const { data: celebrity, isFetching } = useGetCelebrityById(celebrityId);
-  const { updateVote, isSuccess, reset } = useUpdateVoteById(celebrityId);
+  const { handleUpdateVote, isSuccess, reset } = useUpdateVoteById(celebrityId);
 
   return (
     <>
@@ -21,7 +21,7 @@ export default function Vote({ celebrityId }: VoteProps) {
         <VoteAgain onClick={reset} />
       ) : (
         <VoteNow
-          updateVote={updateVote}
+          onClick={handleUpdateVote}
           isLoading={isFetching}
           celebrityId={celebrityId}
         />

@@ -25,7 +25,7 @@ export function useUpdateVoteById(celebrityId: string) {
   const [mutate, result] = useUpdateVoteMutation();
   const dispatch = useAppDispatch();
 
-  const updateVote = ({ celebrityId, vote }: UpdateVoteParams) => {
+  const handleUpdateVote = ({ celebrityId, vote }: UpdateVoteParams) => {
     mutate({ celebrityId, vote });
   };
 
@@ -54,5 +54,5 @@ export function useUpdateVoteById(celebrityId: string) {
     }
   }, [updatedCelebrity, celebrityId, dispatch]);
 
-  return { updateVote, isSuccess: result.isSuccess, reset: result.reset };
+  return { handleUpdateVote, isSuccess: result.isSuccess, reset: result.reset };
 }
