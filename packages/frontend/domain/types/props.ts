@@ -1,4 +1,4 @@
-import type { CelebritiesType, CelebrityType, NavLinksType } from '@app/shared';
+import type { CelebritiesType, CelebrityType } from '@app/shared';
 import type { ListOptions, VoteState } from '../constants';
 
 export interface UpdateVoteParams {
@@ -12,10 +12,6 @@ export interface IconProps {
   name: string;
   width?: number;
   height?: number;
-}
-
-export interface NavLinkProps {
-  navLinks: NavLinksType;
 }
 
 export interface CelebritiesProps {
