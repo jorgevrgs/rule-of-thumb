@@ -43,8 +43,7 @@ export function useUpdateVoteById(celebrityId: string) {
             );
 
             if (index > -1 && updatedCelebrity) {
-              const celebrity = celebrities[index];
-              celebrity.votes = updatedCelebrity.votes;
+              Object.assign(celebrities[index], updatedCelebrity);
             }
 
             return celebrities;
