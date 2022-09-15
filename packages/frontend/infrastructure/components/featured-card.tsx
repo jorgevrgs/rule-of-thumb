@@ -4,9 +4,9 @@ import { LayoutContext } from '../../infrastructure/contexts';
 import Icon from './icon';
 
 export default function FeaturedCard() {
-  const { celebrity } = useContext(LayoutContext);
+  const { featuredCelebrity } = useContext(LayoutContext);
 
-  if (!celebrity) {
+  if (!featuredCelebrity) {
     return null;
   }
 
@@ -16,8 +16,8 @@ export default function FeaturedCard() {
         <Image
           layout="fill"
           className="w-full h-full"
-          src={celebrity.picture}
-          alt={celebrity.name}
+          src={featuredCelebrity.picture}
+          alt={featuredCelebrity.name}
           priority={true}
           objectFit="cover"
           objectPosition="right"
@@ -38,7 +38,7 @@ export default function FeaturedCard() {
                     var(--color-dark-background),
                     var(--color-dark-background)
                   ),
-                calc(-50vw + 650px) -6rem/105vw auto no-repeat url(${celebrity.picture});
+                calc(-50vw + 650px) -6rem/105vw auto no-repeat url(${featuredCelebrity.picture});
               filter: blur(1rem);
             }
 
@@ -48,7 +48,7 @@ export default function FeaturedCard() {
                     var(--color-dark-background),
                     var(--color-dark-background)
                   ),
-                7vw -6.5rem/115vw auto no-repeat url(${celebrity.picture});
+                7vw -6.5rem/115vw auto no-repeat url(${featuredCelebrity.picture});
             }
           `}</style>
 
@@ -56,9 +56,11 @@ export default function FeaturedCard() {
             <p className="whitespace-nowrap font-light">
               {"What's your opinion on"}
             </p>
-            <h2 className="text-5xl font-normal mb-2">{celebrity.name}?</h2>
+            <h2 className="text-5xl font-normal mb-2">
+              {featuredCelebrity.name}?
+            </h2>
             <p className="text-lg font-light line-clamp-4 mb-3">
-              {celebrity.description}
+              {featuredCelebrity.description}
             </p>
             <p className="hidden md:inline-block md:font-light">
               <a href="http://wikipedia.com">

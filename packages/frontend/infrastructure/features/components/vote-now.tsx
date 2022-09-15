@@ -1,5 +1,3 @@
-import { CelebrityType } from '@app/shared';
-import { UseMutationResult } from '@tanstack/react-query';
 import { MouseEventHandler } from 'react';
 import PulseLoader from 'react-spinners/PulseLoader';
 import type { UpdateVoteParams } from '../../../domain/types';
@@ -8,16 +6,11 @@ import { useVoteHook } from '../hooks';
 
 interface VoteNowProps {
   celebrityId: string;
-  mutate: UseMutationResult<
-    CelebrityType,
-    unknown,
-    UpdateVoteParams,
-    unknown
-  >['mutate'];
+  updateVote: ({ celebrityId, vote }: UpdateVoteParams) => void;
   isLoading: boolean;
 }
 
-export function VoteNow({ celebrityId, mutate, isLoading }: VoteNowProps) {
+export function VoteNow({ celebrityId, updateVote, isLoading }: VoteNowProps) {
   const {
     getPositiveVoteClasses,
     setPositiveVote,
@@ -30,7 +23,7 @@ export function VoteNow({ celebrityId, mutate, isLoading }: VoteNowProps) {
   const handleVoteClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
 
-    mutate({ celebrityId, vote: currentVote });
+    updateVote({ celebrityId, vote: currentVote });
   };
 
   return (

@@ -1,9 +1,11 @@
-import { useContext } from 'react';
-import { LayoutContext } from '../../infrastructure/contexts';
 import Icon from './icon';
 
 function Navbar() {
-  const { navLinks } = useContext(LayoutContext);
+  const navLinks = [
+    { name: 'Past Trials', href: '#' },
+    { name: 'How It Works', href: '#' },
+    { name: 'Login / Sign Up', href: '#' },
+  ];
 
   return (
     <nav className="nav w-full z-30" role="navigation">

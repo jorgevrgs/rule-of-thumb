@@ -1,29 +1,26 @@
-import { CelebritiesType } from '@app/shared';
-import { useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { Stores } from '../../../domain';
-import type { VoteProps } from '../../../domain/types';
-import { useUpdateVoteCelebrities } from '../hooks';
+import type { UpdateVoteParams, VoteProps } from '../../../domain/types';
+import { useGetCelebrityById } from '../hooks';
+import { useUpdateVoteMutation } from '../slices';
 import Veredict from './veredict';
 import { VoteAgain } from './vote-again';
 import { VoteNow } from './vote-now';
 import VoteResult from './vote-result';
 
 export default function Vote({ celebrityId }: VoteProps) {
-  const { mutate, reset, isSuccess, isLoading, data } =
-    useUpdateVoteCelebrities();
-
-  const queryClient = useQueryClient();
+  const [mutate, result] = useUpdateVoteMutation();
+  const { reset, isSuccess, isLoading, data } = result;
+  const { data: celebrity } = useGetCelebrityById(celebrityId);
 
   const votes = useMemo(() => {
-    const current =
-      data ||
-      queryClient
-        .getQueryData<CelebritiesType>([Stores.celebrities])
-        ?.find((c) => c.celebrityId === celebrityId);
+    const current = data || celebrity;
 
     return current?.votes;
-  }, [celebrityId, queryClient, data]);
+  }, [celebrity, data]);
+
+  const updateVote = ({ celebrityId, vote }: UpdateVoteParams) => {
+    mutate({ celebrityId, vote });
+  };
 
   return (
     <>
@@ -37,7 +34,7 @@ export default function Vote({ celebrityId }: VoteProps) {
         <VoteAgain onClick={reset} />
       ) : (
         <VoteNow
-          mutate={mutate}
+          updateVote={updateVote}
           isLoading={isLoading}
           celebrityId={celebrityId}
         />
