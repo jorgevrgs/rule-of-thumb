@@ -1,2 +1,2 @@
 export * from './celebrities.hook';
-export * from './use-vote.hook';
+export * from './votes.hook';

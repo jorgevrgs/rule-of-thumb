@@ -2,7 +2,7 @@ import { MouseEventHandler } from 'react';
 import PulseLoader from 'react-spinners/PulseLoader';
 import type { UpdateVoteParams } from '../../../domain/types';
 import { Icon } from '../../components';
-import { useVoteHook } from '../hooks';
+import { useGetVoteClassesHook } from '../hooks';
 
 interface VoteNowProps {
   celebrityId: string;
@@ -18,7 +18,7 @@ export function VoteNow({ celebrityId, updateVote, isLoading }: VoteNowProps) {
     setNegativeVote,
     isButtonDisabled,
     currentVote,
-  } = useVoteHook();
+  } = useGetVoteClassesHook();
 
   const handleVoteClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
