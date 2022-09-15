@@ -1,46 +1,13 @@
-import { useEffect } from 'react';
-import type { UpdateVoteParams, VoteProps } from '../../../domain/types';
-import { useAppDispatch } from '../../hooks';
-import { useGetCelebrityById } from '../hooks';
-import { celebritiesSlice, useUpdateVoteMutation } from '../slices';
+import type { VoteProps } from '../../../domain/types';
+import { useGetCelebrityById, useUpdateVoteById } from '../hooks';
 import Veredict from './veredict';
 import { VoteAgain } from './vote-again';
 import { VoteNow } from './vote-now';
 import VoteResult from './vote-result';
 
 export default function Vote({ celebrityId }: VoteProps) {
-  const [mutate, result] = useUpdateVoteMutation();
-  const { reset, isSuccess, isLoading, data: updatedCelebrity } = result;
-  const { data: celebrity } = useGetCelebrityById(celebrityId);
-  const dispatch = useAppDispatch();
-
-  const updateVote = ({ celebrityId, vote }: UpdateVoteParams) => {
-    mutate({ celebrityId, vote });
-  };
-
-  useEffect(() => {
-    console.log('Detecting changes in the vote result', updatedCelebrity);
-    if (updatedCelebrity) {
-      dispatch(
-        celebritiesSlice.util.updateQueryData(
-          'getCelebrities',
-          undefined,
-          (celebrities) => {
-            const index = celebrities.findIndex(
-              (celebrity) => celebrity.celebrityId === celebrityId
-            );
-
-            if (index > -1 && updatedCelebrity) {
-              const celebrity = celebrities[index];
-              celebrity.votes = updatedCelebrity.votes;
-            }
-
-            return celebrities;
-          }
-        )
-      );
-    }
-  }, [updatedCelebrity, celebrityId, dispatch]);
+  const { data: celebrity, isFetching } = useGetCelebrityById(celebrityId);
+  const { updateVote, isSuccess, reset } = useUpdateVoteById(celebrityId);
 
   return (
     <>
@@ -55,7 +22,7 @@ export default function Vote({ celebrityId }: VoteProps) {
       ) : (
         <VoteNow
           updateVote={updateVote}
-          isLoading={isLoading}
+          isLoading={isFetching}
           celebrityId={celebrityId}
         />
       )}
