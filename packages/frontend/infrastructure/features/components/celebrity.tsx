@@ -1,8 +1,13 @@
+import { CelebrityType } from '@app/shared';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import { ListOptions } from '../../../domain';
-import type { CelebrityProps } from '../../../domain/types';
 import Vote from './vote';
+
+interface CelebrityProps {
+  celebrity: CelebrityType;
+  listOption?: ListOptions;
+}
 
 export default function Celebrity({ celebrity, listOption }: CelebrityProps) {
   const isList = listOption === ListOptions.list;
