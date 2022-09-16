@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
-import Veredict from './veredict';
+import VoteBar from './vote-bar';
 
-describe('<Veredict />', () => {
+describe('<VoteBar />', () => {
   it('should render a list', () => {
-    render(<Veredict positive={67} negative={33} />);
+    render(<VoteBar positive={67} negative={33} />);
     const actual = screen.getByRole('list');
 
     expect(actual).toBeDefined();
