@@ -4,7 +4,7 @@ interface VoteAgainProps {
   onClick: MouseEventHandler;
 }
 
-export function VoteAgain({ onClick }: VoteAgainProps) {
+export default function VoteAgain({ onClick }: VoteAgainProps) {
   return (
     <button
       className="border-white bg-slate-700/60 border-2 h-8 px-8"

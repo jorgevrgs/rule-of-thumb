@@ -1,13 +1,15 @@
 import { roundValue } from '../../../application/utils';
 import { Icon } from '../../components';
 
+interface VotePercentageProps {
+  positive?: number;
+  negative?: number;
+}
+
 export default function VotePercentage({
   positive = 0,
   negative = 0,
-}: {
-  positive?: number;
-  negative?: number;
-}) {
+}: VotePercentageProps) {
   const value = positive - negative;
   const isPositive = value > 0;
   const ariaLabel = isPositive ? 'thumbs up' : 'thumbs down';

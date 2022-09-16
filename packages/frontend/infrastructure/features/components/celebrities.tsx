@@ -1,3 +1,4 @@
+import { CelebritiesType } from '@app/shared';
 import classNames from 'classnames/bind';
 import { useContext, useEffect, useMemo, useState } from 'react';
 import type { SingleValue } from 'react-select';
@@ -7,11 +8,15 @@ import {
   ListOptions,
   listValue,
 } from '../../../domain/constants';
-import type { CelebritiesProps, Option } from '../../../domain/types';
+import type { Option } from '../../../domain/types';
+import SelectView from '../../components/select-view';
 import { LayoutContext } from '../../contexts';
 import { useDeviceTypeHook } from '../../hooks';
 import Celebrity from './celebrity';
-import SelectView from './select-view';
+
+interface CelebritiesProps {
+  celebrities: CelebritiesType;
+}
 
 export default function Celebrities({ celebrities }: CelebritiesProps) {
   const { deviceType } = useContext(LayoutContext);

@@ -1,12 +1,19 @@
+import classNames from 'classnames';
 import { useMemo } from 'react';
-import type { UpdateVoteParams, VoteProps } from '../../../domain/types';
+import type { UpdateVoteParams } from '../../../domain/types';
 import { useGetCelebritiesQuery, useUpdateVoteMutation } from '../hooks';
-import Veredict from './veredict';
-import { VoteAgain } from './vote-again';
-import { VoteNow } from './vote-now';
+import VoteAgain from './vote-again';
+import VoteBar from './vote-bar';
+import VoteInfo from './vote-info';
+import VoteNow from './vote-now';
 import VoteResult from './vote-result';
 
-export default function Vote({ celebrityId }: VoteProps) {
+interface VoteProps {
+  celebrityId: string;
+  isList: boolean;
+}
+
+export default function Vote({ celebrityId, isList }: VoteProps) {
   const { data: celebrities, isLoading } = useGetCelebritiesQuery();
   const {
     mutate,
@@ -27,21 +34,38 @@ export default function Vote({ celebrityId }: VoteProps) {
 
   return (
     <>
-      {celebrity && <VoteResult {...celebrity.votes} />}
-
-      <div className="absolute inset-x-0 bottom-0">
-        {celebrity && <Veredict {...celebrity.votes} />}
-      </div>
-
-      {isSuccess ? (
-        <VoteAgain onClick={reset} />
-      ) : (
-        <VoteNow
-          onClick={handleUpdateVote}
-          isLoading={isLoading}
-          celebrityId={celebrityId}
+      {celebrity && (
+        <VoteInfo
+          lastUpdated={celebrity.lastUpdated}
+          category={celebrity.category}
+          isSuccess={isSuccess}
         />
       )}
+
+      <div
+        className={classNames(
+          'flex flex-wrap gap-4 w-full md:flex-no-wrap',
+          isList
+            ? 'justify-end content-start h-full'
+            : 'justify-center my-8 h-10'
+        )}
+      >
+        {celebrity && <VoteResult {...celebrity.votes} />}
+
+        <div className="absolute inset-x-0 bottom-0">
+          {celebrity && <VoteBar {...celebrity.votes} />}
+        </div>
+
+        {isSuccess ? (
+          <VoteAgain onClick={reset} />
+        ) : (
+          <VoteNow
+            onClick={handleUpdateVote}
+            isLoading={isLoading}
+            celebrityId={celebrityId}
+          />
+        )}
+      </div>
     </>
   );
 }
