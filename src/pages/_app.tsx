@@ -1,11 +1,16 @@
 import { logger } from '@app/shared';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { AppProps } from 'next/app';
+import { BaseProps } from 'pages';
 import { useState } from 'react';
 import '../assets/styles/globals.scss';
 
-function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps<BaseProps>) {
   logger.info('Loading App...');
 
   // Create a client
@@ -13,7 +18,9 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />;
+      <Hydrate state={pageProps.dehydratedState}>
+        <Component {...pageProps} />;
+      </Hydrate>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

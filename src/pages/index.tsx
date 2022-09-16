@@ -10,13 +10,18 @@ import {
   useGetCelebritiesQuery,
 } from '@app/frontend';
 import { logger } from '@app/shared';
-import { QueryClient } from '@tanstack/react-query';
+import type { DehydratedState } from '@tanstack/react-query';
+import { dehydrate, QueryClient } from '@tanstack/react-query';
 import type { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
 import { getSelectorsByUserAgent } from 'react-device-detect';
 import PulseLoader from 'react-spinners/PulseLoader';
 
-interface IndexPageProps {
+export interface BaseProps {
+  dehydratedState: DehydratedState;
+}
+
+interface IndexPageProps extends BaseProps {
   deviceType: LayoutContextType['deviceType'];
 }
 
@@ -60,7 +65,9 @@ const Index: NextPage<IndexPageProps> = ({ deviceType }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps<IndexPageProps> = async (
+  context
+) => {
   let deviceType = DeviceType.mobile;
   const userAgent = context.req.headers['user-agent'];
 
@@ -83,6 +90,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   return {
     props: {
+      dehydratedState: dehydrate(queryClient),
       deviceType,
     },
   };
