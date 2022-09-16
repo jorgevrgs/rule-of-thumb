@@ -1,6 +1,5 @@
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import { getTimeAgo } from '../../../application/utils';
 import { ListOptions } from '../../../domain';
 import type { CelebrityProps } from '../../../domain/types';
 import Vote from './vote';
@@ -59,20 +58,7 @@ export default function Celebrity({ celebrity, listOption }: CelebrityProps) {
           </h3>
           <p className="text-lg line-clamp-3 h-20">{celebrity.description}</p>
 
-          <p className="text-right text-sm mt-4 w-full">
-            {`${getTimeAgo(celebrity.lastUpdated)} in ${celebrity.category}`}
-          </p>
-
-          <div
-            className={classNames(
-              'flex flex-wrap gap-4 w-full md:flex-no-wrap',
-              isList
-                ? 'justify-end content-start h-full'
-                : 'justify-center my-8 h-10'
-            )}
-          >
-            <Vote celebrityId={celebrity.celebrityId} />
-          </div>
+          <Vote celebrityId={celebrity.celebrityId} isList={isList} />
         </div>
       </div>
     </article>

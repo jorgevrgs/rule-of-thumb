@@ -1,7 +1,7 @@
 import type { VeredictProps } from '../../../domain/types';
 import VotePercentage from './vote-percentage';
 
-export default function Veredict({ positive, negative }: VeredictProps) {
+export default function VoteBar({ positive, negative }: VeredictProps) {
   const positivePercentage = (positive / (positive + negative)) * 100;
   const negativePercentage = (negative / (positive + negative)) * 100;
 

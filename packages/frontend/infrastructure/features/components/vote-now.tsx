@@ -11,7 +11,11 @@ interface VoteNowProps {
   isLoading: boolean;
 }
 
-export function VoteNow({ celebrityId, onClick, isLoading }: VoteNowProps) {
+export default function VoteNow({
+  celebrityId,
+  onClick,
+  isLoading,
+}: VoteNowProps) {
   const {
     getPositiveVoteClasses,
     setPositiveVote,
