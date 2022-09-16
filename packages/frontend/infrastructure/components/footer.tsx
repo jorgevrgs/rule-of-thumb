@@ -22,12 +22,12 @@ export default function Footer() {
           <span>Follow us</span>
           <ul>
             <li>
-              <a href="#">
+              <a href="#" aria-label="Follow us in Facebook">
                 <Icon name="facebook" />
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="#" aria-label="Follow us in Twitter">
                 <Icon name="twitter" />
               </a>
             </li>

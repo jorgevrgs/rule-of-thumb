@@ -55,7 +55,8 @@ export default function SelectView({ onChange, listView }: SelectViewProps) {
   };
 
   return (
-    <div role="select">
+    <label>
+      <span className="sr-only">Select View</span>
       <ReactSelect
         className="hidden sm:flex"
         instanceId="selectListView"
@@ -66,6 +67,6 @@ export default function SelectView({ onChange, listView }: SelectViewProps) {
         isMulti={false}
         onChange={onChange}
       />
-    </div>
+    </label>
   );
 }

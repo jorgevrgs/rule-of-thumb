@@ -33,11 +33,7 @@ export default function VoteNow({
 
   return (
     <>
-      <div
-        className="flex items-center justify-center h-8 w-8"
-        role="img"
-        aria-label="Vote positive"
-      >
+      <div className="flex items-center justify-center h-8 w-8">
         <button
           className={getPositiveVoteClasses}
           onClick={setPositiveVote}
@@ -48,11 +44,7 @@ export default function VoteNow({
         </button>
       </div>
 
-      <div
-        className="flex items-center justify-center h-8 w-8"
-        role="img"
-        aria-label="Vote negative"
-      >
+      <div className="flex items-center justify-center h-8 w-8">
         <button
           className={getNegativeVoteClasses}
           onClick={setNegativeVote}

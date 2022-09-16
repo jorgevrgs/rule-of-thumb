@@ -10,7 +10,7 @@ export default function VoteBar({ positive, negative }: VoteBarProps) {
   const negativePercentage = (negative / (positive + negative)) * 100;
 
   return (
-    <div className="flex w-full" role="list">
+    <div className="flex w-full">
       <VotePercentage positive={positivePercentage} />
       <VotePercentage negative={negativePercentage} />
     </div>

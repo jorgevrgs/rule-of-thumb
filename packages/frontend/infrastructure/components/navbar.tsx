@@ -32,7 +32,8 @@ function Navbar() {
                 className="nav__search icon-button"
                 disabled
                 type="submit"
-                role="presentation"
+                role="button"
+                aria-label="Search button"
               >
                 <Icon name="search" width={36} height={36} />
               </button>
