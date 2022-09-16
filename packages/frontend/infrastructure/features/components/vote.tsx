@@ -1,23 +1,28 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import type { UpdateVoteParams, VoteProps } from '../../../domain/types';
-import { useGetCelebritiesQuery, useUpdateVoteMutation } from '../apis';
+import { useGetCelebritiesQuery, useUpdateVoteMutation } from '../hooks';
 import Veredict from './veredict';
 import { VoteAgain } from './vote-again';
 import { VoteNow } from './vote-now';
 import VoteResult from './vote-result';
 
 export default function Vote({ celebrityId }: VoteProps) {
-  const [hasVoted, setHasVoted] = useState(false);
-
-  const { data: celebrities, isFetching } = useGetCelebritiesQuery();
-  const [mutate, { data: updatedCelebrity }] = useUpdateVoteMutation();
+  const { data: celebrities, isLoading } = useGetCelebritiesQuery();
+  const {
+    mutate,
+    data: updatedCelebrity,
+    reset,
+    isSuccess,
+  } = useUpdateVoteMutation();
   const celebrity = useMemo(() => {
-    return celebrities?.find((c) => c.celebrityId === celebrityId);
-  }, [celebrityId, celebrities]);
+    return (
+      updatedCelebrity ??
+      celebrities?.find((c) => c.celebrityId === celebrityId)
+    );
+  }, [celebrityId, celebrities, updatedCelebrity]);
 
   const handleUpdateVote = ({ celebrityId, vote }: UpdateVoteParams) => {
     mutate({ celebrityId, vote });
-    setHasVoted(true);
   };
 
   return (
@@ -28,12 +33,12 @@ export default function Vote({ celebrityId }: VoteProps) {
         {celebrity && <Veredict {...celebrity.votes} />}
       </div>
 
-      {hasVoted ? (
-        <VoteAgain onClick={() => setHasVoted(false)} />
+      {isSuccess ? (
+        <VoteAgain onClick={reset} />
       ) : (
         <VoteNow
           onClick={handleUpdateVote}
-          isLoading={isFetching}
+          isLoading={isLoading}
           celebrityId={celebrityId}
         />
       )}

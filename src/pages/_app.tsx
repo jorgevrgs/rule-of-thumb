@@ -1,17 +1,21 @@
-import { wrapper } from '@app/frontend';
 import { logger } from '@app/shared';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { AppProps } from 'next/app';
-import { Provider } from 'react-redux';
+import { useState } from 'react';
 import '../assets/styles/globals.scss';
 
-function App({ Component, ...pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   logger.info('Loading App...');
-  const { store, props } = wrapper.useWrappedStore(pageProps);
+
+  // Create a client
+  const [queryClient] = useState(() => new QueryClient());
 
   return (
-    <Provider store={store}>
-      <Component {...props.pageProps} />;
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Component {...pageProps} />;
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 

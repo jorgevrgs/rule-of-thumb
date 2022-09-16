@@ -3,14 +3,14 @@ import {
   BannerTop,
   Celebrities,
   DeviceType,
-  getCelebrities,
+  getCelebritiesService,
   Layout,
   LayoutContext,
   LayoutContextType,
   useGetCelebritiesQuery,
-  wrapper,
 } from '@app/frontend';
 import { logger } from '@app/shared';
+import { QueryClient } from '@tanstack/react-query';
 import type { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
 import { getSelectorsByUserAgent } from 'react-device-detect';
@@ -21,9 +21,9 @@ interface IndexPageProps {
 }
 
 const Index: NextPage<IndexPageProps> = ({ deviceType }) => {
-  const { data, isFetching } = useGetCelebritiesQuery();
+  const { data, isLoading } = useGetCelebritiesQuery();
 
-  if (isFetching) {
+  if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen w-screen">
         <PulseLoader />;
@@ -60,28 +60,32 @@ const Index: NextPage<IndexPageProps> = ({ deviceType }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps =
-  wrapper.getServerSideProps((store) => async (context) => {
-    let deviceType = DeviceType.mobile;
-    const userAgent = context.req.headers['user-agent'];
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  let deviceType = DeviceType.mobile;
+  const userAgent = context.req.headers['user-agent'];
 
-    if (userAgent) {
-      const selector = getSelectorsByUserAgent(userAgent);
+  if (userAgent) {
+    const selector = getSelectorsByUserAgent(userAgent);
 
-      if (selector.isDesktop) {
-        deviceType = DeviceType.desktop;
-      } else if (selector.isTablet) {
-        deviceType = DeviceType.tablet;
-      }
+    if (selector.isDesktop) {
+      deviceType = DeviceType.desktop;
+    } else if (selector.isTablet) {
+      deviceType = DeviceType.tablet;
     }
+  }
 
-    await store.dispatch(getCelebrities.initiate());
+  const queryClient = new QueryClient();
 
-    return {
-      props: {
-        deviceType,
-      },
-    };
+  await queryClient.prefetchQuery({
+    queryKey: ['celebrities'],
+    queryFn: getCelebritiesService,
   });
+
+  return {
+    props: {
+      deviceType,
+    },
+  };
+};
 
 export default Index;
