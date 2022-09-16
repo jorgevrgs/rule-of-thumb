@@ -1,2 +1,2 @@
-export * from './celebrities.hook';
+export * from './api.hook';
 export * from './votes.hook';

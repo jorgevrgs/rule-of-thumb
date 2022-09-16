@@ -18,14 +18,14 @@
     "stop": "sh ./.bin/03-stop.sh"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "1.8.5",
     "@tailwindcss/line-clamp": "0.4.2",
+    "@tanstack/react-query": "4.3.4",
+    "@tanstack/react-query-devtools": "4.3.5",
     "classnames": "2.3.1",
     "dayjs": "1.11.5",
     "lodash.omit": "4.5.0",
     "mongodb": "4.9.1",
     "next": "12.3.0",
-    "next-redux-wrapper": "8.0.0",
     "pino": "8.5.0",
     "react": "18.2.0",
     "react-device-detect": "2.2.2",

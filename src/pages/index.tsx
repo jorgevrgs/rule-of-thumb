@@ -3,29 +3,37 @@ import {
   BannerTop,
   Celebrities,
   DeviceType,
-  getCelebrities,
-  getRunningOperationPromises,
+  getCelebritiesService,
   Layout,
   LayoutContext,
   LayoutContextType,
   useGetCelebritiesQuery,
-  wrapper,
 } from '@app/frontend';
 import { logger } from '@app/shared';
+import type { DehydratedState } from '@tanstack/react-query';
+import { dehydrate, QueryClient } from '@tanstack/react-query';
 import type { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
 import { getSelectorsByUserAgent } from 'react-device-detect';
 import PulseLoader from 'react-spinners/PulseLoader';
 
-interface IndexPageProps {
+export interface BaseProps {
+  dehydratedState: DehydratedState;
+}
+
+interface IndexPageProps extends BaseProps {
   deviceType: LayoutContextType['deviceType'];
 }
 
 const Index: NextPage<IndexPageProps> = ({ deviceType }) => {
-  const { data, isFetching } = useGetCelebritiesQuery();
+  const { data, isLoading } = useGetCelebritiesQuery();
 
-  if (isFetching) {
-    return <PulseLoader />;
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen w-screen">
+        <PulseLoader />;
+      </div>
+    );
   }
 
   if (!data) {
@@ -57,29 +65,35 @@ const Index: NextPage<IndexPageProps> = ({ deviceType }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps =
-  wrapper.getServerSideProps((store) => async (context) => {
-    let deviceType = DeviceType.mobile;
-    const userAgent = context.req.headers['user-agent'];
+export const getServerSideProps: GetServerSideProps<IndexPageProps> = async (
+  context
+) => {
+  let deviceType = DeviceType.mobile;
+  const userAgent = context.req.headers['user-agent'];
 
-    if (userAgent) {
-      const selector = getSelectorsByUserAgent(userAgent);
+  if (userAgent) {
+    const selector = getSelectorsByUserAgent(userAgent);
 
-      if (selector.isDesktop) {
-        deviceType = DeviceType.desktop;
-      } else if (selector.isTablet) {
-        deviceType = DeviceType.tablet;
-      }
+    if (selector.isDesktop) {
+      deviceType = DeviceType.desktop;
+    } else if (selector.isTablet) {
+      deviceType = DeviceType.tablet;
     }
+  }
 
-    store.dispatch(getCelebrities.initiate());
-    await Promise.all(getRunningOperationPromises());
+  const queryClient = new QueryClient();
 
-    return {
-      props: {
-        deviceType,
-      },
-    };
+  await queryClient.prefetchQuery({
+    queryKey: ['celebrities'],
+    queryFn: getCelebritiesService,
   });
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+      deviceType,
+    },
+  };
+};
 
 export default Index;
