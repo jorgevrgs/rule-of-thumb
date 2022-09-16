@@ -4,7 +4,6 @@ import {
   Celebrities,
   DeviceType,
   getCelebrities,
-  getRunningOperationPromises,
   Layout,
   LayoutContext,
   LayoutContextType,
@@ -25,7 +24,11 @@ const Index: NextPage<IndexPageProps> = ({ deviceType }) => {
   const { data, isFetching } = useGetCelebritiesQuery();
 
   if (isFetching) {
-    return <PulseLoader />;
+    return (
+      <div className="flex justify-center items-center h-screen w-screen">
+        <PulseLoader />;
+      </div>
+    );
   }
 
   if (!data) {
@@ -72,8 +75,7 @@ export const getServerSideProps: GetServerSideProps =
       }
     }
 
-    store.dispatch(getCelebrities.initiate());
-    await Promise.all(getRunningOperationPromises());
+    await store.dispatch(getCelebrities.initiate());
 
     return {
       props: {

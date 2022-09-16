@@ -1,16 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
-import { celebritiesSlice } from '../features/slices';
+import { celebritiesApi } from '../features/apis';
 
 export const store = configureStore({
   reducer: {
-    [celebritiesSlice.reducerPath]: celebritiesSlice.reducer,
+    [celebritiesApi.reducerPath]: celebritiesApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(celebritiesSlice.middleware),
+    getDefaultMiddleware().concat(celebritiesApi.middleware),
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 
-export const wrapper = createWrapper(() => store, { debug: true });
+export const wrapper = createWrapper(() => store, {
+  debug: false,
+});
