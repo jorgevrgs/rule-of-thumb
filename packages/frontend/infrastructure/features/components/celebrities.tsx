@@ -9,10 +9,10 @@ import {
   listValue,
 } from '../../../domain/constants';
 import type { Option } from '../../../domain/types';
+import SelectView from '../../components/select-view';
 import { LayoutContext } from '../../contexts';
 import { useDeviceTypeHook } from '../../hooks';
 import Celebrity from './celebrity';
-import SelectView from './select-view';
 
 interface CelebritiesProps {
   celebrities: CelebritiesType;

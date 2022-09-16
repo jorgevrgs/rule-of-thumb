@@ -1,5 +1,5 @@
 import ReactSelect, { SingleValue, StylesConfig } from 'react-select';
-import { gridValue, listValue, Option } from '../../../domain';
+import { gridValue, listValue, Option } from '../../domain';
 
 interface SelectViewProps {
   onChange: (newValue: SingleValue<Option>) => void;
