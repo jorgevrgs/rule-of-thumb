@@ -48,6 +48,10 @@ const Index: NextPage<IndexPageProps> = ({ deviceType }) => {
     <>
       <Head>
         <title>Rule of Thumb</title>
+        <meta
+          name="description"
+          content="Rule of Thumb is a crowd sourced court of public opinion where anyone and everyone can speak out and speak freely. It's easy: You share your opinion, we analyze and put the data in a public report."
+        />
       </Head>
 
       <LayoutContext.Provider value={{ featuredCelebrity, deviceType }}>
