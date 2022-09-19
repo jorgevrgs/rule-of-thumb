@@ -32,6 +32,10 @@ export default function Vote({ celebrityId, isList }: VoteProps) {
     mutate({ celebrityId, vote });
   };
 
+  const handleResetVote = () => {
+    reset();
+  };
+
   return (
     <>
       {celebrity && (
@@ -57,7 +61,7 @@ export default function Vote({ celebrityId, isList }: VoteProps) {
         </div>
 
         {isSuccess ? (
-          <VoteAgain onClick={reset} />
+          <VoteAgain onClick={handleResetVote} />
         ) : (
           <VoteNow
             onClick={handleUpdateVote}
