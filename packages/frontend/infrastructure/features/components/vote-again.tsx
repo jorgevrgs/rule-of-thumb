@@ -13,7 +13,7 @@ export default function VoteAgain({ onClick }: VoteAgainProps) {
 
   return (
     <button
-      className="bg-slate-700/60 border-2 h-8 px-8 focus:outline-none focus-visible:border-white"
+      className="bg-slate-700/60 border-2 h-9 px-8 focus:outline-none focus-visible:border-white"
       type="button"
       onClick={onClick}
       ref={ref}

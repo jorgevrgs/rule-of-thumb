@@ -48,7 +48,7 @@ export default function Vote({ celebrityId, isList }: VoteProps) {
 
       <div
         className={classNames(
-          'flex flex-wrap gap-4 w-full md:flex-no-wrap',
+          'flex flex-wrap items-center gap-4 w-full md:flex-no-wrap',
           isList
             ? 'justify-end content-start h-full'
             : 'justify-center my-8 h-10'

@@ -84,7 +84,7 @@ export default function VoteNow({
         </button>
       </div>
 
-      <div className="flex items-center justify-center h-8">
+      <div className="flex items-center justify-center h-9">
         {isLoading ? (
           <PulseLoader />
         ) : (
