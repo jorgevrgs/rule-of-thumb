@@ -74,6 +74,7 @@ export default function FeaturedCard() {
             <div className="flex justify-between mt-0 -mx-4 -mb-4 md:mt-0 md:-mb-4 md:-mx-6">
               <button
                 className="w-1/2 h-11 bg-green-positive/80"
+                type="button"
                 aria-label="thumbs up"
                 disabled
               >
@@ -81,6 +82,7 @@ export default function FeaturedCard() {
               </button>
               <button
                 className="w-1/2 h-11 bg-yellow-negative/80"
+                type="button"
                 aria-label="thumbs down"
                 disabled
               >
