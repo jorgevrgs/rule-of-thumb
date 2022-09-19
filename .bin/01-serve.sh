@@ -19,7 +19,10 @@ echo "MONGO_INITDB_PASSWORD      = ${MONGO_INITDB_PASSWORD}"
 echo "NEXT_FRONTEND_URL          = ${NEXT_FRONTEND_URL}"
 echo "NEXT_MONGO_URL             = ${NEXT_MONGO_URL}"
 
-docker compose build app --no-cache --progress=plain
-docker-compose up --force-recreate -d
+BUILD_VERSION=$(git rev-parse --short HEAD)
+echo "BUILD_VERSION              = ${BUILD_VERSION}"
+docker build -t rule-of-thumb/app:latest -f Dockerfile .
+docker build -t rule-of-thumb/app:$BUILD_VERSION -f Dockerfile .
+docker-compose up -d
 
 docker ps
