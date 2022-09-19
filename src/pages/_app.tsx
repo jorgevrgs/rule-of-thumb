@@ -4,7 +4,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import type { AppProps } from 'next/app';
 import { BaseProps } from 'pages';
 import { useState } from 'react';
@@ -21,7 +21,7 @@ function App({ Component, pageProps }: AppProps<BaseProps>) {
       <Hydrate state={pageProps.dehydratedState}>
         <Component {...pageProps} />;
       </Hydrate>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }

@@ -9,7 +9,6 @@ export default function VoteAgain({ onClick }: VoteAgainProps) {
     <button
       className="border-white bg-slate-700/60 border-2 h-8 px-8"
       type="button"
-      role="button"
       onClick={onClick}
     >
       Vote Again

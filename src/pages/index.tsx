@@ -54,7 +54,7 @@ const Index: NextPage<IndexPageProps> = ({ deviceType }) => {
         <Layout>
           <BannerTop />
 
-          <main role="main" id="main">
+          <main id="main">
             <Celebrities celebrities={otherCelebrities} />
           </main>
 
