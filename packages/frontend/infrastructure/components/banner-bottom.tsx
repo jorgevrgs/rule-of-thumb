@@ -16,7 +16,7 @@ export default function BannerBottom() {
         </h2>
       </div>
       <div className="banner__right">
-        <button className="banner__cta" role="button">
+        <button className="banner__cta" type="button" role="button">
           Submit a name
         </button>
       </div>

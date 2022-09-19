@@ -37,6 +37,7 @@ export default function VoteNow({
         <button
           className={getPositiveVoteClasses}
           onClick={setPositiveVote}
+          type="button"
           role="button"
           aria-label="Thumbs up"
         >
@@ -48,6 +49,7 @@ export default function VoteNow({
         <button
           className={getNegativeVoteClasses}
           onClick={setNegativeVote}
+          type="button"
           role="button"
           aria-label="Thumbs down"
         >

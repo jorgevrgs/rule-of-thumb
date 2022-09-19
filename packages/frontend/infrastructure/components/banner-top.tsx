@@ -18,7 +18,12 @@ export default function BannerTop() {
           opinion, we analyze and put the data in a public report.
         </p>
       </div>
-      <button className="icon-button" aria-label="close">
+      <button
+        className="icon-button"
+        type="button"
+        role="button"
+        aria-label="close"
+      >
         <Icon name="close" width={20} height={20} />
       </button>
     </aside>
