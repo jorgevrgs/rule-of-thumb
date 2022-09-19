@@ -8,6 +8,7 @@ export default function Icon({ name, width = 24, height = 24 }: IconProps) {
       height={height}
       src={`/icons/${name}.svg`}
       alt={`${name} icon`}
+      aria-label={`${name} icon`}
       aria-hidden="true"
       objectFit="cover"
     />

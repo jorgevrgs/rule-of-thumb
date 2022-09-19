@@ -74,16 +74,22 @@ export default function FeaturedCard() {
             <div className="flex justify-between mt-0 -mx-4 -mb-4 md:mt-0 md:-mb-4 md:-mx-6">
               <button
                 className="w-1/2 h-11 bg-green-positive/80"
-                aria-label="thumbs up"
+                type="button"
+                aria-label="Vote with thumbs up"
                 disabled
+                tabIndex={-1}
               >
+                <span className="sr-only">Vote positive</span>
                 <Icon name="thumbs-up" width={16} height={16} />
               </button>
               <button
                 className="w-1/2 h-11 bg-yellow-negative/80"
-                aria-label="thumbs down"
+                type="button"
+                aria-label="Vote with thumbs down"
                 disabled
+                tabIndex={-1}
               >
+                <span className="sr-only">Vote negative</span>
                 <Icon name="thumbs-down" width={16} height={16} />
               </button>
             </div>

@@ -31,7 +31,7 @@ const Index: NextPage<IndexPageProps> = ({ deviceType }) => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen w-screen">
-        <PulseLoader />;
+        <PulseLoader />
       </div>
     );
   }
@@ -54,7 +54,7 @@ const Index: NextPage<IndexPageProps> = ({ deviceType }) => {
         <Layout>
           <BannerTop />
 
-          <main role="main">
+          <main id="main">
             <Celebrities celebrities={otherCelebrities} />
           </main>
 

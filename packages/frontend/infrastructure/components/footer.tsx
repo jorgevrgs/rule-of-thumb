@@ -3,7 +3,7 @@ import Icon from './icon';
 export default function Footer() {
   return (
     <>
-      <hr role="separator" />
+      <hr />
       <footer className="footer">
         <div className="footer__links">
           <ul>
@@ -23,12 +23,12 @@ export default function Footer() {
           <ul>
             <li>
               <a href="#">
-                <Icon name="facebook" />
+                <Icon name="facebook" aria-label="Follow us in Facebook" />
               </a>
             </li>
             <li>
               <a href="#">
-                <Icon name="twitter" />
+                <Icon name="twitter" aria-label="Follow us in Twitter" />
               </a>
             </li>
           </ul>

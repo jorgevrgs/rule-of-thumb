@@ -17,9 +17,7 @@ test.describe('Homepage', () => {
 
   test('Change List to Grid', async ({ page }) => {
     // Click main[role="main"] div:has-text("List") >> nth=3
-    const listView = page
-      .locator('main[role="main"] div:has-text("List")')
-      .nth(3);
+    const listView = page.locator('main div:has-text("List")').nth(3);
     await expect(listView).toBeVisible();
     await listView.click();
 
@@ -27,9 +25,7 @@ test.describe('Homepage', () => {
     await page.locator('#react-select-selectListView-option-1').click();
 
     // Click main[role="main"] div:has-text("Grid") >> nth=3
-    const gridView = page
-      .locator('main[role="main"] div:has-text("Grid")')
-      .nth(3);
+    const gridView = page.locator('main div:has-text("Grid")').nth(3);
     await expect(gridView).toBeVisible();
     await gridView.click();
 

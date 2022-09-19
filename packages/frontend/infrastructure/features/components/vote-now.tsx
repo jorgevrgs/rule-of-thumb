@@ -1,9 +1,9 @@
 import classNames from 'classnames';
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useMemo, useState } from 'react';
 import PulseLoader from 'react-spinners/PulseLoader';
+import { VoteState } from '../../../domain';
 import type { UpdateVoteParams } from '../../../domain/types';
 import { Icon } from '../../components';
-import { useGetVoteClassesHook } from '../hooks';
 
 interface VoteNowProps {
   celebrityId: string;
@@ -16,68 +16,89 @@ export default function VoteNow({
   onClick,
   isLoading,
 }: VoteNowProps) {
-  const {
-    getPositiveVoteClasses,
-    setPositiveVote,
-    getNegativeVoteClasses,
-    setNegativeVote,
-    isButtonDisabled,
-    currentVote,
-  } = useGetVoteClassesHook();
+  const [vote, setVote] = useState<VoteState>(VoteState.neutral);
+
+  const handleSetPositiveVote = () => {
+    if (vote !== VoteState.positive) {
+      setVote(VoteState.positive);
+    } else {
+      setVote(VoteState.neutral);
+    }
+  };
+  const hadleSetNegativeVote = () => {
+    if (vote !== VoteState.negative) {
+      setVote(VoteState.negative);
+    } else {
+      setVote(VoteState.neutral);
+    }
+  };
+
+  const { isPositiveVote, isNegativeVote, isNeutralVote } = useMemo(
+    () => ({
+      isPositiveVote: vote === VoteState.positive,
+      isNegativeVote: vote === VoteState.negative,
+      isNeutralVote: vote === VoteState.neutral,
+    }),
+    [vote]
+  );
 
   const handleVoteClick: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
 
-    onClick({ celebrityId, vote: currentVote });
+    onClick({ celebrityId, vote });
   };
 
   return (
     <>
-      <div
-        className="flex items-center justify-center h-8 w-8"
-        role="img"
-        aria-label="Vote positive"
-      >
+      <div className="flex items-center justify-center h-8 w-8">
         <button
-          className={getPositiveVoteClasses}
-          onClick={setPositiveVote}
-          role="button"
-          aria-label="Thumbs up"
+          className={classNames(
+            'flex items-center justify-center w-full h-full border-2 outline-none focus-visible:outline-black bg-green-positive/80 hover:bg-green-positive',
+            {
+              'border-white': isPositiveVote,
+              'border-none': !isPositiveVote,
+            }
+          )}
+          onClick={handleSetPositiveVote}
+          type="button"
         >
+          <span className="sr-only">Vote positive with thumbs up</span>
           <Icon name="thumbs-up" width={16} height={16} />
         </button>
       </div>
 
-      <div
-        className="flex items-center justify-center h-8 w-8"
-        role="img"
-        aria-label="Vote negative"
-      >
+      <div className="flex items-center justify-center h-8 w-8">
         <button
-          className={getNegativeVoteClasses}
-          onClick={setNegativeVote}
-          role="button"
-          aria-label="Thumbs down"
+          className={classNames(
+            'flex items-center justify-center w-full h-full border-2 outline-none focus-visible:outline-black bg-yellow-negative/80 hover:bg-yellow-negative',
+            {
+              'border-white': isNegativeVote,
+              'border-none': !isNegativeVote,
+            }
+          )}
+          onClick={hadleSetNegativeVote}
+          type="button"
         >
+          <span className="sr-only">Vote negative with thumbs down</span>
           <Icon name="thumbs-down" width={16} height={16} />
         </button>
       </div>
 
-      <div className="flex items-center justify-center h-8">
+      <div className="flex items-center justify-center h-9">
         {isLoading ? (
           <PulseLoader />
         ) : (
           <button
             className={classNames(
-              'border-white bg-slate-700/60 border-2 h-full px-8',
+              'border-slate-700 bg-slate-700/60 border-2 h-full px-8 focus:outline-none focus-visible:border-white',
               {
-                'text-slate-400 cursor-not-allowed': isButtonDisabled,
-                'text-white hover:bg-slate-700': !isButtonDisabled,
+                'text-slate-400 cursor-not-allowed': isNeutralVote,
+                'text-white hover:bg-slate-700': !isNeutralVote,
               }
             )}
-            disabled={isButtonDisabled}
+            disabled={isNeutralVote}
             onClick={handleVoteClick}
-            role="button"
+            type="button"
           >
             Vote Now
           </button>
