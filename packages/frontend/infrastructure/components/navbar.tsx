@@ -45,7 +45,9 @@ function Navbar() {
                 disabled
                 type="submit"
                 aria-label="Search button"
+                tab-index="-1"
               >
+                <span className="sr-only">Search</span>
                 <Icon name="search" width={36} height={36} />
               </button>
             </form>

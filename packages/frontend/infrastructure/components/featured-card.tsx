@@ -77,7 +77,9 @@ export default function FeaturedCard() {
                 type="button"
                 aria-label="Vote with thumbs up"
                 disabled
+                tab-index="-1"
               >
+                <span className="sr-only">Vote positive</span>
                 <Icon name="thumbs-up" width={16} height={16} />
               </button>
               <button
@@ -85,7 +87,9 @@ export default function FeaturedCard() {
                 type="button"
                 aria-label="Vote with thumbs down"
                 disabled
+                tab-index="-1"
               >
+                <span className="sr-only">Vote negative</span>
                 <Icon name="thumbs-down" width={16} height={16} />
               </button>
             </div>

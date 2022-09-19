@@ -12,7 +12,8 @@ export default function BannerTop() {
           {`Rule of Thumb is a crowd sourced court of public opinion where anyone and everyone can speak out and speak freely. It's easy: You share your opinion, we analyze and put the data in a public report.`}
         </p>
       </div>
-      <button className="icon-button" type="button" aria-label="close banner">
+      <button className="icon-button" type="button">
+        <span className="sr-only">Close banner</span>
         <Icon name="close" width={20} height={20} />
       </button>
     </aside>

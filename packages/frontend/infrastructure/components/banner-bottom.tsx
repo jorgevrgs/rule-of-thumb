@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function BannerBottom() {
   return (
-    <aside className="banner banner-bottom">
+    <aside className="banner banner-bottom" aria-label="Submit a new celebrity">
       <Image
         layout="fill"
         className="banner__background"
