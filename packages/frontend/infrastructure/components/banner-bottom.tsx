@@ -2,7 +2,10 @@ import Image from 'next/image';
 
 export default function BannerBottom() {
   return (
-    <aside className="banner banner-bottom" aria-label="Submit a new celebrity">
+    <aside
+      className="relative flex items-center justify-between bg-gray-200 overflow-hidden p-4 my-9 banner-bottom"
+      aria-label="Submit a new celebrity"
+    >
       <Image
         layout="fill"
         className="banner__background"

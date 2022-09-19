@@ -227,17 +227,6 @@
     font-weight: 300;
   }
 
-  .banner {
-    position: relative;
-    display: flex;
-    overflow: hidden;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem;
-    margin: 1rem;
-    background-color: var(--color-light-gray);
-  }
-
   .banner__background {
     position: absolute;
     top: 0;
