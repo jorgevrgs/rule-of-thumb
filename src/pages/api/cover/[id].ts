@@ -1,4 +1,4 @@
-import { getImageByNameController, tryCatchAsync } from '@app/backend';
+import { getCoverByNameController, tryCatchAsync } from '@app/backend';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
@@ -7,7 +7,7 @@ export default async function handler(
 ) {
   switch (req.method) {
     case 'GET':
-      tryCatchAsync<NodeJS.ReadableStream>(getImageByNameController)(req, res);
+      tryCatchAsync<NodeJS.ReadableStream>(getCoverByNameController)(req, res);
       break;
     default:
       res.status(405).json({ message: 'Method not allowed' });

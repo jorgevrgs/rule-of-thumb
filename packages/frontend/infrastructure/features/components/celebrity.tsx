@@ -27,7 +27,7 @@ export default function Celebrity({ celebrity, listOption }: CelebrityProps) {
         })}
       >
         <Image
-          src={celebrity.picture}
+          src={celebrity.picture.replace(/.png$/, '.webp')}
           alt={celebrity.name}
           className={classNames('absolute inset-0 object-cover w-full h-full', {
             'sm:object-cover sm:w-full sm:h-full': isList,

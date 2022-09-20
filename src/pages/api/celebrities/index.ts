@@ -1,14 +1,18 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import { findCelebritiesCollection } from '@app/backend';
-import type { CelebritiesType } from '@app/shared';
+import { getCelebritiesController, tryCatchAsync } from '@app/backend';
+import { CelebritiesType } from '@app/shared';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
-  _req: NextApiRequest,
-  res: NextApiResponse<CelebritiesType>
+  req: NextApiRequest,
+  res: NextApiResponse
 ) {
-  const celebrities = await findCelebritiesCollection();
-
-  res.status(200).json(celebrities);
+  switch (req.method) {
+    case 'GET':
+      tryCatchAsync<CelebritiesType>(getCelebritiesController)(req, res);
+      break;
+    default:
+      res.status(405).json({ message: 'Method not allowed' });
+  }
 }
