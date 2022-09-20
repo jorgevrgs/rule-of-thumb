@@ -16,7 +16,9 @@ export default function FeaturedCard() {
         <Image
           layout="fill"
           className="w-full h-full"
-          src={featuredCelebrity.picture}
+          src={featuredCelebrity.picture
+            .replace('/images/', '/cover/')
+            .replace('.png', '.webp')}
           alt={featuredCelebrity.name}
           priority={true}
           objectFit="cover"
@@ -63,8 +65,18 @@ export default function FeaturedCard() {
               {featuredCelebrity.description}
             </p>
             <p className="hidden md:inline-block md:font-light">
-              <a href="http://wikipedia.com">
+              <a
+                href={`http://en.wikipedia.org/wiki/${encodeURIComponent(
+                  featuredCelebrity.name
+                )}`}
+                aria-label="Open more details"
+                rel="noreferrer noopener"
+                target="_blank"
+              >
                 <Icon name="wikipedia" width={27} height={18} />
+                <span className="sr-only">
+                  To know more details about this celebrity click to open
+                </span>
                 More information
               </a>
             </p>
